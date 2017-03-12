@@ -9,6 +9,8 @@
   </head>
 
   <body>
+    <%= render 'layouts/navigation' %>
+
     <%= content_tag 'div', flash[:notice] if flash[:notice] %>
     <%= content_tag 'div', flash[:alert] if flash[:alert] %>
     <%= content_tag 'div', flash[:error] if flash[:error] %>

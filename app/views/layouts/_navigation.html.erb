@@ -1,0 +1,12 @@
+<nav class="">
+  <ul>
+    <li><%= link_to "Study Home", root_path %></li>
+    <% if signed_in? %>
+      <li><%= current_user.email %></li>
+      <li><%= link_to "Log out", destroy_user_session_path, method: 'delete' %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path %></li>
+      <li><%= link_to "Sign up", new_user_registration_path %></li>
+    <% end %>
+  </ul>
+</nav>
