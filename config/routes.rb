@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :lessons
-  resources :categories
-  root 'static#home'
+  resources :categories do
+    resources :lessons
+  end
 
-  devise_for :users
+  resources :users
+  devise_for :users, path: 'u'
+
+  root 'static#home'
 end
