@@ -8,7 +8,7 @@ his = Category.create(title: "History")
 
 stan.lessons.create(title: "Boolean logic", content: "true && false = false", category: math)
 stan.lessons.create(title: "Logarithms", content: "ln(0) = 1", category: math)
-stan.lessons.create(title: "Trigonometry (sin^2(x) + cos^2(x) = 1)", category: math)
+stan.lessons.create(title: "Trigonometry", content:"(sin^2(x) + cos^2(x) = 1)", category: math)
 stan.lessons.create(title: "Kinematics", content: "S = V*t", category: phys)
 stan.lessons.create(title: "Electricity", content: "I = U/R", category: phys)
 stan.lessons.create(title: "Optics", content: "div B = 0", category: phys)

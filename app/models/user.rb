@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :categories, through: :lessons
   has_many :lessons
+
+  def lessons_by_categories
+    self.lessons.group_by {|lesson| lesson.category}
+  end
 end
