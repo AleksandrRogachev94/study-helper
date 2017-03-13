@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
 
   before_action :authenticate_user!
 
-  prepend_before_action :set_user, except: [:create, :update, :destroy]
+  prepend_before_action :set_user
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
   after_action :verify_authorized
@@ -19,18 +19,31 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new(user: @user)
-    @category = @lesson.build_category
+    @lesson.build_category
     authorize @lesson
   end
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.user = current_user
+    @lesson.user = @user
     authorize @lesson
     if @lesson.save
-      redirect_to user_lessons_path(current_user), notice: "Successfully created lesson"
+      redirect_to user_lesson_path(@user, @lesson), notice: "Successfully created lesson"
     else
       render 'new'
+    end
+  end
+
+  def edit
+    authorize @lesson
+  end
+
+  def update
+    authorize @lesson
+    if @lesson.update(lesson_params)
+      redirect_to user_lesson_path(@user, @lesson), notice: "Successfully updated lesson"
+    else
+      render 'edit'
     end
   end
 

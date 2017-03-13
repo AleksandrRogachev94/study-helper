@@ -1,4 +1,4 @@
-<h1><%= @lesson.title %></h1>
+<h1>Lesson: <%= @lesson.title %></h1>
 <h1>Author: <%= link_to @lesson.user.email, user_path(@lesson.user) %></h1>
 <h3>Category: <%= @lesson.category.title %></h1>
 
@@ -16,3 +16,5 @@
   <h3>Links</h3>
   <pre><%= @lesson.links %></pre>
 </div>
+
+<%= link_to 'Edit', edit_user_lesson_path(@lesson.user, @lesson) %>

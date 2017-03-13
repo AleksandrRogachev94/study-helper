@@ -5,6 +5,5 @@ module LessonsHelper
     else
       "Lessons of #{user.email}"
     end
-
   end
 end
