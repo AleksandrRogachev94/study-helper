@@ -1,5 +1,5 @@
 module LessonsHelper
-  def list_index_title(user)
+  def header_index_title(user)
     if user == current_user
       "Your Lessons"
     else

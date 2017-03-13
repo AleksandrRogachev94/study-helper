@@ -1,5 +1,5 @@
 module StudyshipsHelper
-  def list_index_students(user)
+  def header_index_students(user)
     if user == current_user
       "Your students"
     else
@@ -7,7 +7,7 @@ module StudyshipsHelper
     end
   end
 
-  def list_index_teachers(user)
+  def header_index_teachers(user)
     if user == current_user
       "Your teachers"
     else

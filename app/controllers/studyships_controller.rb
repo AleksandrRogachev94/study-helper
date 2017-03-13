@@ -19,13 +19,13 @@ class StudyshipsController < ApplicationController
   end
 
   def teachers
-    studyship_stub = Studyship.new(student: current_user)
+    studyship_stub = @user.student_teacher_relationships.build
     authorize studyship_stub
     @teachers = @user.teachers
   end
 
   def students
-    studyship_stub = Studyship.new(teacher: current_user)
+    studyship_stub = @user.teacher_student_relationships.build
     authorize studyship_stub
     @students = @user.students
   end
