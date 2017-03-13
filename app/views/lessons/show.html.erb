@@ -17,4 +17,9 @@
   <pre><%= @lesson.links %></pre>
 </div>
 
-<%= link_to 'Edit', edit_user_lesson_path(@lesson.user, @lesson) %>
+<% if policy(@lesson).update? %>
+  <%= link_to 'Edit', edit_user_lesson_path(@lesson.user, @lesson) %>
+<% end %>
+<% if policy(@lesson).destroy? %>
+  <%= link_to 'Delete', user_lesson_path(@lesson.user, @lesson), method: 'delete', data: { confirm: "Are you sure?" } %>
+<% end %>

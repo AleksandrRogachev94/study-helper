@@ -47,6 +47,12 @@ class LessonsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @lesson
+    @lesson.delete
+    redirect_to user_lessons_path(@user)
+  end
+
   private
 
     def set_user
