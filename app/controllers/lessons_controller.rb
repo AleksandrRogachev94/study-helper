@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-  
+
   before_action :authenticate_user!
 
   prepend_before_action :set_user, except: [:create, :update, :destroy]
@@ -24,8 +24,14 @@ class LessonsController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    @lesson = Lesson.new(lesson_params)
+    @lesson.user = current_user
     authorize @lesson
+    if @lesson.save
+      redirect_to user_lessons_path(current_user), notice: "Successfully created lesson"
+    else
+      render 'new'
+    end
   end
 
   private
@@ -41,6 +47,6 @@ class LessonsController < ApplicationController
     end
 
     def lesson_params
-      params.require(:lesson).permit(:title, :description, :content, :links, :category_id)
+      params.require(:lesson).permit(:title, :description, :content, :links, :category_id, :category_attributes => [:title])
     end
 end

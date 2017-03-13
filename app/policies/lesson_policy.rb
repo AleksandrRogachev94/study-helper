@@ -14,7 +14,7 @@ class LessonPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def create
+  def create?
     true
   end
 
