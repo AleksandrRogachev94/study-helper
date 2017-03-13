@@ -1,22 +1,26 @@
 class LessonPolicy < ApplicationPolicy
 
   def show?
-    record.user == user
+    #record.user == user
+    true
   end
 
-  # Record is a user from params
   def index?
-    record.user == user
+    #record.user == user
+    true
   end
 
-  # Record is a user from params
   def new?
     record.user == user
   end
 
-  class Scope < Scope
-    def resolve
-      scope
-    end
+  def create
+    true
   end
+
+  # class Scope < Scope
+  #   def resolve
+  #     scope
+  #   end
+  # end
 end

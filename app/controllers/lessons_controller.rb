@@ -1,7 +1,9 @@
 class LessonsController < ApplicationController
+  
   before_action :authenticate_user!
+
+  prepend_before_action :set_user, except: [:create, :update, :destroy]
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
-  prepend_before_action :set_user
 
   after_action :verify_authorized
 
@@ -17,6 +19,12 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new(user: @user)
+    @category = @lesson.build_category
+    authorize @lesson
+  end
+
+  def create
+    raise params.inspect
     authorize @lesson
   end
 
@@ -30,5 +38,9 @@ class LessonsController < ApplicationController
     def set_lesson
       @lesson = @user.lessons.find_by(id: params[:id])
       return redirect_to root_path, alert: "The Lesson doesn't exist or belong to this author" if !@lesson
+    end
+
+    def lesson_params
+      params.require(:lesson).permit(:title, :description, :content, :links, :category_id)
     end
 end
