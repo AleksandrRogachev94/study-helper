@@ -4,11 +4,13 @@
   <% @lessons_by_categories.each do |category, lessons| %>
     <li>
       <%= category.title %>
-      <ul>
+      <ol>
         <% lessons.each do |lesson| %>
-          <li><%= link_to lesson.title, user_lesson_path(current_user, lesson) %></li>
+          <li><%= link_to lesson.title, user_lesson_path(@user, lesson) %></li>
         <% end %>
-      </ul>
+      </ol>
     </li>
   <% end %>
 </ul>
+
+<%= link_to "Create new Lesson", new_user_lesson_path %>
