@@ -1,6 +1,5 @@
 add index to keys
 favourites (bookmarks)
-validates :title, uniqueness: { case_sensitive: false }
 
 categories find rescue
 
@@ -8,4 +7,3 @@ year????
 
 search in select
 
-metaprogramming for helper
