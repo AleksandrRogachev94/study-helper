@@ -1,9 +1,10 @@
-<h1>Something!!!</h1>
+<h1><%= header_index_page(@user, @rel_type.pluralize) %></h1>
+
 <ul>
-  <% @users.each do |user| %>
+  <% @studyships.each do |studyship| %>
     <li>
-      <%= link_to user.email, user_path(user) %>
-      <%#= link_to student.delete %>
+      <%= link_to studyship.send("#{@rel_type}").email, user_path(studyship.send("#{@rel_type}")) %>
+      <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete' %>
     </li>
   <% end %>
 </ul>

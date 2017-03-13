@@ -1,7 +1,0 @@
-<h1><%= header_index_teachers(@user) %></h1>
-
-<ul>
-  <% @teachers.each do |teacher| %>
-    <li><%= link_to teacher.email, user_path(teacher) %></li>
-  <% end %>
-</ul>

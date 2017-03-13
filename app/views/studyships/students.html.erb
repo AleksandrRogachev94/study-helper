@@ -1,9 +1,0 @@
-<h1><%= header_index_students(@user) %></h1>
-<ul>
-  <% @students.each do |student| %>
-    <li>
-      <%= link_to student.email, user_path(student) %>
-      <%#= link_to student.delete %>
-    </li>
-  <% end %>
-</ul>

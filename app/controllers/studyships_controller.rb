@@ -1,14 +1,30 @@
 class StudyshipsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_teacher, only: [:create]
-  before_action :set_user, only: [:index]
+  before_action :set_user, only: [:index, :create]
 
-  after_action :verify_authorized, only: [:create, :index]
+  after_action :verify_authorized, only: [:create, :destroy]
+
+  # Stub is needed to authorize index action
+  def index
+    case params[:rel_type]
+    when "students"
+      studyship_stub = @user.teacher_student_relationships.build
+      @studyships = @user.teacher_student_relationships.reload
+    when "teachers"
+      studyship_stub = @user.student_teacher_relationships.build
+      @studyships = @user.student_teacher_relationships.reload
+    else
+      return redirect_to root_path, alert: "Relationships must be '/students' or '/teachers'"
+    end
+
+    authorize studyship_stub
+    @rel_type = params[:rel_type].singularize
+  end
 
   def create
     authorize Studyship
 
-    if Studyship.establish_mutual_relationships(teacher: @teacher, student: current_user)
+    if Studyship.establish_mutual_relationships(teacher: @user, student: current_user)
       redirect_to user_studyships_path(current_user, "teachers"), notice: "Successfully added new Teacher"
     else
       redirect_to (:back), alert: "Can't establish relationship"
@@ -16,45 +32,18 @@ class StudyshipsController < ApplicationController
   end
 
   def destroy
-  end
-
-  # Stub is needed to authorize action
-  def index
-    case params[:rel_type]
-    when "students"
-      studyship_stub = @user.teacher_student_relationships.build
-      @users = @user.students
-    when "teachers"
-      studyship_stub = @user.student_teacher_relationships.build
-      @users = @user.teachers
+    if params[:rel_type] != "students" && params[:rel_type] != "teachers"
+      flash[:alert] = "Relationships must be '/students' or '/teachers'"
+      redirect_to(:back)
     else
-      return redirect_to(:back), alert: "Relationships must be '/students' or '/teachers'"
+      studyship = Studyship.find_by(id: params[:id])
+      authorize studyship
+      studyship.delete
+      redirect_to user_studyships_path(current_user, params[:rel_type]), notice: "Successfully deleted #{params[:rel_type].singularize}"
     end
-
-    authorize studyship_stub
-  end
-
-  def teachers
-    studyship_stub = @user.student_teacher_relationships.build
-    authorize studyship_stub
-    @teachers = @user.teachers
-  end
-
-  def students
-    studyship_stub = @user.teacher_student_relationships.build
-    authorize studyship_stub
-    @students = @user.students
   end
 
   private
-
-    def set_teacher
-      @teacher = User.find_by(id: params[:teacher_id])
-      if !@teacher || @teacher == current_user
-        flash[:alert] = "User doesn't exist"
-        return redirect_to(:back)
-      end
-    end
 
     def set_user
       @user = User.find_by(id: params[:user_id])

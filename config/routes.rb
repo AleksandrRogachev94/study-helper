@@ -5,15 +5,17 @@ Rails.application.routes.draw do
   # UsersController and nested lessons.
   resources :users do
     resources :lessons
+
+    # Establishing connections between students and teachers. StudentshipsController
     get '/:rel_type' => 'studyships#index', as: "studyships"
+    post '/:rel_type' => 'studyships#create'
     delete ':rel_type/:id' => 'studyships#destroy', as: "studyship"
   end
 
+  #resources :studyships, only: [:create]
+
   # Devise
   devise_for :users, path: 'u'
-
-  # Establishing connections between students and teachers. StudentshipsController
-  resources :studyships, only: [:create, :destroy]
 
   root 'static#home'
 end
