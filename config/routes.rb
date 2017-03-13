@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # UsersController and nested lessons.
   resources :users do
     resources :lessons
-    get 'teachers' => 'studyships#teachers'
-    get 'students' => 'studyships#students'
+    get '/:rel_type' => 'studyships#index', as: "studyships"
+    delete ':rel_type/:id' => 'studyships#destroy', as: "studyship"
   end
 
   # Devise

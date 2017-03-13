@@ -1,11 +1,7 @@
 class StudyshipPolicy < ApplicationPolicy
 
-  def teachers?
-    record.student == user
-  end
-
-  def students?
-    record.teacher == user
+  def index?
+    record.student == user || record.teacher == user
   end
 
   def create?
