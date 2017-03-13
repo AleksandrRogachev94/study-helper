@@ -8,8 +8,8 @@ class LessonsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    stub_lesson = Lesson.new(user: @user) # Stub for authorization if LessonPolicy.
-    authorize stub_lesson
+    @stub_lesson = Lesson.new(user: @user) # Stub for authorization if LessonPolicy.
+    authorize @stub_lesson
     @lessons_by_categories = @user.lessons_by_categories
   end
 

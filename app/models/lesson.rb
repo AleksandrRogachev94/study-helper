@@ -4,6 +4,9 @@ class Lesson < ApplicationRecord
 
   before_save :make_capitalized
 
+  validates :title, presence: true
+  validates :content, presence: true, length: { minimum: 30 }
+
   def category_attributes=(attrs)
     if attrs[:title].present?
       category = Category.where("lower(title) = ?", attrs[:title]).first_or_create(title: attrs[:title])

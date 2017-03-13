@@ -13,4 +13,6 @@
   <% end %>
 </ul>
 
-<%= link_to "Create new Lesson", new_user_lesson_path %>
+<% if policy(@stub_lesson).new? %>
+  <%= link_to "Create new Lesson", new_user_lesson_path %>
+<% end %>

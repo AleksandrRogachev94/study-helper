@@ -1,0 +1,10 @@
+<% if lesson.errors.any? %>
+  <%= content_tag 'div', class: "errors-explanation" do %>
+  <h3>The following errors prohibited this lesson from being saved:</h3>
+    <ul>
+      <% lesson.errors.full_messages.each do |msg| %>
+        <%= content_tag 'li', msg %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

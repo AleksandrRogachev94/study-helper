@@ -1,3 +1,5 @@
+<%= render 'valid_errors', lesson: lesson %>
+
 <%= form_for [lesson.user, lesson] do |f| %>
   <%= render 'category_fields', f: f, category: lesson.category %>
   <%= render 'lesson_fields', f: f %>

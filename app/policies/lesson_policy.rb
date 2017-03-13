@@ -10,12 +10,8 @@ class LessonPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    record.user == user
-  end
-
   def create?
-    true
+    record.user == user
   end
 
   def update?
