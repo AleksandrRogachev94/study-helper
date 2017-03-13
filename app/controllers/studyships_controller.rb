@@ -3,8 +3,11 @@ class StudyshipsController < ApplicationController
   before_action :set_teacher, only: [:create]
   before_action :set_user, only: [:teachers, :students]
 
+  after_action :verify_authorized, only: [:create, :teachers, :students]
+
   def create
-    #Check if ship is already includeed!!!!
+    authorize Studyship
+
     if Studyship.establish_mutual_relationships(teacher: @teacher, student: current_user)
       redirect_to user_teachers_path(current_user), notice: "Successfully added new Teacher"
     else
@@ -16,10 +19,14 @@ class StudyshipsController < ApplicationController
   end
 
   def teachers
+    studyship_stub = Studyship.new(student: current_user)
+    authorize studyship_stub
     @teachers = @user.teachers
   end
 
   def students
+    studyship_stub = Studyship.new(teacher: current_user)
+    authorize studyship_stub
     @students = @user.students
   end
 
