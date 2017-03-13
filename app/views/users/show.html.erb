@@ -1,2 +1,4 @@
+<h1><%= @user.email %></h1>
 <h1>Profile Page...</h1>
-<p><%= link_to "Lessons", user_lessons_path(@user) %></p>
+
+<p><%= link_for_user_lessons(@stub_lesson) %><p>

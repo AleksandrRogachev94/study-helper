@@ -7,12 +7,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @stub_lesson = @user.lessons.build
   end
 
   private
 
     def set_user
       @user = User.find_by(id: params[:id])
-      return redirect_to root_path, alert: "The User doesn't exist" if !@user
+      return redirect_to root_path, alert: "User doesn't exist" if !@user
     end
 end

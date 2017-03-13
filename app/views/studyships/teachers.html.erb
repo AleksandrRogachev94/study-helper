@@ -1,0 +1,7 @@
+<h1>Teachers of <%= @user.email %></h1>
+
+<ul>
+  <% @teachers.each do |teacher| %>
+    <li><%= link_to teacher.email, user_path(teacher) %></li>
+  <% end %>
+</ul>

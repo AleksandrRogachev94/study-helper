@@ -1,13 +1,11 @@
 class LessonPolicy < ApplicationPolicy
 
   def show?
-    #record.user == user
-    true
+    record.user == user || user.teachers.include?(record.user)
   end
 
   def index?
-    #record.user == user
-    true
+    show?
   end
 
   def create?

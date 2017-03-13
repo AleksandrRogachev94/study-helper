@@ -5,8 +5,6 @@ helen = User.create(email: "Helen@gmail.com", password: "12345678", password_con
 linda = User.create(email: "Linda@gmail.com", password: "12345678", password_confirmation: "12345678")
 pablo = User.create(email: "Pablo@gmail.com", password: "12345678", password_confirmation: "12345678")
 
-
-
 math = Category.create(title: "Math")
 phys = Category.create(title: "Physics")
 eng = Category.create(title: "English")
@@ -18,7 +16,7 @@ span = Category.create(title: "Spanish")
 astr = Category.create(title: "Astronomy")
 econ = Category.create(title: "Economics")
 
-stan.lessons.create(title: "Boolean logic", content: "true && false = false", category: math)
+stan.lessons.create(title: "Boolean logic", content: "true && false = falses", category: math)
 stan.lessons.create(title: "Logarithms", content: "ln(0) = 1", category: math)
 stan.lessons.create(title: "Trigonometry", content:"(sin^2(x) + cos^2(x) = 1)", category: math)
 stan.lessons.create(title: "Kinematics", content: "S = V*t", category: phys)
