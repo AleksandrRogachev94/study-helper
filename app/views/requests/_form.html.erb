@@ -1,0 +1,6 @@
+<%= form_for Request.new do |f| %>
+  <%= f.label :description %><br>
+  <%= f.text_area :description, cols: 80, rows: 10 %><br>
+  <%= f.hidden_field :teacher_id, value: @stub_lesson.user.id %>
+  <%= f.submit "Add as a Teacher" %>
+<% end %>

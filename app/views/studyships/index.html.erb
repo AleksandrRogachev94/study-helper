@@ -8,3 +8,7 @@
     </li>
   <% end %>
 </ul>
+
+<% if @rel_type == "student" %>
+  <%= link_to "New Students request", requests_path %>
+<% end %>

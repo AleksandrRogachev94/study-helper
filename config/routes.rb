@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     delete ':rel_type/:id' => 'studyships#destroy', as: "studyship"
   end
 
-  #resources :studyships, only: [:create]
+  resources :requests, only: [:create, :destroy, :index]
+
 
   # Devise
   devise_for :users, path: 'u'
