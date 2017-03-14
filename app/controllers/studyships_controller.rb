@@ -25,9 +25,10 @@ class StudyshipsController < ApplicationController
   def create
     authorize Studyship
 
+    request = Request.find_by(id: params[:request_id])
     # If someone wants to hack by url, the only thing he can do is to grant acces to other users to his data.
-    if Studyship.establish_mutual_relationships(teacher: @current_user, student: @user)
-      Request.find_by(id: params[:request_id]).delete
+    if request && Studyship.establish_mutual_relationships(teacher: @current_user, student: @user)
+      request.delete
       redirect_to requests_path, notice: "Request confirmed"
     else
       redirect_to (:back), alert: "Can't establish relationship"

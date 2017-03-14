@@ -3,12 +3,18 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
 
   after_action :verify_policy_scoped, only: :index
+  after_action :verify_authorized, only: [:destroy]
 
   def index
     @requests = policy_scope(Request)
+    if @requests.empty?
+      flash[:notice] = "You don't have any requests"
+      redirect_to(:back)
+    end
   end
 
   def create
+    return redirect_to root_path, alert: "You can't be a teacher of yourself" if params[:request][:teacher_id] == current_user.id
     request = Request.new(request_params)
     request.student = current_user
     if request.save
@@ -17,20 +23,6 @@ class RequestsController < ApplicationController
       redirect_to root_path, alert: "Can't make a request"
     end
   end
-
-  # def update
-  #   request = Request.find_by(id: params[:id])
-  #   return redirect_to requests_path, alert: "Requst doesn't exist" if !request
-  #   authorize request
-  #
-  #   case params[:request_action]
-  #   when "confirm"
-  #     request.update(status: "confirmed")
-  #     redirect_to user_studyships_path()
-  #   when "decline"
-  #     request.update(status: "declined")
-  #   end
-  # end
 
   def destroy
     request = Request.find_by(id: params[:id])
