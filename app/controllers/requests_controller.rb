@@ -7,10 +7,7 @@ class RequestsController < ApplicationController
 
   def index
     @requests = policy_scope(Request)
-    if @requests.empty?
-      flash[:notice] = "You don't have any requests"
-      redirect_to(:back)
-    end
+    redirect_to user_studyships_path(current_user, "students"), notice: "You don't have any requests" if @requests.empty?
   end
 
   def create

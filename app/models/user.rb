@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :teacher_student_relationships, class_name: "Studyship", foreign_key: 'teacher_id'
   has_many :students, through: :teacher_student_relationships
 
+  has_one :profile
+
   def lessons_by_categories
     self.lessons.group_by {|lesson| lesson.category}
   end

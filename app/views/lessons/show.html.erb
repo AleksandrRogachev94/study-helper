@@ -1,6 +1,6 @@
 <h1>Lesson: <%= @lesson.title %></h1>
 <h1>Author: <%= link_to @lesson.user.email, user_path(@lesson.user) %></h1>
-<h3>Category: <%= @lesson.category.title %></h1>
+<h3>Category: <%= link_to @lesson.category.title, category_path(@lesson.category) %></h1>
 
 <div class="">
   <h3>Description</h3>
