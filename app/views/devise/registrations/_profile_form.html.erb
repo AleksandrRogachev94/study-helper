@@ -1,40 +1,6 @@
 <fieldset>
   <legend>Profile</legend>
   <%= f.fields_for :profile, Profile.new do |profile_form| %>
-
-    <div class="field">
-      <%= profile_form.label :first_name, "First name(REQUIRED)" %>
-      <%= profile_form.text_field :first_name %>
-
-    <div class="field">
-      <%= profile_form.label :last_name, "Last name(REQUIRED)" %>
-      <%= profile_form.text_field :last_name %>
-    </div>
-
-    <div class="field">
-      <%= profile_form.label :phone_number %>
-      <%= profile_form.telephone_field :phone_number %>
-    </div>
-
-    <div class="field">
-      <%= profile_form.label :age %>
-      <%= profile_form.number_field :age %>
-    </div>
-
-    <div class="field">
-      <%= profile_form.label :study_place %>
-      <%= profile_form.text_field :study_place %>
-    </div>
-
-    <div class="field">
-      <%= profile_form.label :degree %>
-      <%= profile_form.text_field :degree %>
-    </div>
-
-    <div class="field">
-      <%= profile_form.label :interests %>
-      <%= profile_form.text_area :interests %>
-    </div>
-
+    <%= render 'profiles/profile_fields', f: profile_form %>
   <% end %>
 </fieldset>

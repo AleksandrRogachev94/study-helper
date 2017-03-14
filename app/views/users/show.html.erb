@@ -1,4 +1,8 @@
-<h1><%= @user.email %></h1>
-<h1>Profile Page...</h1>
+<h1>Profile</h1>
 
+<%= render 'profiles/profile', profile: @user.profile %>
+<%= link_to 'Edit Profile', edit_user_profile_path(@user) %>
+
+<%= show_field_for @user, :email, 'p' %>
+<%= link_to 'Edit Credentials', edit_user_registration_path %>
 <p><%= link_for_user_lessons(@stub_lesson) %><p>
