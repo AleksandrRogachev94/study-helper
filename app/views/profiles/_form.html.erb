@@ -1,4 +1,4 @@
-<%= form_for :profile do |f| %>
+<%= form_for profile, url: profile_path do |f| %>
   <%= render 'profile_fields', f: f %>
   <%= f.submit %>
 <% end %>

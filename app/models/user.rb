@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   validates :profile, presence: true
 
+  delegate :full_name, to: :profile
+
   def lessons_by_categories
     self.lessons.group_by {|lesson| lesson.category}
   end
