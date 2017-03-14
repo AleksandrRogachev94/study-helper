@@ -8,17 +8,20 @@ end
 gem 'rails', '~> 5.0.2'
 gem 'sqlite3'
 gem 'puma', '~> 3.0'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2'
 gem 'pundit', '~> 1.1'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth', '~> 1.6'
 gem 'figaro'
+
+gem 'jbuilder', '~> 2.5'
+gem 'coffee-rails', '~> 4.2'
+gem 'jquery-rails'
+gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
