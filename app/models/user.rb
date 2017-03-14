@@ -15,9 +15,19 @@ class User < ApplicationRecord
   has_many :teacher_student_relationships, class_name: "Studyship", foreign_key: 'teacher_id'
   has_many :students, through: :teacher_student_relationships
 
-  has_one :profile
+  has_one :profile, dependent: :destroy
+  validates :profile, presence: { message: "First name and Last name can't be blank" }
 
   def lessons_by_categories
     self.lessons.group_by {|lesson| lesson.category}
+  end
+
+  def profile_attributes=(attrs)
+    # raise attrs.inspect
+    # if attrs[:title].present?
+    #   category = Category.where("lower(title) = ?", attrs[:title]).first_or_create(title: attrs[:title])
+    #   self.category = category
+    #   self.save
+    # end
   end
 end

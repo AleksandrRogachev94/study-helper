@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
 
   # Devise
-  devise_for :users, path: 'u'
+  devise_for :users, path: 'u', controllers: { registrations: 'users_devise/registrations' }
 
   root 'static#home'
 end
