@@ -1,6 +1,12 @@
 <%= form_for Request.new do |f| %>
-  <%= f.label :description %><br>
-  <%= f.text_area :description, cols: 80, rows: 10 %><br>
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, cols: 80, rows: 10, class: "form-control" %><br>
+  </div>
+
   <%= f.hidden_field :teacher_id, value: @stub_lesson.user.id %>
-  <%= f.submit "Add as a Teacher" %>
+
+  <div class="form-group">
+    <%= f.submit "Add as a Teacher" class: "btn btn-primary" %>
+  </div>
 <% end %>

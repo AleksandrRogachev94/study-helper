@@ -14,10 +14,7 @@
  *= require_self
  */
 
- .field_with_errors {
-   color: red;
-   display: inline-block;
- }
+/*------------------------------ Common --------------------------------*/
 
  html {
    height: 100%;
@@ -37,9 +34,32 @@ body {
   min-height: 100%;
 }
 
+/*------------------------------ Navigation --------------------------------*/
+
 nav {
   opacity: 0.9;
 }
+
+/*------------------------------ Main --------------------------------*/
+
+.container {
+  border: 1px solid red;
+}
+
+.field {
+
+}
+
+.field_with_errors {
+  color: red;
+  display: inline-block;
+}
+
+legend {
+  color: white;
+}
+
+/*------------------------------ Footer --------------------------------*/
 
 footer {
   position: absolute;

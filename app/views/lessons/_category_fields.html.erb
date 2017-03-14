@@ -1,11 +1,14 @@
-<p>Choose category from the list or or create new one.</p>
-<%= f.collection_select :category_id, Category.all, :id, :title %>
-
 <fieldset>
-  <legend>New Category</legend>
+  <legend>Choose category from the list or create new one</legend>
+  
+  <%= f.collection_select :category_id, Category.all, :id, :title, {}, {class: "selectpicker", "data-live-search  ": "true"} %>
+  <br><br>
+
   <%= f.fields_for :category, category do |category_form| %>
-    <%= category_form.label :title, "Title (live blank if you don't want to create it)" %>
-    <%= category_form.text_field :title, value: "" %>
+    <div class="form-group">
+      <%= category_form.label :title, "Title (live blank if you don't want to create it)" %>
+      <%= category_form.text_field :title, value: "", class: "form-control" %>
+    </div>
   <% end %>
 </fieldset>
 <br>
