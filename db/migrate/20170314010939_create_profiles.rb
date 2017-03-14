@@ -8,6 +8,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
       t.string :study_place
       t.string :degree
       t.string :interests
+      t.string :image
       t.integer :user_id
 
       t.timestamps

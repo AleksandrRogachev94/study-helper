@@ -11,6 +11,10 @@ class Profile < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
+  def full_name=(full_name)
+    self.first_name, self.last_name = full_name.split(" ")
+  end
+
   def capitalize_name
     self.first_name.capitalize!
     self.last_name.capitalize!

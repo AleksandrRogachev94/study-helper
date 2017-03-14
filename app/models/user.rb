@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable
+  devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :categories, through: :lessons
   has_many :lessons
@@ -29,4 +30,13 @@ class User < ApplicationRecord
     self.profile = profile
     self.profile = nil if !profile.save
   end
+
+  def self.from_omniauth(auth)
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0,20]
+    profile = user.build_profile(full_name: auth.info.name, image: auth.info.image)
+    profile.save(:validate => false)
+  end
+end
 end

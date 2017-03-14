@@ -14,8 +14,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'devise', '~> 4.2.0'
-gem 'pundit'
+gem 'devise', '~> 4.2'
+gem 'pundit', '~> 1.1'
+gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth', '~> 1.6'
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

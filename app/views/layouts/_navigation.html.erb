@@ -2,7 +2,7 @@
   <ul>
     <li><%= link_to "Study Home", root_path %></li>
     <% if signed_in? %>
-      <li><%= link_to current_user.full_name, user_path(current_user) %></li>
+      <li><%= link_to (current_user.try(:full_name) || current_user.email), user_path(current_user) %></li>
       <li><%= link_to "My Teachers", user_studyships_path(current_user, "teachers") %></li>
       <li><%= link_to "My Students", user_studyships_path(current_user, "students") %></li>
       <li><%= link_to "All Users", users_path %></li>
