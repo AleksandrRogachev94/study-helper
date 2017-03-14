@@ -1,8 +1,15 @@
 <h1>Profile</h1>
 
 <%= render 'profiles/profile', profile: @user.profile %>
-<%= link_to 'Edit Profile', edit_profile_path %>
+
+<% if policy(@user.profile).update? %>
+  <%= link_to 'Edit Profile', edit_profile_path %>
+<% end %>
 
 <%= show_field_for @user, :email, 'p' %>
-<%= link_to 'Edit Credentials', edit_user_registration_path %>
+
+<% if @user == current_user %>
+  <%= link_to 'Edit Credentials', edit_user_registration_path %>
+<% end %>
+
 <p><%= link_for_user_lessons(@stub_lesson) %><p>
