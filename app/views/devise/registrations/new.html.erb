@@ -21,13 +21,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <fieldset>
-    <legend>Profile</legend>
-    <%= f.fields_for :profile, @profile do |profile_form| %>
-      <%= profile_form.label :first_name %>
-      <%= profile_form.text_field :first_name %>
-    <% end %>
-  </fieldset>
+  <%= render 'profile_form', f: f %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
