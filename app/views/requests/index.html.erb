@@ -1,0 +1,14 @@
+<h1>Students Requests</h1>
+<ul>
+  <% @requests.each do |request| %>
+    <li>
+      <%= link_to request.student.email, user_path(request.student) %>
+
+      <%= button_to "Accept", user_studyships_path(request.student, "teachers"), params: { request_id: request.id } %>
+      <%= button_to "Decline", request_path(request), method: 'delete' %>
+      <% if request.description.present? %>
+        <br>Desciption: <%= request.description %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

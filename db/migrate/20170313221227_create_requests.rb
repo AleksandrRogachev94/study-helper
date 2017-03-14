@@ -7,5 +7,8 @@ class CreateRequests < ActiveRecord::Migration[5.0]
 
       t.timestamps null: false
     end
+
+    add_index :requests, :teacher_id, name: "request_teacher_id_ix"
+    add_index :requests, :student_id, name: "request_student_id_ix"
   end
 end

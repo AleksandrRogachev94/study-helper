@@ -2,17 +2,13 @@ class RequestsController < ApplicationController
 
   before_action :authenticate_user!
 
+  after_action :verify_policy_scoped, only: :index
+
   def index
+    @requests = policy_scope(Request)
   end
 
   def create
-    # teacher = User.find_by(id: params[:teacher_id])
-    #
-    # if teacher.nil? || current_user.teachers.include?(teacher)
-    #   flash[:alert] = "User doesn't exist or you already have him as teacher"
-    #   return redirect_to(:back)
-    # end
-
     request = Request.new(request_params)
     request.student = current_user
     if request.save
@@ -20,6 +16,29 @@ class RequestsController < ApplicationController
     else
       redirect_to root_path, alert: "Can't make a request"
     end
+  end
+
+  # def update
+  #   request = Request.find_by(id: params[:id])
+  #   return redirect_to requests_path, alert: "Requst doesn't exist" if !request
+  #   authorize request
+  #
+  #   case params[:request_action]
+  #   when "confirm"
+  #     request.update(status: "confirmed")
+  #     redirect_to user_studyships_path()
+  #   when "decline"
+  #     request.update(status: "declined")
+  #   end
+  # end
+
+  def destroy
+    request = Request.find_by(id: params[:id])
+    return redirect_to requests_path, alert: "Requst doesn't exist" if !request
+    authorize request
+
+    request.delete
+    redirect_to requests_path, notice: "Request declined"
   end
 
   private

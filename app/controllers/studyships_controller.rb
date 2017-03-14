@@ -2,6 +2,7 @@ class StudyshipsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:index, :create]
 
+  # actually index is authorized too.
   after_action :verify_authorized, only: [:create, :destroy]
 
   # Stub is needed to authorize index action
@@ -24,8 +25,10 @@ class StudyshipsController < ApplicationController
   def create
     authorize Studyship
 
-    if Studyship.establish_mutual_relationships(teacher: @user, student: current_user)
-      redirect_to user_studyships_path(current_user, "teachers"), notice: "Successfully added new Teacher"
+    # If someone wants to hack by url, the only thing he can do is to grant acces to other users to his data.
+    if Studyship.establish_mutual_relationships(teacher: @current_user, student: @user)
+      Request.find_by(id: params[:request_id]).delete
+      redirect_to requests_path, notice: "Request confirmed"
     else
       redirect_to (:back), alert: "Can't establish relationship"
     end

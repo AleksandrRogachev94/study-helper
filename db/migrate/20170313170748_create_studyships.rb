@@ -7,7 +7,7 @@ class CreateStudyships < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :studyships, :tacher_id, name: "teacher_id_ix"
+    add_index :studyships, :teacher_id, name: "teacher_id_ix"
     add_index :studyships, :student_id, name: "student_id_ix"
   end
 end
