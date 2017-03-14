@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <!-- Main Nav -->
           <ul class="nav navbar-nav">
-            <%= link_to "About", about_path, class: "navbar-brand" %>
+            <li><%= link_to "About", about_path %></li>
             <% if signed_in? %>
               <li><%= link_to (current_user.try(:full_name) || current_user.email), user_path(current_user) %></li>
               <li><%= link_to "My Teachers", user_studyships_path(current_user, "teachers") %></li>

@@ -14,3 +14,5 @@
     <% end %>
   </ul>
 </nav>
+
+url(image_url('wallpaper_for_alex.jpg'))

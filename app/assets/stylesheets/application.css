@@ -14,7 +14,40 @@
  *= require_self
  */
 
-.field_with_errors {
-  color: red;
-  display: inline-block;
+ .field_with_errors {
+   color: red;
+   display: inline-block;
+ }
+
+ html {
+   height: 100%;
+ }
+
+body {
+  background: url("/assets/wp_website.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  padding-top: 50px; /* For fixeed navbar */
+  position: relative;
+  padding-bottom: 6em; /* needed for footer to not to conflict with content. */
+  color: white;
+  min-height: 100%;
+}
+
+nav {
+  opacity: 0.9;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1em;
+  background-color: #111013;
+  text-align: right;
+  opacity: 0.9;
 }
