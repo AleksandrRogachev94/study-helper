@@ -1,0 +1,8 @@
+<div class="my_container">
+  <p>* blue - your teacher, purple - your student, green - both</p>
+  <div class="list-group">
+    <% users.each do |user| %>
+      <%= link_to (user.full_name || user.email), user_path(user), class: user_class_bs(user) %>
+    <% end %>
+  </div>
+</div>

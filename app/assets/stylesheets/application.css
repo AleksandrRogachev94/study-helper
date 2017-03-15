@@ -61,6 +61,18 @@ legend {
   text-align: center;
 }
 
+h1, h2 {
+  text-align: center
+}
+
+.my_container {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/*------------------------------ Lists --------------------------------*/
+
 .list-group-item-purple {
   background-color: rgba(128,0,128,0.2);
 }
@@ -69,13 +81,9 @@ a.list-group-item-purple:hover {
   background-color: rgba(128,0,128,0.35);
 }
 
-h1, h2 {
-  text-align: center
-}
-
-.sign_in, .sign_up, .edit_credentials, .edit_user_profile, .list-group {
-  width: 50%;
-  margin: 0 auto;
+.studyships {
+  width: 70%;
+  display: inline-block;
 }
 
 /*------------------------------ Footer --------------------------------*/

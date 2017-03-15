@@ -1,6 +1,9 @@
 <h1>All Categories</h1>
-<ul>
-  <% @categories.each do |category| %>
-    <li><%= link_to category.title, category_path(category) %></li>
-  <% end %>
-</ul>
+
+<div class="my_container">
+  <div class="list-group">
+    <% @categories.each do |category| %>
+      <%= link_to category.title, category_path(category), class: "list-group-item list-group-item-action" %>
+    <% end %>
+  </div>
+</div>

@@ -1,14 +1,15 @@
 <h1><%= header_index_page(@user, @rel_type.pluralize) %></h1>
 
-<ul>
-  <% @studyships.each do |studyship| %>
-    <li>
-      <%= link_to studyship.send("#{@rel_type}").email, user_path(studyship.send("#{@rel_type}")) %>
-      <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete' %>
-    </li>
-  <% end %>
-</ul>
+<div class="my_container">
+  <div class="list-group">
+    <% @studyships.each do |studyship| %>
+        <%= link_to studyship.send("#{@rel_type}").try(:full_name), user_path(studyship.send("#{@rel_type}")), class: "list-group-item list-group-item-action studyships" %>
+        <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', class: "btn btn-danger" %>
+        <br>
+    <% end %>
+  </div>
 
-<% if @rel_type == "student" %>
-  <%= link_to "New Requests from Students", requests_path %>
-<% end %>
+  <% if @rel_type == "student" %>
+    <%= link_to "New Requests from Students", requests_path, class: "btn btn-primary" %>
+  <% end %>
+</div>

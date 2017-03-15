@@ -1,7 +1,3 @@
 <h1>All Teachers of the <%= @category.title %> Category</h1>
 
-<ul>
-  <% @users.each do |user| %>
-    <li><%= link_to user.email, user_path(user) %></li>
-  <% end %>
-</ul>
+<%= render 'users/users_with_studyships', users: @users %>

@@ -1,18 +1,20 @@
 <h1><%= header_index_page(@user, "lessons") %></h1>
 
-<ul>
-  <% @lessons_by_categories.each do |category, lessons| %>
-    <li>
-      <%= category.title %>
-      <ol>
-        <% lessons.each do |lesson| %>
-          <li><%= link_to lesson.title, user_lesson_path(@user, lesson) %></li>
-        <% end %>
-      </ol>
-    </li>
-  <% end %>
-</ul>
+<div class="my_container">
+  <div class="list-group">
+    <% @lessons_by_categories.each do |category, lessons| %>
+      <li class="list-group-item list-group-item-info">
+        <%= category.title %>
+        <div class="list-group">
+          <% lessons.each do |lesson| %>
+            <%= link_to lesson.title, user_lesson_path(@user, lesson), class: "list-group-item list-group-item-action" %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </div>
 
-<% if policy(@stub_lesson).new? %>
-  <%= link_to "Create new Lesson", new_user_lesson_path, class: "btn btn-primary" %>
-<% end %>
+  <% if policy(@stub_lesson).new? %>
+    <%= link_to "Create new Lesson", new_user_lesson_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
