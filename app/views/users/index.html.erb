@@ -1,12 +1,8 @@
 <h1>All Users</h1>
 
-<ul>
+<div class="list-group">
+  <p>* blue - your teacher, purple - your student, green - both</p>
   <% @users.each do |user| %>
-    <% next if current_user == user %>
-    <li>
-      <%= link_to user.email, user_path(user) %>
-      <%= " - your student" if current_user.students.include?(user) %>
-      <%= " - your teacher" if current_user.teachers.include?(user) %>
-    </li>
+    <%= link_to (user.full_name || user.email), user_path(user), class: user_class_bs(user) %>
   <% end %>
-</ul>
+</div>

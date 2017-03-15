@@ -45,7 +45,7 @@ nav {
   margin-top: 1em;
   padding-top: 1em;
   background-color: rgba(255, 255, 255, 0.92);
-  padding-bottom: 1em;
+  padding-bottom: 2em;
 }
 
 .field_with_errors {
@@ -57,15 +57,23 @@ legend {
   border-bottom: 1px solid black;
 }
 
-.alert {
+.alert, .list-group p {
   text-align: center;
+}
+
+.list-group-item-purple {
+  background-color: rgba(128,0,128,0.2);
+}
+
+a.list-group-item-purple:hover {
+  background-color: rgba(128,0,128,0.35);
 }
 
 h1, h2 {
   text-align: center
 }
 
-.sign_in, .sign_up, .edit_credentials, .edit_user_profile {
+.sign_in, .sign_up, .edit_credentials, .edit_user_profile, .list-group {
   width: 50%;
   margin: 0 auto;
 }
