@@ -1,7 +1,14 @@
-<%= image_tag profile.image if profile.image %>
+<%= image_tag profile.image, id: "avatar" if profile.image %>
 <%= show_field_for profile, :full_name, "h1" %>
-<%= show_field_for profile, :phone_number, "p" %>
-<%= show_field_for profile, :age, "p" %>
-<%= show_field_for profile, :study_place, "p" %>
-<%= show_field_for profile, :degree, "p" %>
-<%= show_field_for profile, :interests, "p" %>
+
+<table class="table">
+  <tbody>
+    <% profile.attributes.each do |name, value| %>
+      <% next if !['phone_number', 'age', 'study_place', 'degree', 'interests', 'created_at'].include?(name) || value.blank? %>
+        <tr>
+          <%= content_tag 'td', name.humanize %>
+          <%= content_tag 'td', value %>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

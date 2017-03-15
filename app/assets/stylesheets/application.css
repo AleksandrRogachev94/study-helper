@@ -71,6 +71,10 @@ h1, h2 {
   text-align: center;
 }
 
+img#avatar {
+  width: 40%;
+}
+
 /*------------------------------ Lists --------------------------------*/
 
 .list-group-item-purple {
@@ -86,6 +90,10 @@ a.list-group-item-purple:hover {
   display: inline-block;
 }
 
+.button_to {
+  display: inline-block;
+}
+
 /*------------------------------ Footer --------------------------------*/
 
 footer {
@@ -96,5 +104,5 @@ footer {
   padding: 1em;
   background-color: #111013;
   text-align: right;
-  opacity: 0.9;
+  opacity: 0.93;
 }
