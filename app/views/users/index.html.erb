@@ -1,3 +1,8 @@
 <h1>All Users</h1>
 
-<%= render 'users_with_studyships', users: @users %>
+<div class="my_container">
+
+  <%= render 'search_form', path: users_path %>
+  <br>
+  <%= render 'users_with_studyships', users: @users %>
+</div>

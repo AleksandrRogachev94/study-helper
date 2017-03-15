@@ -32,11 +32,21 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.email = auth.info.email
-    user.password = Devise.friendly_token[0,20]
-    profile = user.build_profile(full_name: auth.info.name, image: auth.info.image)
-    profile.save(:validate => false)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      profile = user.build_profile(full_name: auth.info.name, image: auth.info.image)
+      profile.save(:validate => false)
+    end
   end
-end
+
+  def self.search(search)
+    if search
+      self.where("email LIKE ?", "%#{search}%") ||
+      self.profile.where("last_name LIKE ?", "%#{search}%") ||
+      self.profile.where("first_name LIKE ?", "%#{search}%")
+    else
+      self.all
+    end
+  end
 end

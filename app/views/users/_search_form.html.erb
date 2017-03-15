@@ -1,0 +1,10 @@
+<%= form_tag path, :method => 'get', class: "form-inline" do %>
+
+  <div class="form-group has-feedback">
+    <label class="control-label" for="inputSuccess4"></label>
+    <%= text_field_tag :search, params[:search], autofocus: true, class: "form-control" %>
+    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+  </div>
+
+  <%= submit_tag "Search", :name => nil, class: "btn btn-info" %>
+<% end %>

@@ -4,7 +4,7 @@
   <div class="list-group">
     <% @studyships.each do |studyship| %>
         <%= link_to studyship.send("#{@rel_type}").try(:full_name), user_path(studyship.send("#{@rel_type}")), class: "list-group-item list-group-item-action studyships" %>
-        <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', class: "btn btn-danger" %>
+        <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
         <br>
     <% end %>
   </div>

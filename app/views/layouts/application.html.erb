@@ -13,16 +13,18 @@
   <body>
     <%= render 'layouts/navigation' %>
 
-    <div class="container">
-      <%= content_tag 'div', flash[:notice], class: "alert alert-success" if flash[:notice] %>
-      <%= content_tag 'div', flash[:alert], class: "alert alert-danger" if flash[:alert] %>
-      <%= content_tag 'div', flash[:error], class: "alert alert-danger" if flash[:error] %>
-
+    <% if params[:action] != "home" %>
+      <div class="container">
+        <%= content_tag 'div', flash[:notice], class: "alert alert-success" if flash[:notice] %>
+        <%= content_tag 'div', flash[:alert], class: "alert alert-danger" if flash[:alert] %>
+        <%= content_tag 'div', flash[:error], class: "alert alert-danger" if flash[:error] %>
+        <%= yield %>
+      </div>
+    <% else %>
       <%= yield %>
-    </div>
+    <% end %>
 
     <%= render 'layouts/footer' %>
-
     <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

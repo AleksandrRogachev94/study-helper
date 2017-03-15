@@ -16,3 +16,5 @@
 </nav>
 
 url(image_url('wallpaper_for_alex.jpg'))
+
+{class: "selectpicker", "data-live-search  ": "true"}

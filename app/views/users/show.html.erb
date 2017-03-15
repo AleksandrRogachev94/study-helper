@@ -5,13 +5,13 @@
   <%= render 'profiles/profile', profile: @user.profile %>
 
   <% if policy(@user.profile).update? %>
-    <%= link_to 'Edit Profile', edit_profile_path %>
+    <%= link_to 'Edit Profile', edit_profile_path, class: "my-link" %>
   <% end %>
 
   <%= show_field_for @user, :email, 'p' %>
 
   <% if @user == current_user %>
-    <%= link_to 'Edit Credentials', edit_user_registration_path %>
+    <%= link_to 'Edit Credentials', edit_user_registration_path, class: "my-link" %>
   <% end %>
 
   <p><%= link_for_user_lessons(@stub_lesson) %><p>

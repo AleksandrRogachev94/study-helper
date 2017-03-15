@@ -1,6 +1,10 @@
 <h1>All Categories</h1>
 
 <div class="my_container">
+
+  <%= render 'users/search_form', path: categories_path %>
+  <br>
+
   <div class="list-group">
     <% @categories.each do |category| %>
       <%= link_to category.title, category_path(category), class: "list-group-item list-group-item-action" %>
