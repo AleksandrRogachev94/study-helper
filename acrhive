@@ -18,3 +18,8 @@
 url(image_url('wallpaper_for_alex.jpg'))
 
 {class: "selectpicker", "data-live-search  ": "true"}
+
+@import url('https://fonts.googleapis.com/css?family=Clicker+Script');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Amaranth');
+@import url('https://fonts.googleapis.com/css?family=Convergence');

@@ -1,17 +1,15 @@
-<h1>Profile</h1>
-
-<div class="my_container">
+<div class="my-container">
 
   <%= render 'profiles/profile', profile: @user.profile %>
 
+  <p>E-mail: <%= @user.email %></p>
+
   <% if policy(@user.profile).update? %>
     <%= link_to 'Edit Profile', edit_profile_path, class: "my-link" %>
-  <% end %>
-
-  <%= show_field_for @user, :email, 'p' %>
+  <% end %><br>
 
   <% if @user == current_user %>
-    <%= link_to 'Edit Credentials', edit_user_registration_path, class: "my-link" %>
+    <%= link_to 'Edit Credentials', edit_user_registration_path, class: "my-link" %><br><br>
   <% end %>
 
   <p><%= link_for_user_lessons(@stub_lesson) %><p>

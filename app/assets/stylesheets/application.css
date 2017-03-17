@@ -14,8 +14,8 @@
  *= require_self
  */
 
-@import url('https://fonts.googleapis.com/css?family=Clicker+Script');
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Rochester');
 
 /*------------------------------ Common --------------------------------*/
 
@@ -30,6 +30,9 @@ body {
   -o-background-size: cover;
   background-size: cover;
 
+  font-family: 'Roboto', sans-serif;
+
+  font-size: 1.7em;
   padding-top: 50px; /* For fixeed navbar */
   position: relative;
   padding-bottom: 6em; /* needed for footer to not to conflict with content. */
@@ -40,6 +43,22 @@ body {
 
 nav {
   opacity: 0.9;
+}
+
+.nav.navbar-nav li a {
+  color: #DADADA;
+}
+
+.nav.navbar-nav .dropdown-menu li a {
+  color: black;
+}
+
+.navbar-header a.navbar-brand {
+  color: #ccff00;
+}
+
+.navbar-header a.navbar-brand:hover {
+  color: #8cff00;
 }
 
 /*------------------------------ Main --------------------------------*/
@@ -68,7 +87,7 @@ h1, h2 {
   text-align: center
 }
 
-.my_container {
+.my-container {
   width: 50%;
   margin: 0 auto;
   text-align: center;
@@ -76,14 +95,6 @@ h1, h2 {
 
 img#avatar {
   width: 40%;
-}
-
-div.home {
-  position: absolute;
-  top: 40%;
-  color: white;
-  font-size: 1.8em;
-  font-family: 'Dancing Script', cursive;
 }
 
 a {
@@ -104,6 +115,29 @@ a.my-link:hover {
 a.my-link:active  {
   transition: color .3s;
   color: #79C5E3;
+}
+
+div.home {
+  position: absolute;
+  top: 30%;
+  color: white;
+  font-size: 2.3em;
+  text-align: center;
+}
+
+.home p {
+  font-family: "Rochester", cursive;
+  font-size: 1.2em;
+}
+
+.home h1 {
+  color: #ccff00;
+  font-size: 1.6em;
+}
+
+.about {
+  text-align: left;
+  padding: 0 40px;
 }
 
 /*------------------------------ Lists --------------------------------*/

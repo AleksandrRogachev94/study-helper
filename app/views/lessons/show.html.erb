@@ -1,21 +1,10 @@
-<h1>Lesson: <%= @lesson.title %></h1>
-<h1>Author: <%= link_to @lesson.user.email, user_path(@lesson.user) %></h1>
-<h3>Category: <%= link_to @lesson.category.title, category_path(@lesson.category) %></h1>
+<h1><%= @lesson.title %></h1>
+<h1>Author: <%= link_to (@lesson.user.appearance), user_path(@lesson.user), class: "my-link" %></h1>
+<h3>Category: <%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
 
-<div class="">
-  <h3>Description</h3>
-  <pre><%= @lesson.description %></pre>
-</div>
-
-<div class="">
-  <h3>Content</h3>
-  <pre><%= @lesson.content %></pre>
-</div>
-
-<div class="">
-  <h3>Links</h3>
-  <pre><%= @lesson.links %></pre>
-</div>
+<%= show_field_for(@lesson, :description, "h3", "pre") %>
+<%= show_field_for(@lesson, :content, "h3", "pre") %>
+<%= show_field_for(@lesson, :links, "h3", "pre") %>
 
 <% if policy(@lesson).update? %>
   <%= link_to 'Edit', edit_user_lesson_path(@lesson.user, @lesson), class: "btn btn-primary" %>

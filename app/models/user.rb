@@ -21,6 +21,10 @@ class User < ApplicationRecord
 
   delegate :full_name, to: :profile
 
+  def appearance
+    self.full_name || self.email
+  end
+
   def lessons_by_categories
     self.lessons.group_by {|lesson| lesson.category}
   end

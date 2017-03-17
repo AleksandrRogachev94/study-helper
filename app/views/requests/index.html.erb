@@ -2,12 +2,12 @@
 <ul>
   <% @requests.each do |request| %>
     <li>
-      <%= link_to (request.student.full_name || request.student.email), user_path(request.student), class: "my-link" %>
+      <%= link_to (request.student.apperance), user_path(request.student), class: "my-link" %>
 
       <%= button_to "Accept", user_studyships_path(request.student, "teachers"), params: { request_id: request.id }, class: "btn btn-success" %>
       <%= button_to "Decline", request_path(request), method: 'delete', class: "btn btn-danger" %>
 
-      <%= show_field_for(request, :description, "p") %>
+      <%= show_field_for(request, :description, "h3", "p") %>
     </li>
   <% end %>
 </ul>

@@ -1,5 +1,5 @@
-<fieldset>
-  <legend>Choose category from the list or create new one<br>(reload the page if select field doesn't appear)</legend>
+<fieldset class="form-inline">
+  <legend>Choose category from the list or create new one</legend>
 
   <div class="form-group">
     <%= f.collection_select :category_id, Category.all, :id, :title, {}, class: "form-control" %>
@@ -7,7 +7,7 @@
 
   <%= f.fields_for :category, category do |category_form| %>
     <div class="form-group">
-      <%= category_form.label :title, "Title (live blank if you don't want to create it)" %>
+      <%= category_form.label :title, "or New" %>
       <%= category_form.text_field :title, value: "", class: "form-control" %>
     </div>
   <% end %>
