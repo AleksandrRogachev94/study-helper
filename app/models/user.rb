@@ -8,11 +8,11 @@ class User < ApplicationRecord
   has_many :categories, through: :lessons
   has_many :lessons
 
-  # From the student view
+  # As a student
   has_many :student_teacher_relationships, class_name: "Studyship", foreign_key: 'student_id'
   has_many :teachers, through: :student_teacher_relationships
 
-  # From the teacher view
+  # As a teacher
   has_many :teacher_student_relationships, class_name: "Studyship", foreign_key: 'teacher_id'
   has_many :students, through: :teacher_student_relationships
 

@@ -1,6 +1,6 @@
 <p>* blue - your teacher, purple - your student, green - both</p>
 <div class="list-group">
   <% users.each do |user| %>
-    <%= link_to (user.apparance), user_path(user), class: user_class_bs(user) %>
+    <%= link_to user.appearance, user_path(user), class: user_class_bs(user) %>
   <% end %>
 </div>
