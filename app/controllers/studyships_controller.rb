@@ -47,6 +47,10 @@ class StudyshipsController < ApplicationController
     end
   end
 
+  def most_popular_teachers
+    @teachers = User.most_popular_teachers(10)
+  end
+
   private
 
     def set_user

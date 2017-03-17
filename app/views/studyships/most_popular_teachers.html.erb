@@ -1,0 +1,10 @@
+<h1>10 Most Popular Teachers</h1>
+
+<div class="my-container">
+  <p>* blue - your teacher, purple - your student, green - both</p>
+  <div class="list-group">
+    <% @teachers.each do |teacher| %>
+      <%= link_to "#{teacher.appearance} - #{pluralize(teacher.students_count, "student")} ", user_path(teacher), class: user_class_bs(teacher) %>
+    <% end %>
+  </div>
+</div>

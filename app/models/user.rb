@@ -53,4 +53,9 @@ class User < ApplicationRecord
       self.all
     end
   end
+
+  def self.most_popular_teachers(limit)
+    self.select('users.*, count(users.id) AS students_count').joins(teacher_student_relationships: :student)
+                                                             .group(:id).order('students_count DESC').limit(limit)
+  end
 end

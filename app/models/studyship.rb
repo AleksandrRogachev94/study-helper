@@ -11,7 +11,7 @@ class Studyship < ApplicationRecord
 
     teacher_student = teacher.teacher_student_relationships.create(student: student)
 
-    if (teacher_student && !teacher_student.errors.any?) #student_teacher && !student_teacher.errors.any? ||
+    if (teacher_student && !teacher_student.errors.any?)
       true
     else
       false

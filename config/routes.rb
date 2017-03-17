@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :requests, only: [:create, :destroy, :index]
 
+  get '/most-popular-teachers' => 'studyships#most_popular_teachers'
+
   root 'static#home'
   get '/about' => 'static#about'
 end
