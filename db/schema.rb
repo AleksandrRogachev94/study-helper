@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20170314164454) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["category_id"], name: "category_id_ix"
-    t.index ["user_id"], name: "user_id_ix"
+    t.index ["category_id"], name: "lesson_category_id_ix"
+    t.index ["user_id"], name: "lesson_user_id_ix"
   end
 
   create_table "profiles", force: :cascade do |t|

@@ -7,13 +7,13 @@ module ApplicationHelper
     end
   end
 
-  def show_field_for(object, field, title_tag, value_tag)
+  def show_field_for(object, field, title_tag, value_tag, classes = "")
     title =  field.to_s.humanize
     value = object.send(field)
     if value.present?
       content_tag("div", class: "field") do
         concat content_tag(title_tag, title)
-        concat content_tag(value_tag, value)
+        concat content_tag(value_tag, value, class: classes)
       end
     else
       ""
