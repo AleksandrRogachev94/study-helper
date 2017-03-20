@@ -45,13 +45,17 @@ class User < ApplicationRecord
   end
 
   def self.search(search)
-    if search
-      self.where("email LIKE ?", "%#{search}%") ||
-      self.profile.where("last_name LIKE ?", "%#{search}%") ||
-      self.profile.where("first_name LIKE ?", "%#{search}%")
-    else
-      self.all
+    return self.all if search.empty?
+
+    result = Profile.where("last_name LIKE ?", "%#{search}%").map(&:user)
+    if result.empty?
+     Profile.where("first_name LIKE ?", "%#{search}%").map(&:user)
     end
+    if result.empty?
+      result = self.where("email LIKE ?", "%#{search}%")
+    end
+
+    result
   end
 
   def self.most_popular_teachers(limit)
