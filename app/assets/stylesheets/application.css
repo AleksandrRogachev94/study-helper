@@ -70,6 +70,11 @@ nav {
   padding-bottom: 2em;
 }
 
+.flash-container {
+  margin-top: 15px;
+  opacity: 0.94;
+}
+
 .field_with_errors {
   color: red;
   /*display: inline-block;*/
@@ -171,18 +176,4 @@ footer {
   text-align: right;
   opacity: 0.93;
   color: rgb(139, 123, 118);
-}
-
-.lesson-fields {
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
-
-  padding: 0.5em;
-  font-family: "Roboto";
-  text-align: justify;
-  background-color: #F5F5F5;
-  border-radius: 10px;
 }

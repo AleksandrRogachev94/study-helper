@@ -12,12 +12,10 @@
 
   <body>
     <%= render 'layouts/navigation' %>
+    <%= render 'layouts/flashes' %>
 
     <% if params[:action] != "home" %>
       <div class="container">
-        <%= content_tag 'div', flash[:notice], class: "alert alert-success" if flash[:notice] %>
-        <%= content_tag 'div', flash[:alert], class: "alert alert-danger" if flash[:alert] %>
-        <%= content_tag 'div', flash[:error], class: "alert alert-danger" if flash[:error] %>
         <%= yield %>
       </div>
     <% else %>
