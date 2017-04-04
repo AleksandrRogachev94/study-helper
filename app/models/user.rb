@@ -45,13 +45,15 @@ class User < ApplicationRecord
   end
 
   def self.search(search)
-    return self.all if search.empty?
+    return self.all if search.blank?
 
+    # Search in profiles first.
     result = Profile.where("last_name LIKE ?", "%#{search}%").map(&:user)
     if result.empty?
      Profile.where("first_name LIKE ?", "%#{search}%").map(&:user)
     end
     if result.empty?
+      #Search in credentials.
       result = self.where("email LIKE ?", "%#{search}%")
     end
 
