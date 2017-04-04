@@ -11,7 +11,6 @@ class Lesson < ApplicationRecord
     if attrs[:title].present?
       category = Category.where("lower(title) = ?", attrs[:title]).first_or_create(title: attrs[:title])
       self.category = category
-      self.save
     end
   end
 
