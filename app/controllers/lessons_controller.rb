@@ -30,7 +30,6 @@ class LessonsController < ApplicationController
     if @lesson.save
       redirect_to user_lesson_path(@user, @lesson), notice: "Successfully created lesson"
     else
-      @lesson.category.delete
       render 'new'
     end
   end

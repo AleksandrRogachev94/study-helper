@@ -9,7 +9,7 @@ class Lesson < ApplicationRecord
 
   def category_attributes=(attrs)
     if attrs[:title].present?
-      category = Category.where("lower(title) = ?", attrs[:title]).first_or_create(title: attrs[:title])
+      category = Category.where("lower(title) = ?", attrs[:title]).first_or_initialize(title: attrs[:title])
       self.category = category
     end
   end
