@@ -26,6 +26,7 @@ class StudyshipsController < ApplicationController
     authorize Studyship
 
     request = Request.find_by(id: params[:request_id])
+    return redirect_to requests_path, notice: "You are not an owner of this request" if !request || (request.teacher != current_user)
     # If someone wants to hack by url, the only thing he can do is to grant acces to other users to his data.
     if request && Studyship.establish_mutual_relationships(teacher: @current_user, student: @user)
       request.delete
