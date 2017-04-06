@@ -23,7 +23,7 @@ class RequestsController < ApplicationController
 
   def destroy
     request = Request.find_by(id: params[:id])
-    return redirect_to requests_path, alert: "Requst doesn't exist" if !request
+    return redirect_to requests_path, alert: "Request doesn't exist" if !request
     authorize request
 
     request.delete

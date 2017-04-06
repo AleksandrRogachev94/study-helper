@@ -15,6 +15,8 @@ class LessonsController < ApplicationController
 
   def show
     authorize @lesson
+    @comments = @lesson.comments
+    @comment = Comment.new
   end
 
   def new

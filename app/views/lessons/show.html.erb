@@ -12,3 +12,11 @@
 <% if policy(@lesson).destroy? %>
   <%= link_to 'Delete', user_lesson_path(@lesson.user, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 <% end %>
+
+<%= render 'comment_form', comment: @comment, lesson_id: @lesson.id %>
+
+<ul>
+<% @comments.each do |comment| %>
+  <li><%= comment.user.appearance  %> - <%= comment.content %></li>
+<% end %>
+</ul>
