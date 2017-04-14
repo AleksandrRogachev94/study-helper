@@ -1,7 +1,7 @@
 class LessonPolicy < ApplicationPolicy
 
   def show?
-    record.user == user || user.teachers.include?(record.user)
+    record.author == user || user.teachers.include?(record.author)
   end
 
   def index?
@@ -9,20 +9,14 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def create?
-    record.user == user
+    true
   end
 
   def update?
-    record.user == user
+    record.author == user
   end
 
   def destroy?
-    record.user == user
+    record.author == user
   end
-
-  # class Scope < Scope
-  #   def resolve
-  #     scope
-  #   end
-  # end
 end

@@ -1,5 +1,5 @@
 <h1><%= @lesson.title %></h1>
-<h1>Author: <%= link_to (@lesson.user.appearance), user_path(@lesson.user), class: "my-link" %></h1>
+<h1>Author: <%= link_to (@lesson.author.appearance), user_path(@lesson.author), class: "my-link" %></h1>
 <h3>Category: <%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
 
 <%= show_field_for(@lesson, :description, "h3", "p", "lesson-fields") %>
@@ -7,10 +7,10 @@
 <%= show_field_for(@lesson, :links, "h3", "p", "lesson-fields") %>
 
 <% if policy(@lesson).update? %>
-  <%= link_to 'Edit', edit_user_lesson_path(@lesson.user, @lesson), class: "btn btn-primary" %>
+  <%= link_to 'Edit', edit_user_lesson_path(@lesson.author, @lesson), class: "btn btn-primary" %>
 <% end %>
 <% if policy(@lesson).destroy? %>
-  <%= link_to 'Delete', user_lesson_path(@lesson.user, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+  <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 <% end %>
 
 <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>

@@ -16,7 +16,7 @@ class LessonsController < ApplicationController
 
   def show
     authorize @lesson
-    @comments = @lesson.comments
+    @comments = @lesson.comments.reverse
     @comment = Comment.new
   end
 
@@ -28,7 +28,7 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.user = @user
+    @lesson.author = @user
     authorize @lesson
     if @lesson.save
       redirect_to user_lesson_path(@user, @lesson), notice: "Successfully created lesson"
