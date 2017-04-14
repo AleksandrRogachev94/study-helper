@@ -1,15 +1,15 @@
-<li>
+<li class="comment">
   <p><%= comment.author.appearance  %> - <%= comment.content %></p>
   <div class="links">
     <% if policy(comment).update? %>
       <!-- TODO -->
-      <%= link_to "Update", comment_path(comment), method: 'PATCH' %>
+      <%= link_to "Update", comment_path(comment), method: 'PATCH', class: "btn btn-primary" %>
     <% end %>
 
     <% if policy(comment).destroy? %>
-      <%= form_tag comment_path(comment), method: "DELETE" do %>
+      <%= form_tag comment_path(comment), method: "DELETE", class: "delete-comment" do %>
         <%= hidden_field_tag :lesson_id, comment.lesson.id %>
-        <%= submit_tag "Delete", data: { confirm: "Are you sure?" } %>
+        <%= submit_tag "Delete", data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
       <% end %>
     <% end %>
   </div>

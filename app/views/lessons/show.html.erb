@@ -13,8 +13,14 @@
   <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 <% end %>
 
-<%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
 
-<ul>
-  <%= render partial: 'comments/comment', collection: @comments %>
-</ul>
+
+<section>
+  <div class="section-form">
+    <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
+  </div>
+
+  <ul id="comments">
+    <%= render partial: 'comments/comment', collection: @comments %>
+  </ul>
+</section>
