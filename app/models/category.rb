@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
   has_many :lessons
-  has_many :users, through: :lessons
+  has_many :authors, through: :lessons
 
   before_save :capitalize_title
 

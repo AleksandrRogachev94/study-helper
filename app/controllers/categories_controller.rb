@@ -8,6 +8,6 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find_by(id: params[:id])
     return redirect_to categories_path, alert: "Category doesn't exist" if !@category
-    @users = @category.users.uniq
+    @users = @category.authors.uniq
   end
 end

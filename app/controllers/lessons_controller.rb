@@ -1,4 +1,3 @@
-#
 class LessonsController < ApplicationController
 
   before_action :authenticate_user!
@@ -9,7 +8,7 @@ class LessonsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @stub_lesson = Lesson.new(user: @user) # Stub for authorization in LessonPolicy.
+    @stub_lesson = Lesson.new(author: @user) # Stub for authorization in LessonPolicy.
     authorize @stub_lesson
     @lessons_by_categories = @user.lessons_by_categories
   end
@@ -21,7 +20,7 @@ class LessonsController < ApplicationController
   end
 
   def new
-    @lesson = Lesson.new(user: @user)
+    @lesson = Lesson.new(author: @user)
     @lesson.build_category
     authorize @lesson
   end
