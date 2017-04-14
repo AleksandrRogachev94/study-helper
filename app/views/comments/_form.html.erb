@@ -1,6 +1,10 @@
 <%= form_for comment do |f| %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
+
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
   <%= f.hidden_field :lesson_id, value: lesson_id %>
   <%= f.submit %>
 <% end %>
