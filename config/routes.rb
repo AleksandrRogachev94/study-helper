@@ -19,8 +19,6 @@ Rails.application.routes.draw do
 
   get '/most-popular-teachers' => 'studyships#most_popular_teachers'
 
-  resources 'comments'
-
   root 'static#home'
   get '/about' => 'static#about'
 end

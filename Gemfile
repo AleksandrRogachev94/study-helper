@@ -17,7 +17,6 @@ gem 'omniauth', '~> 1.6'
 gem 'figaro'
 
 gem 'jbuilder', '~> 2.5'
-gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.2.0'

@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
 
     @comment.lesson = lesson
     if @comment.save
-      redirect_to user_lesson_path(current_user, lesson), notice: "Successfully created comment"
+      redirect_to user_lesson_path(lesson.user, lesson)
     else
-      return redirect_to lesson_path(lesson), alert: "Can't create comment"
+      redirect_to user_lesson_path(lesson.user, lesson), alert: "Can't create comment"
     end
   end
 
