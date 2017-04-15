@@ -26,15 +26,20 @@ Comment.prototype.destroy = function() {
 Comment.ready = function() {
   let source = $("#comment-template").html()
   Comment.template = Handlebars.compile(source)
+
+  source = $("#update-comment-template").html()
+  Comment.updateTemplate = Handlebars.compile(source)
+
   Comment.attachListeners()
 }
 
 Comment.attachListeners = function() {
   $("#new_comment").on("submit", Comment.formSubmit)
   $("#comments").on("submit", ".delete-comment", Comment.destroy)
-  $("#comments").on("click", ".update-comment", Comment.update)
+  $("#comments").on("click", ".update-comment", Comment.addUpdateForm)
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Create comment
 
 Comment.formSubmit = function(ev) {
@@ -82,6 +87,7 @@ Comment.failCreate = function(xhr) {
   $("#create-comment-error").text(error)
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Delete comment
 
 Comment.destroy = function(ev) {
@@ -112,7 +118,6 @@ Comment.confirmDestroy = function($form) {
 }
 
 Comment.successDestroy = function(json) {
-  // debugger
   const comment = new Comment(json)
   comment.destroy()
 }
@@ -130,12 +135,35 @@ Comment.failDestroy = function(xhr) {
   this.parent().next().text(error)
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Update comment
 
-Comment.update = function(ev) {
+Comment.addUpdateForm = function(ev) {
   ev.preventDefault()
-  console.log("HIJACKED")
+  const id = $(this).data("id")
+
+  const comment = Comment.from_li(id)
+
+  const updateForm = Comment.updateTemplate(comment)
+  $(this).parent().parent().html(updateForm)
 }
+
+Comment.from_li = function(id) {
+  let $li = $("li#comment_" + id)
+  if($li.length <= 0) return new Comment({});
+
+  const json = {
+    id: id,
+    content: $li.find(".content").text(),
+    created_at: $li.find(".created_at").text(),
+    author: {
+      appearance: $li.find(".appearance").text()
+    }
+  }
+
+  return new Comment(json)
+}
+
 
 //------------------------------------------------------------------------
 // Documents Ready

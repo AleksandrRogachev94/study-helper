@@ -27,7 +27,9 @@
 
 <script id="comment-template" type="text/x-handlebars-template">
   <li id="comment_{{id}}" class="comment">
-    <p>{{author.full_name}} - {{content}}</p>
+    <p class="appearance">{{author.appearance}}</p>
+    <p class="content">{{content}}</p>
+    <p class="created_at">{{created_at}}</p>
     <div class="links">
       <!-- TODO -->
       <a href="#" class="update-comment btn btn-primary" data-id="{{id}}">Update</a>
@@ -42,4 +44,14 @@
 
     <div class="comment-error"></div>
   </li>
+</script>
+
+<script id="update-comment-template" type="text/x-handlebars-template">
+  <form class="form-update-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
+    <input name="utf8" type="hidden" value="✓">
+    <input type="hidden" name="_method" value="patch">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <textarea name="comment[content]" id="comment_content">{{content}}</textarea>
+    <%= submit_tag "Update Comment", class: "btn btn-primary", data: { disable_with: "Updating..." } %>
+  </form>
 </script>

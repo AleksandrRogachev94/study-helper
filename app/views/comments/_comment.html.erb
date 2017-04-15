@@ -1,5 +1,7 @@
 <li id="comment_<%= comment.id %>" class="comment">
-  <p><%= comment.author.appearance  %> - <%= comment.content %></p>
+  <p class="appearance"><%= comment.author.appearance  %></p>
+  <p class="content"><%= comment.content %></p>
+  <p class="created_at"><%= comment.created_at %></p>
   <div class="links">
     <% if policy(comment).update? %>
       <!-- TODO -->
