@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:show]
 
-  before_action :set_lesson_from_hidden, only: [:update, :destroy]
   before_action :set_comment, only: [:update, :destroy]
 
   def create
@@ -28,16 +27,18 @@ class CommentsController < ApplicationController
 
   def destroy
     authorize @comment
+    lesson = @comment.lesson
     @comment.delete
-    redirect_to user_lesson_path(@lesson.author, @lesson), notice: "Successfully deleted comment"
+    redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully deleted comment"
   end
 
   def update
     authorize @comment
+    lesson = @comment.lesson
     if @comment.update(params)
-      redirect_to user_lesson_path(@lesson.author, @lesson), notice: "Successfully updated comment"
+      redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully updated comment"
     else
-      redirect_to user_lesson_path(@lesson.author, @lesson), alert: "Can't update comment"
+      redirect_to user_lesson_path(lesson.author, lesson), alert: "Can't update comment"
     end
   end
 
@@ -45,11 +46,6 @@ class CommentsController < ApplicationController
 
     def comment_params
       params.require(:comment).permit(:content)
-    end
-
-    def set_lesson_from_hidden
-      @lesson = Lesson.find_by(id: params[:lesson_id])
-      return redirect_to root_path, alert: "Lesson doesn't exist" if !@lesson
     end
 
     def set_comment

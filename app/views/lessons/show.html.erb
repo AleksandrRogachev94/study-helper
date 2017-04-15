@@ -31,14 +31,7 @@
     <div class="links">
       <!-- TODO -->
       <a class="btn btn-primary" rel="nofollow" data-method="PATCH" href="/comments/{{id}}">Update</a>
-
-      <form class="delete-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
-        <input name="utf8" type="hidden" value="✓">
-        <input type="hidden" name="_method" value="delete">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= hidden_field_tag :lesson_id, @lesson.id %>
-        <%= submit_tag "Delete", data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      </form>
+      <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="DELETE" href="/comments/{{id}}">Delete</a>
     </div>
   </li>
 </script>

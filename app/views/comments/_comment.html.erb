@@ -7,10 +7,7 @@
     <% end %>
 
     <% if policy(comment).destroy? %>
-      <%= form_tag comment_path(comment), method: "DELETE", class: "delete-comment" do %>
-        <%= hidden_field_tag :lesson_id, comment.lesson.id %>
-        <%= submit_tag "Delete", data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      <% end %>
+      <%= link_to "Delete", comment_path(comment), method: 'DELETE', data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
     <% end %>
   </div>
 </li>
