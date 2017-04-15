@@ -1,5 +1,8 @@
 'use strict'
 
+//TODOTODOTODOTODO
+// Refactor AJAX!!!!!
+
 //------------------------------------------------------------------------
 // Comment Class
 
@@ -17,6 +20,16 @@ Comment.prototype.render = function() {
   $("#comments").prepend(li)
 }
 
+Comment.prototype.replaceCommentWithForm = function($li) {
+  const form = Comment.updateTemplate(this)
+  $li.replaceWith(form)
+}
+
+Comment.prototype.replaceFormWithComment = function($form) {
+  const li = Comment.template(this)
+  $form.replaceWith(li)
+}
+
 Comment.prototype.destroy = function() {
   $("li#comment_" + this.id).remove()
 }
@@ -24,6 +37,8 @@ Comment.prototype.destroy = function() {
 // Class methods
 
 Comment.ready = function() {
+  Comment.commentsToUpdate = [] // Array for all comments opened to update
+
   let source = $("#comment-template").html()
   Comment.template = Handlebars.compile(source)
 
@@ -36,7 +51,9 @@ Comment.ready = function() {
 Comment.attachListeners = function() {
   $("#new_comment").on("submit", Comment.formSubmit)
   $("#comments").on("submit", ".delete-comment", Comment.destroy)
+
   $("#comments").on("click", ".update-comment", Comment.addUpdateForm)
+  $("#comments").on("submit", ".form-update-comment", Comment.update)
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,9 +160,9 @@ Comment.addUpdateForm = function(ev) {
   const id = $(this).data("id")
 
   const comment = Comment.from_li(id)
+  Comment.commentsToUpdate.push(comment) // Add to array of comments opened to update.
 
-  const updateForm = Comment.updateTemplate(comment)
-  $(this).parent().parent().html(updateForm)
+  comment.replaceCommentWithForm($(this).parent().parent())
 }
 
 Comment.from_li = function(id) {
@@ -162,6 +179,66 @@ Comment.from_li = function(id) {
   }
 
   return new Comment(json)
+}
+
+Comment.update = function(ev) {
+  ev.preventDefault()
+
+  const $form = $(this)
+
+  const params = $form.serialize()
+  const action = $form.attr("action")
+
+  $.ajax({
+    url: action,
+    type: "PATCH",
+    data: params,
+    dataType: "json"
+  })
+  .done(Comment.successUpdate.bind($form))
+  .fail(Comment.failUpdate.bind($form))
+}
+
+Comment.successUpdate = function(json) {
+  const comment = new Comment(json)
+
+  // 'this' binded to form
+  comment.replaceFormWithComment($(this))
+}
+
+Comment.failUpdate = function(xhr) {
+  let error;
+
+  switch(xhr.readyState) {
+    case 0:
+      error = "Network Error"
+      break
+    case 4:
+      const json = $.parseJSON(xhr.responseText)
+      error = json.errors.join(", ")
+      break
+    default:
+      error = "Error occured"
+  }
+
+  // 'this' binded to form
+  const id = this.parent().data("id")
+  const comment = Comment.removeFromArray(id)
+  comment.replaceFormWithComment(this.parent())
+  $("#comment_" + id + " .comment-error").text(error)
+}
+
+Comment.removeFromArray = function(id) {
+
+  let array = Comment.commentsToUpdate
+  let i, l = array.length
+  for(i = 0; i < l; i++) {
+
+    if(array[i].id === id) {
+      Comment.commentsToUpdate = [...array.slice(0, i), ...array.slice(i + 1)]
+      return array[i]
+    }
+  }
 }
 
 

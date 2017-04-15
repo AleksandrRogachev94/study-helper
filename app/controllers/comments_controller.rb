@@ -38,10 +38,14 @@ class CommentsController < ApplicationController
   def update
     authorize @comment
     lesson = @comment.lesson
-    if @comment.update(params)
-      redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully updated comment"
-    else
-      redirect_to user_lesson_path(lesson.author, lesson), alert: "Can't update comment"
+    respond_to do |f|
+      if @comment.update(comment_params)
+        f.html { redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully updated comment" }
+        f.json { render json: @comment, status: :ok }
+      else
+        f.html { redirect_to user_lesson_path(lesson.author, lesson), alert: "Can't update comment" }
+        f.json { render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
