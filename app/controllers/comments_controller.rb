@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   before_action :authenticate_user!
-  after_action :verify_authorized
+  after_action :verify_authorized, except: [:show]
 
   before_action :set_lesson_from_hidden, only: [:update, :destroy]
   before_action :set_comment, only: [:update, :destroy]

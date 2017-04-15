@@ -13,14 +13,32 @@
   <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 <% end %>
 
-
-
 <section>
-  <div class="section-form">
+  <div class="comment-form">
     <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
   </div>
+
+  <div id="comment-error"></div>
 
   <ul id="comments">
     <%= render partial: 'comments/comment', collection: @comments %>
   </ul>
 </section>
+
+<script id="comment-template" type="text/x-handlebars-template">
+  <li class="comment">
+    <p>{{author.full_name}} - {{content}}</p>
+    <div class="links">
+      <!-- TODO -->
+      <a class="btn btn-primary" rel="nofollow" data-method="PATCH" href="/comments/{{id}}">Update</a>
+
+      <form class="delete-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
+        <input name="utf8" type="hidden" value="✓">
+        <input type="hidden" name="_method" value="delete">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= hidden_field_tag :lesson_id, @lesson.id %>
+        <%= submit_tag "Delete", data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      </form>
+    </div>
+  </li>
+</script>

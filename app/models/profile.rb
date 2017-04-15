@@ -1,5 +1,4 @@
 class Profile < ApplicationRecord
-
   belongs_to :user
 
   before_save :capitalize_name

@@ -1,10 +1,29 @@
+function Comment(attributes) {
+  this.id = attributes.id
+  this.content = attributes.content
+  this.created_at = attributes.created_at
+  this.author = attributes.author
+}
+
+Comment.prototype.renderLI = function() {
+  return Comment.template(this)
+}
+
+$(document).ready(function() {
+  let source = $("#comment-template").html()
+  Comment.template = Handlebars.compile(source)
+})
+
+//------------------------------------------------------
+// Documents Ready
+
 $(document).ready(function() {
   $("#new_comment").on("submit", function(ev) {
     ev.preventDefault()
-    let $form = $(this)
+    const $form = $(this)
 
-    let params = $form.serialize()
-    let action = $form.attr("action")
+    const params = $form.serialize()
+    const action = $form.attr("action")
 
     $.ajax({
       url: action,
@@ -14,16 +33,27 @@ $(document).ready(function() {
     })
     .done(function(json) {
       $.rails.enableFormElements($form)
-      console.log(json)
+      const comment = new Comment(json)
+
+      $("#comment-error").text("") // Empty error div
+      $("#comments").prepend(comment.renderLI())
     })
     .fail(function(xhr) {
       $.rails.enableFormElements($form)
-      let errors = $.parseJSON(xhr.responseText).errors
-      console.log(errors.join(" "))
-    })
+      let error
+      switch(xhr.readyState) {
+        case 0:
+          error = "Network Error"
+          break
+        case 4:
+          error = $.parseJSON(xhr.responseText).errors.join(", ")
+          break
+        default:
+          error = "Error occured"
+      }
 
-    $.rails.enableFormElements($form)
-    // $.rails.enableFormElements($("#new_comment"))
+      $("#comment-error").text(error)
+    })
   })
 
 })

@@ -14,6 +14,7 @@ gem 'devise', '~> 4.2'
 gem 'pundit', '~> 1.1'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth', '~> 1.6'
+gem 'active_model_serializers'
 gem 'figaro'
 
 gem 'jbuilder', '~> 2.5'
