@@ -16,9 +16,10 @@ $(document).ready(function() {
       $.rails.enableFormElements($form)
       console.log(json)
     })
-    .fail(function(error) {
+    .fail(function(xhr) {
       $.rails.enableFormElements($form)
-      console.log(error)
+      let errors = $.parseJSON(xhr.responseText).errors
+      console.log(errors.join(" "))
     })
 
     $.rails.enableFormElements($form)

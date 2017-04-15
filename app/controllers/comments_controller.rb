@@ -15,10 +15,14 @@ class CommentsController < ApplicationController
     @comment.lesson = @lesson
     authorize @comment
 
-    if @comment.save
-      redirect_to user_lesson_path(@lesson.author, @lesson), notice: "Successfully created comment"
-    else
-      redirect_to user_lesson_path(@lesson.author, @lesson), alert: "Can't create comment"
+    respond_to do |f|
+      if @comment.save
+        f.html { redirect_to user_lesson_path(@lesson.author, @lesson), notice: "Successfully created comment" }
+        f.json { render json: @comment, status: :created }
+      else
+        f.html { redirect_to user_lesson_path(@lesson.author, @lesson), alert: "Can't create comment" }
+        f.json { render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
