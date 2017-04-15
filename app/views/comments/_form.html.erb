@@ -6,5 +6,5 @@
   </div>
 
   <%= f.hidden_field :lesson_id, value: lesson_id %>
-  <%= f.submit %>
+  <%= f.submit data: { disable_with: "Creating..." } %>
 <% end %>
