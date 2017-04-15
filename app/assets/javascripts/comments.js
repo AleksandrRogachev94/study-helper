@@ -24,7 +24,7 @@ Comment.ready = function() {
 
 Comment.attachListeners = function() {
   $("#new_comment").on("submit", Comment.formSubmit)
-  $("#delete-comment").on("submit", Comment.destroy)
+  $("#comments").on("submit", ".delete-comment", Comment.destroy)
 }
 
 Comment.formSubmit = function(ev) {
@@ -73,19 +73,20 @@ Comment.failCreate = function(xhr) {
 
 Comment.destroy = function(ev) {
   ev.preventDefault()
-  const $form = $(this)
-
-  const params = $form.serialize()
-  const action = $form.attr("action")
-
-  $.ajax({
-    url: action,
-    type: "POST",
-    data: params,
-    dataType: "json"
-  })
-  .done(Comment.successCreate)
-  .fail(Comment.failCreate)
+  console.log("Hijacked it")
+  // const $form = $(this)
+  //
+  // const params = $form.serialize()
+  // const action = $form.attr("action")
+  //
+  // $.ajax({
+  //   url: action,
+  //   type: "POST",
+  //   data: params,
+  //   dataType: "json"
+  // })
+  // .done(Comment.successCreate)
+  // .fail(Comment.failCreate)
 }
 
 //------------------------------------------------------------------------

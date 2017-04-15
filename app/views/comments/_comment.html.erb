@@ -3,11 +3,14 @@
   <div class="links">
     <% if policy(comment).update? %>
       <!-- TODO -->
-      <%= link_to "Update", comment_path(comment), method: 'PATCH', class: "btn btn-primary" %>
+      <%= link_to "Update", comment_path(comment), method: 'PATCH', class: "update-comment btn btn-primary" %>
     <% end %>
 
     <% if policy(comment).destroy? %>
-      <%= link_to "Delete", comment_path(comment), method: 'DELETE', data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <%= form_tag comment_path(comment), method: "DELETE", class: "delete-comment" do %>
+        <%= hidden_field_tag :lesson_id, comment.lesson.id %>
+        <%= submit_tag "Delete", class: "btn btn-danger" %>
+      <% end %>
     <% end %>
   </div>
 </li>
