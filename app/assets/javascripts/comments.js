@@ -63,17 +63,7 @@ Comment.formSubmit = function(ev) {
   ev.preventDefault()
   const $form = $(this)
 
-  const params = $form.serialize()
-  const action = $form.attr("action")
-
-  $.ajax({
-    url: action,
-    type: "POST",
-    data: params,
-    dataType: "json"
-  })
-  .done(Comment.successCreate)
-  .fail(Comment.failCreate)
+  Comment.SubmitFormAJAX($form, Comment.successCreate, Comment.failCreate)
 }
 
 Comment.successCreate = function(json) {
@@ -102,17 +92,7 @@ Comment.destroy = function(ev) {
   const $form = $(this)
   if(!Comment.confirmDestroy($form)) return;
 
-  const params = $form.serialize()
-  const action = $form.attr("action")
-
-  $.ajax({
-    url: action,
-    type: "DELETE",
-    data: params,
-    dataType: "json"
-  })
-  .done(Comment.successDestroy)
-  .fail(Comment.failDestroy.bind($form))
+  Comment.SubmitFormAJAX($form, Comment.successDestroy, Comment.failDestroy.bind($form))
 }
 
 Comment.confirmDestroy = function($form) {
@@ -168,18 +148,7 @@ Comment.update = function(ev) {
   ev.preventDefault()
 
   const $form = $(this)
-
-  const params = $form.serialize()
-  const action = $form.attr("action")
-
-  $.ajax({
-    url: action,
-    type: "PATCH",
-    data: params,
-    dataType: "json"
-  })
-  .done(Comment.successUpdate.bind($form))
-  .fail(Comment.failUpdate.bind($form))
+  Comment.SubmitFormAJAX($form, Comment.successUpdate.bind($form), Comment.failUpdate.bind($form))
 }
 
 Comment.successUpdate = function(json) {
@@ -213,15 +182,34 @@ Comment.removeFromCommentsToUpdate = function(id) {
   }
 }
 
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Shared methods.
+
 Comment.processError = function(xhr) {
   switch(xhr.readyState) {
     case 0:
       return "Network Error"
     case 4:
-      return $.parseJSON(xhr.responseText).errors.join(", ")
+      if(Math.floor((xhr.status/100)) === 5) { // Status Code 5**
+        return "Server Error"
+      } else {
+        return $.parseJSON(xhr.responseText).errors.join(", ")
+      }
     default:
       return "Error occured"
   }
+}
+
+Comment.SubmitFormAJAX = function($form, success, fail) {
+  console.log(($form.find("input[name='_method']").val() || $form.attr("method")))
+  $.ajax({
+    url: $form.attr("action"),
+    type: ($form.find("input[name='_method']").val() || $form.attr("method")),
+    data: $form.serialize(),
+    dataType: "json"
+  })
+  .done(success)
+  .fail(fail)
 }
 
 //------------------------------------------------------------------------
