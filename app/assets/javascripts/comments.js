@@ -32,7 +32,10 @@ Comment.ready = function() {
 Comment.attachListeners = function() {
   $("#new_comment").on("submit", Comment.formSubmit)
   $("#comments").on("submit", ".delete-comment", Comment.destroy)
+  $("#comments").on("click", ".update-comment", Comment.update)
 }
+
+// Create comment
 
 Comment.formSubmit = function(ev) {
   ev.preventDefault()
@@ -79,6 +82,8 @@ Comment.failCreate = function(xhr) {
   $("#create-comment-error").text(error)
 }
 
+// Delete comment
+
 Comment.destroy = function(ev) {
   ev.preventDefault()
 
@@ -121,8 +126,15 @@ Comment.failDestroy = function(xhr) {
     default:
       error = "Error occured"
   }
-  // this binded to form
+  // 'this' binded to form
   this.parent().next().text(error)
+}
+
+// Update comment
+
+Comment.update = function(ev) {
+  ev.preventDefault()
+  console.log("HIJACKED")
 }
 
 //------------------------------------------------------------------------

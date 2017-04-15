@@ -30,7 +30,7 @@
     <p>{{author.full_name}} - {{content}}</p>
     <div class="links">
       <!-- TODO -->
-      <a class="btn btn-primary" rel="nofollow" data-method="PATCH" href="/comments/{{id}}">Update</a>
+      <a href="#" class="update-comment btn btn-primary" data-id="{{id}}">Update</a>
 
       <form class="delete-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
         <input name="utf8" type="hidden" value="✓">

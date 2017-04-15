@@ -3,7 +3,7 @@
   <div class="links">
     <% if policy(comment).update? %>
       <!-- TODO -->
-      <%= link_to "Update", comment_path(comment), method: 'PATCH', class: "update-comment btn btn-primary" %>
+      <a href="#" class="update-comment btn btn-primary" data-id="<%= comment.id %>">Update</a>
     <% end %>
 
     <% if policy(comment).destroy? %>
