@@ -18,7 +18,7 @@
     <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
   </div>
 
-  <div id="comment-error"></div>
+  <div id="create-comment-error"></div>
 
   <ul id="comments">
     <%= render partial: 'comments/comment', collection: @comments %>
@@ -26,7 +26,7 @@
 </section>
 
 <script id="comment-template" type="text/x-handlebars-template">
-  <li class="comment">
+  <li id="comment_{{id}}" class="comment">
     <p>{{author.full_name}} - {{content}}</p>
     <div class="links">
       <!-- TODO -->
@@ -36,8 +36,10 @@
         <input name="utf8" type="hidden" value="✓">
         <input type="hidden" name="_method" value="delete">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= submit_tag "Delete", class: "btn btn-danger" %>
+        <%= submit_tag "Delete", class: "btn btn-danger", data: { disable_with: "Deleting..." } %>
       </form>
     </div>
+
+    <div class="comment-error"></div>
   </li>
 </script>

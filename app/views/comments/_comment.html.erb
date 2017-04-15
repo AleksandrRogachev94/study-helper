@@ -1,4 +1,4 @@
-<li class="comment">
+<li id="comment_<%= comment.id %>" class="comment">
   <p><%= comment.author.appearance  %> - <%= comment.content %></p>
   <div class="links">
     <% if policy(comment).update? %>
@@ -8,9 +8,10 @@
 
     <% if policy(comment).destroy? %>
       <%= form_tag comment_path(comment), method: "DELETE", class: "delete-comment" do %>
-        <%= hidden_field_tag :lesson_id, comment.lesson.id %>
-        <%= submit_tag "Delete", class: "btn btn-danger" %>
+        <%= submit_tag "Delete", class: "btn btn-danger", data: { disable_with: "Deleting..." } %>
       <% end %>
     <% end %>
   </div>
+
+  <div class="comment-error"></div>
 </li>

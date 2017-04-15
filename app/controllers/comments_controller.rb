@@ -29,7 +29,10 @@ class CommentsController < ApplicationController
     authorize @comment
     lesson = @comment.lesson
     @comment.delete
-    redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully deleted comment"
+    respond_to do |f|
+      f.html { redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully deleted comment" }
+      f.json { render json: @comment, status: :ok }
+    end
   end
 
   def update

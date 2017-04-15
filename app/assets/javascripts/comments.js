@@ -1,3 +1,5 @@
+'use strict'
+
 //------------------------------------------------------------------------
 // Comment Class
 
@@ -10,8 +12,13 @@ function Comment(attributes) {
 
 // Instance methods
 
-Comment.prototype.renderLI = function() {
-  return Comment.template(this)
+Comment.prototype.render = function() {
+  const li = Comment.template(this)
+  $("#comments").prepend(li)
+}
+
+Comment.prototype.destroy = function() {
+  $("li#comment_" + this.id).remove()
 }
 
 // Class methods
@@ -49,8 +56,9 @@ Comment.successCreate = function(json) {
 
   const comment = new Comment(json)
 
-  $("#comment-error").text("") // Empty error div
-  $("#comments").prepend(comment.renderLI())
+  $("#new_comment textarea").val("")// Empty input
+  $("#create-comment-error").text("") // Empty error div
+  comment.render() // Adding to the page
 }
 
 Comment.failCreate = function(xhr) {
@@ -68,25 +76,53 @@ Comment.failCreate = function(xhr) {
       error = "Error occured"
   }
 
-  $("#comment-error").text(error)
+  $("#create-comment-error").text(error)
 }
 
 Comment.destroy = function(ev) {
   ev.preventDefault()
-  console.log("Hijacked it")
-  // const $form = $(this)
-  //
-  // const params = $form.serialize()
-  // const action = $form.attr("action")
-  //
-  // $.ajax({
-  //   url: action,
-  //   type: "POST",
-  //   data: params,
-  //   dataType: "json"
-  // })
-  // .done(Comment.successCreate)
-  // .fail(Comment.failCreate)
+
+  const $form = $(this)
+  if(!Comment.confirmDestroy($form)) return;
+
+  const params = $form.serialize()
+  const action = $form.attr("action")
+
+  $.ajax({
+    url: action,
+    type: "DELETE",
+    data: params,
+    dataType: "json"
+  })
+  .done(Comment.successDestroy)
+  .fail(Comment.failDestroy.bind($form))
+}
+
+Comment.confirmDestroy = function($form) {
+  if(!confirm("Are you sure?")) {
+    setTimeout(function() { $.rails.enableFormElements($form) }, 100) // Preventing disabling of a button
+    return false;
+  }
+  return true
+}
+
+Comment.successDestroy = function(json) {
+  // debugger
+  const comment = new Comment(json)
+  comment.destroy()
+}
+
+Comment.failDestroy = function(xhr) {
+  let error
+  switch(xhr.readyState) {
+    case 0:
+      error = "Network Error"
+      break
+    default:
+      error = "Error occured"
+  }
+  // this binded to form
+  this.parent().next().text(error)
 }
 
 //------------------------------------------------------------------------
