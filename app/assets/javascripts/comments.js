@@ -89,18 +89,7 @@ Comment.successCreate = function(json) {
 Comment.failCreate = function(xhr) {
   $.rails.enableFormElements($("#new_comment"))
 
-  let error
-  switch(xhr.readyState) {
-    case 0:
-      error = "Network Error"
-      break
-    case 4:
-      error = $.parseJSON(xhr.responseText).errors.join(", ")
-      break
-    default:
-      error = "Error occured"
-  }
-
+  let error = Comment.processError(xhr)
   $("#create-comment-error").text(error)
 }
 
@@ -140,16 +129,10 @@ Comment.successDestroy = function(json) {
 }
 
 Comment.failDestroy = function(xhr) {
-  let error
-  switch(xhr.readyState) {
-    case 0:
-      error = "Network Error"
-      break
-    default:
-      error = "Error occured"
-  }
+  let error = Comment.processError(xhr)
+
   // 'this' binded to form
-  this.parent().next().text(error)
+  this.parent().next().text(error) // Place Errors.
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -204,32 +187,21 @@ Comment.successUpdate = function(json) {
 
   // 'this' binded to form
   comment.replaceFormWithComment($(this))
+  Comment.removeFromCommentsToUpdate(comment.id)
 }
 
 Comment.failUpdate = function(xhr) {
-  let error;
 
-  switch(xhr.readyState) {
-    case 0:
-      error = "Network Error"
-      break
-    case 4:
-      const json = $.parseJSON(xhr.responseText)
-      error = json.errors.join(", ")
-      break
-    default:
-      error = "Error occured"
-  }
+  let error = Comment.processError(xhr)
 
   // 'this' binded to form
   const id = this.parent().data("id")
-  const comment = Comment.removeFromArray(id)
+  const comment = Comment.removeFromCommentsToUpdate(id) // Remove from array of opened comments
   comment.replaceFormWithComment(this.parent())
-  $("#comment_" + id + " .comment-error").text(error)
+  $("#comment_" + id + " .comment-error").text(error) // Place Errors.
 }
 
-Comment.removeFromArray = function(id) {
-
+Comment.removeFromCommentsToUpdate = function(id) {
   let array = Comment.commentsToUpdate
   let i, l = array.length
   for(i = 0; i < l; i++) {
@@ -241,6 +213,16 @@ Comment.removeFromArray = function(id) {
   }
 }
 
+Comment.processError = function(xhr) {
+  switch(xhr.readyState) {
+    case 0:
+      return "Network Error"
+    case 4:
+      return $.parseJSON(xhr.responseText).errors.join(", ")
+    default:
+      return "Error occured"
+  }
+}
 
 //------------------------------------------------------------------------
 // Documents Ready
