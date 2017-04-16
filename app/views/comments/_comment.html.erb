@@ -1,16 +1,16 @@
 <li id="comment_<%= comment.id %>" class="comment">
   <div class="row">
-    <div class="col-sm-1">
+    <div class="col-xs-1">
       <div class="avatar">
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-xs-3">
       <p class="appearance"><%= comment.author.appearance %></p>
     </div>
-    <div class="col-sm-3">
+    <div class="col-xs-3">
       <p class="created_at"><%= comment.created_at %></p>
     </div>
-    <div class="col-sm-3 col-sm-offset-3">
+    <div class="col-xs-3 col-xs-offset-2">
       <div class="links">
         <% if policy(comment).update? %>
           <!-- TODO -->

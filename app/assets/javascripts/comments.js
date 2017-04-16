@@ -124,8 +124,7 @@ Comment.addUpdateForm = function(ev) {
 
   const comment = Comment.from_li(id)
   Comment.commentsToUpdate.push(comment) // Add to array of comments opened to update.
-
-  comment.replaceCommentWithForm($(this).parent().parent())
+  comment.replaceCommentWithForm($(this).parent().parent().parent().next())
 }
 
 Comment.from_li = function(id) {
@@ -155,8 +154,8 @@ Comment.successUpdate = function(json) {
   const comment = new Comment(json)
 
   // 'this' binded to form
-  comment.replaceFormWithComment($(this))
   Comment.removeFromCommentsToUpdate(comment.id)
+  comment.replaceFormWithComment(this.parent().parent())
 }
 
 Comment.failUpdate = function(xhr) {
@@ -166,7 +165,7 @@ Comment.failUpdate = function(xhr) {
   // 'this' binded to form
   const id = this.parent().data("id")
   const comment = Comment.removeFromCommentsToUpdate(id) // Remove from array of opened comments
-  comment.replaceFormWithComment(this.parent())
+  comment.replaceFormWithComment(this.parent().parent())
   $("#comment_" + id + " .comment-error").text(error) // Place Errors.
 }
 

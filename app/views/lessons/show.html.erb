@@ -1,54 +1,62 @@
-<article>
-  <h1 id="title"><strong><%= @lesson.title %></strong></h1>
-  <h3 id="author">by <%= link_to (@lesson.author.appearance), user_path(@lesson.author), class: "my-link" %></h1>
-  <h3 id="category"><%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
+<div class="lesson-container">
+  <article>
+    <h1 id="title"><strong><%= @lesson.title %></strong></h1>
 
-  <div class="lesson">
-    <p id="description"><em><%= @lesson.description %></em></p>
-    <p id="content"><%= @lesson.content %></p>
-    <h3 id="resources">Resources</h3>
-    <h3 id="links">Links</h3>
-    <p><%= @lesson.links %></p>
+    <h3 id="author"><%= link_to user_path(@lesson.author), class: "my-link" do %>
+        <div class="avatar"></div>
+        <%= @lesson.author.appearance %>
+      <% end %>
+    </h3>
 
-    <div class="lesson-links">
-      <% if policy(@lesson).update? %>
-        <%= link_to 'Edit', edit_user_lesson_path(@lesson.author, @lesson), class: "btn btn-primary" %>
-      <% end %>
-      <% if policy(@lesson).destroy? %>
-        <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-      <% end %>
+    <h3 id="category"><%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
+
+    <div class="lesson">
+      <p id="description"><em><%= @lesson.description %></em></p>
+      <p id="content"><%= @lesson.content %></p>
+      <h3 id="resources">Resources</h3>
+      <h3 id="links">Links</h3>
+      <p><%= @lesson.links %></p>
+
+      <div class="lesson-links">
+        <% if policy(@lesson).update? %>
+          <%= link_to 'Edit', edit_user_lesson_path(@lesson.author, @lesson), class: "btn btn-primary" %>
+        <% end %>
+        <% if policy(@lesson).destroy? %>
+          <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
     </div>
-  </div>
-</article>
+  </article>
 
 
-<section id="comments-section">
-  <h2>Comments</h2>
-  <div class="comment-form">
-    <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
-  </div>
+  <section id="comments-section">
+    <h2>Comments</h2>
+    <div class="comment-form">
+      <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
+    </div>
 
-  <div id="create-comment-error"></div>
+    <div id="create-comment-error"></div>
 
-  <ul id="comments">
-    <%= render partial: 'comments/comment', collection: @comments %>
-  </ul>
-</section>
+    <ul id="comments">
+      <%= render partial: 'comments/comment', collection: @comments %>
+    </ul>
+  </section>
+</div>
 
 <script id="comment-template" type="text/x-handlebars-template">
   <li id="comment_{{id}}" class="comment">
     <div class="row">
-      <div class="col-sm-1">
+      <div class="col-xs-1">
         <div class="avatar">
         </div>
       </div>
-      <div class="col-sm-2">
+      <div class="col-xs-3">
         <p class="appearance">{{author.appearance}}</p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-xs-3">
         <p class="created_at">{{created_at}}</p>
       </div>
-      <div class="col-sm-3 col-sm-offset-3">
+      <div class="col-xs-3 col-xs-offset-2">
         <div class="links">
           <a href="#" class="update-comment my-link" data-id="{{id}}">Update</a>
 
@@ -69,13 +77,15 @@
 </script>
 
 <script id="update-comment-template" type="text/x-handlebars-template">
-  <div data-id="{{id}}" class="comment">
+  <div data-id="{{id}}">
     <form class="form-update-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
       <input name="utf8" type="hidden" value="✓">
       <input type="hidden" name="_method" value="PATCH">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <textarea name="comment[content]" id="comment_content">{{content}}</textarea>
-      <%= submit_tag "Update Comment", class: "btn btn-primary", data: { disable_with: "Updating..." } %>
+      <div class="form-group">
+        <textarea name="comment[content]" id="comment_content", rows="6", class="form-control">{{content}}</textarea>
+      </div>
+      <%= submit_tag "Update", class: "btn btn-primary", data: { disable_with: "Updating..." } %>
     </form>
   </div>
 </script>
