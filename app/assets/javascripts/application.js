@@ -15,4 +15,3 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require handlebars.min
-//= require comments
