@@ -11,6 +11,15 @@
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
+.avatar-title {
+  height: 3em;
+  width: 3em;
+  border-radius: 1.5em;
+  margin: 0 auto;
+  background-color: black;
+  margin-bottom: 1em;
+}
+
 h1, h2, h3 {
   text-align: center
 }
@@ -26,9 +35,6 @@ h1, h2, h3 {
 
 #links, #resources {
   text-align: left;
-}
-
-#content {
 }
 
 .lesson {
@@ -57,12 +63,9 @@ h1, h2, h3 {
 
 // -------------------------------COMMENT LINKS-----------------------------
 
-.links {
-  text-align: right;
-}
-
 .delete-comment { // Form
   display: inline;
+  margin-left: 2em;
 }
 
 .delete-comment-button {
@@ -91,7 +94,8 @@ h1, h2, h3 {
  color: #79C5E3;
 }
 
-//------------------------------------------------------------
+//------------------------------------------------------------------------
+// Each comment.
 
 ul#comments {
   list-style-type: none;
@@ -100,13 +104,12 @@ ul#comments {
 }
 
 .comment {
-  // background-color: #D3D3D3;
   border-bottom: 1px solid black;
   margin-bottom: 15px;
   font-size: 0.8em;
 }
 
-.content {
+#comments .content {
   font-size: 1.3em;
 }
 
@@ -118,23 +121,32 @@ ul#comments {
   text-align: right;
 }
 
-.row {
+//-----------------------------------------------------------------------------
+// Flex Box
+
+.flex-container, .flex-container-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flex-container {
   margin-bottom: 20px;
 }
 
-.row .col-xs-2, .row .col-xs-3 {
-  padding-top: 1em;
-}
-
-.avatar {
+.info {
   margin: 0 auto;
-  height: 3.5em;
-  width: 3.5em;
-  border-radius: 1.75em;
-  background-color: black;
+  padding-left: 1em;
+  display: inline-block;
+  text-align: center;
 }
 
-#author .avatar {
-  height: 3em;
-  width: 3em;
+.avatar-comment {
+  display: inline-block;
+  margin: 0 auto;
+  height: 4em;
+  width: 4em;
+  border-radius: 2.25em;
+  background-color: black;
 }

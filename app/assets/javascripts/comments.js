@@ -1,15 +1,12 @@
 'use strict'
 
-//TODOTODOTODOTODO
-// Refactor AJAX!!!!!
-
 //------------------------------------------------------------------------
 // Comment Class
 
 function Comment(attributes) {
   this.id = attributes.id
   this.content = attributes.content
-  this.created_at = attributes.created_at
+  this.created_at = Comment.format_date(new Date(attributes.created_at))
   this.author = attributes.author
 }
 
@@ -17,7 +14,8 @@ function Comment(attributes) {
 
 Comment.prototype.render = function() {
   const li = Comment.template(this)
-  $("#comments").prepend(li)
+  const rendered = $(li).prependTo("#comments").hide()
+  rendered.slideDown()
 }
 
 Comment.prototype.replaceCommentWithForm = function($li) {
@@ -31,13 +29,16 @@ Comment.prototype.replaceFormWithComment = function($form) {
 }
 
 Comment.prototype.destroy = function() {
-  $("li#comment_" + this.id).remove()
+  $("li#comment_" + this.id).fadeOut("normal", function() {
+    $(this).remove();
+  });
 }
 
 // Class methods
 
 Comment.ready = function() {
-  Comment.commentsToUpdate = [] // Array for all comments opened to update
+  Comment.commentsToUpdate = [] // Array for all comments opened to update.
+  Comment.fixDates() // Fix dates from the server.
 
   let source = $("#comment-template").html()
   Comment.template = Handlebars.compile(source)
@@ -54,6 +55,7 @@ Comment.attachListeners = function() {
 
   $("#comments").on("click", ".update-comment", Comment.addUpdateForm)
   $("#comments").on("submit", ".form-update-comment", Comment.update)
+  $("#comments").on("click", "#cancel-update-comment", Comment.cancelUpdate)
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,6 +127,7 @@ Comment.addUpdateForm = function(ev) {
   const comment = Comment.from_li(id)
   Comment.commentsToUpdate.push(comment) // Add to array of comments opened to update.
   comment.replaceCommentWithForm($(this).parent().parent().parent().next())
+  $("#comment_" + id + " .form-update-comment textarea").focus()
 }
 
 Comment.from_li = function(id) {
@@ -169,6 +172,15 @@ Comment.failUpdate = function(xhr) {
   $("#comment_" + id + " .comment-error").text(error) // Place Errors.
 }
 
+Comment.cancelUpdate = function(ev) {
+  ev.preventDefault()
+  console.log("Hijacked")
+  // 'this' binded to form
+  const id = $(this).parent().parent().data("id")
+  const comment = Comment.removeFromCommentsToUpdate(id) // Remove from array of opened comments
+  comment.replaceFormWithComment($(this).parent().parent().parent())
+}
+
 Comment.removeFromCommentsToUpdate = function(id) {
   let array = Comment.commentsToUpdate
   let i, l = array.length
@@ -209,6 +221,22 @@ Comment.SubmitFormAJAX = function($form, success, fail) {
   })
   .done(success)
   .fail(fail)
+}
+
+Comment.fixDates = function() {
+  let js_date
+  const dates = $(".created_at")
+
+  dates.each(function() {
+    js_date = new Date($(this).text())
+    $(this).text(Comment.format_date(js_date))
+  })
+}
+
+var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+Comment.format_date = function(date) {
+  return `${month[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 }
 
 //------------------------------------------------------------------------

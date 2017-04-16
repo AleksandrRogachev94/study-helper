@@ -1,19 +1,18 @@
 <li id="comment_<%= comment.id %>" class="comment">
-  <div class="row">
-    <div class="col-xs-1">
-      <div class="avatar">
+  <div class="flex-container">
+
+    <div class="flex-block flex-container-info">
+      <div class="flex-block avatar-comment">
+      </div>
+      <div class="flex-block info">
+        <p class="appearance"><%= comment.author.appearance %></p>
+        <p class="created_at"><%= comment.created_at %></p>
       </div>
     </div>
-    <div class="col-xs-3">
-      <p class="appearance"><%= comment.author.appearance %></p>
-    </div>
-    <div class="col-xs-3">
-      <p class="created_at"><%= comment.created_at %></p>
-    </div>
-    <div class="col-xs-3 col-xs-offset-2">
+
+    <div class="flex-block">
       <div class="links">
         <% if policy(comment).update? %>
-          <!-- TODO -->
           <a href="#" class="update-comment my-link" data-id="<%= comment.id %>">Update</a>
         <% end %>
 
