@@ -1,10 +1,10 @@
 <%= form_for comment do |f| %>
 
   <div class="form-group">
-    <%= f.label :content %>
-    <%= f.text_area :content %>
+    <%= f.label :content, "Create New Comment" %>
+    <%= f.text_area :content, rows: 6, class: "form-control" %>
   </div>
 
   <%= f.hidden_field :lesson_id, value: lesson_id %>
-  <%= f.submit data: { disable_with: "Creating..." } %>
+  <%= f.submit data: { disable_with: "Creating..." }, class: "btn btn-primary", id: "create-comment-button" %>
 <% end %>

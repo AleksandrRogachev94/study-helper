@@ -1,19 +1,29 @@
-<h1><%= @lesson.title %></h1>
-<h1>Author: <%= link_to (@lesson.author.appearance), user_path(@lesson.author), class: "my-link" %></h1>
-<h3>Category: <%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
+<article>
+  <h1 id="title"><strong><%= @lesson.title %></strong></h1>
+  <h3 id="author">by <%= link_to (@lesson.author.appearance), user_path(@lesson.author), class: "my-link" %></h1>
+  <h3 id="category"><%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
 
-<%= show_field_for(@lesson, :description, "h3", "p", "lesson-fields") %>
-<%= show_field_for(@lesson, :content, "h3", "p", "lesson-fields") %>
-<%= show_field_for(@lesson, :links, "h3", "p", "lesson-fields") %>
+  <div class="lesson">
+    <p id="description"><em><%= @lesson.description %></em></p>
+    <p id="content"><%= @lesson.content %></p>
+    <h3 id="resources">Resources</h3>
+    <h3 id="links">Links</h3>
+    <p><%= @lesson.links %></p>
 
-<% if policy(@lesson).update? %>
-  <%= link_to 'Edit', edit_user_lesson_path(@lesson.author, @lesson), class: "btn btn-primary" %>
-<% end %>
-<% if policy(@lesson).destroy? %>
-  <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-<% end %>
+    <div class="lesson-links">
+      <% if policy(@lesson).update? %>
+        <%= link_to 'Edit', edit_user_lesson_path(@lesson.author, @lesson), class: "btn btn-primary" %>
+      <% end %>
+      <% if policy(@lesson).destroy? %>
+        <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </div>
+  </div>
+</article>
 
-<section>
+
+<section id="comments-section">
+  <h2>Comments</h2>
   <div class="comment-form">
     <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
   </div>
@@ -27,20 +37,32 @@
 
 <script id="comment-template" type="text/x-handlebars-template">
   <li id="comment_{{id}}" class="comment">
-    <p class="appearance">{{author.appearance}}</p>
-    <p class="content">{{content}}</p>
-    <p class="created_at">{{created_at}}</p>
-    <div class="links">
-      <!-- TODO -->
-      <a href="#" class="update-comment btn btn-primary" data-id="{{id}}">Update</a>
+    <div class="row">
+      <div class="col-sm-1">
+        <div class="avatar">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <p class="appearance">{{author.appearance}}</p>
+      </div>
+      <div class="col-sm-3">
+        <p class="created_at">{{created_at}}</p>
+      </div>
+      <div class="col-sm-3 col-sm-offset-3">
+        <div class="links">
+          <a href="#" class="update-comment my-link" data-id="{{id}}">Update</a>
 
-      <form class="delete-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
-        <input name="utf8" type="hidden" value="✓">
-        <input type="hidden" name="_method" value="delete">
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <%= submit_tag "Delete", class: "btn btn-danger", data: { disable_with: "Deleting..." } %>
-      </form>
+          <form class="delete-comment" action="/comments/{{id}}" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="_method" value="delete">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <%= submit_tag "Delete", class: "delete-comment-button", data: { disable_with: "Deleting..." } %>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <p class="content">{{content}}</p>
 
     <div class="comment-error"></div>
   </li>

@@ -1,22 +1,93 @@
-.lesson-fields {
+#content, #description, #links {
   white-space: pre-wrap;       /* css-3 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
 
-  padding: 0.5em;
-  font-family: "Roboto";
+h1, h2, h3 {
+  text-align: center
+}
+
+#title {
+  text-align: center;
+  font-size: 3em;
+}
+
+#description {
+  margin-bottom: 30px;
+}
+
+#links, #resources {
+  text-align: left;
+}
+
+#content {
+}
+
+.lesson {
+  padding: 20px;
   text-align: justify;
-  background-color: #F5F5F5;
-  border-radius: 10px;
+}
+
+.lesson-links .btn {
+  display: inline-block;
+  width: 150px;
+  margin: 0 auto;
 }
 
 // --------------------Comments---------------------------------
 
-.delete-comment {
-  display: inline-block;
+#comments-section {
+  margin-top: 40px;
 }
+
+#comments-section .btn {
+  width: 75px;
+}
+
+#create-comment-button.btn {
+  width: 150px;
+}
+
+// -------------------------------COMMENT LINKS-----------------------------
+
+.links {
+  text-align: right;
+}
+
+.delete-comment { // Form
+  display: inline;
+}
+
+.delete-comment-button {
+  background:none!important;
+  color:inherit;
+  border:none;
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+  transition: color .4s;
+  color: #265C83;
+  text-decoration: none;
+}
+
+.delete-comment-button:link, .delete-comment-button:visited {
+ color: #265C83;
+}
+
+.delete-comment-button:hover {
+ color: #63A1B9;
+ text-decoration: none;
+}
+
+.delete-comment-button:active  {
+ transition: color .3s;
+ color: #79C5E3;
+}
+
+//------------------------------------------------------------
 
 ul#comments {
   list-style-type: none;
@@ -25,9 +96,36 @@ ul#comments {
 }
 
 .comment {
-  background-color: #D3D3D3;
+  // background-color: #D3D3D3;
+  border-bottom: 1px solid black;
   margin-bottom: 15px;
+  font-size: 0.8em;
 }
+
+.content {
+  font-size: 1.3em;
+}
+
 #create-comment-error, .comment-error {
   color: red;
+}
+
+.comment-error {
+  text-align: right;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.col-sm-2, .col-sm-3 {
+  padding-top: 1em;
+}
+
+.avatar {
+  margin: 0 auto;
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 1.75em;
+  background-color: black;
 }

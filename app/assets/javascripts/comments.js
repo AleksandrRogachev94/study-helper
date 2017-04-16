@@ -112,7 +112,7 @@ Comment.failDestroy = function(xhr) {
   let error = Comment.processError(xhr)
 
   // 'this' binded to form
-  this.parent().next().text(error) // Place Errors.
+  this.parent().parent().parent().next().next().text(error) // Place Errors.
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
