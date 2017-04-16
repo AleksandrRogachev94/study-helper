@@ -1,6 +1,7 @@
 .lesson-container {
-  padding-left: 4em;
-  padding-right: 4em;
+  padding-left: 10px;
+  padding-right: 10px;
+
 }
 
 #content, #description, #links {
@@ -149,4 +150,20 @@ ul#comments {
   width: 4em;
   border-radius: 2.25em;
   background-color: black;
+}
+
+// Medium
+@media only screen and (min-width: 768px) {
+  .lesson-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+// Small
+@media only screen and (min-width: 576px) {
+  .lesson-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
