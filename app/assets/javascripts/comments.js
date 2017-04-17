@@ -38,7 +38,7 @@ Comment.prototype.destroy = function() {
 
 Comment.ready = function() {
   Comment.commentsToUpdate = [] // Array for all comments opened to update.
-  Comment.fixDates() // Fix dates from the server.
+  // Comment.fixDates() // Fix dates from the server.
 
   if($("#comment-template").length <= 0 || $("#update-comment-template").length <= 0) return;
 
@@ -52,12 +52,19 @@ Comment.ready = function() {
 }
 
 Comment.attachListeners = function() {
-  $("#new_comment").on("submit", Comment.formSubmit)
-  $("#comments").on("submit", ".delete-comment", Comment.destroy)
+  // $("#new_comment").on("submit", Comment.formSubmit)
+  // $("#comments").on("submit", ".delete-comment", Comment.destroy)
+  //
+  // $("#comments").on("click", ".update-comment", Comment.addUpdateForm)
+  // $("#comments").on("submit", ".form-update-comment", Comment.update)
+  // $("#comments").on("click", "#cancel-update-comment", Comment.cancelUpdate)
 
-  $("#comments").on("click", ".update-comment", Comment.addUpdateForm)
-  $("#comments").on("submit", ".form-update-comment", Comment.update)
-  $("#comments").on("click", "#cancel-update-comment", Comment.cancelUpdate)
+  $(document).on("submit", "#new_comment", Comment.formSubmit)
+  $(document).on("submit", ".delete-comment", Comment.destroy)
+
+  $(document).on("click", ".update-comment", Comment.addUpdateForm)
+  $(document).on("submit", ".form-update-comment", Comment.update)
+  $(document).on("click", "#cancel-update-comment", Comment.cancelUpdate)
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

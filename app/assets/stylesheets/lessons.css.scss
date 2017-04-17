@@ -60,6 +60,7 @@ h1, h2, h3 {
 
 #new_comment .comment-action-button.btn {
   width: 150px;
+  margin-bottom: 20px;
 }
 
 // -------------------------------COMMENT LINKS-----------------------------
@@ -120,6 +121,10 @@ ul#comments {
 
 .comment-error {
   text-align: right;
+}
+
+.form-update-comment {
+  margin-bottom: 10px;
 }
 
 //-----------------------------------------------------------------------------
