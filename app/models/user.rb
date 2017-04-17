@@ -26,7 +26,8 @@ class User < ApplicationRecord
   end
 
   def lessons_by_categories
-    self.lessons.group_by {|lesson| lesson.category}
+    result = self.lessons.group_by {|lesson| lesson.category}
+    result.transform_keys { |category| category.title }
   end
 
   def profile_attributes=(attrs)

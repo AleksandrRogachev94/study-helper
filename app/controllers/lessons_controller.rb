@@ -11,6 +11,10 @@ class LessonsController < ApplicationController
     @stub_lesson = Lesson.new(author: @user) # Stub for authorization in LessonPolicy.
     authorize @stub_lesson
     @lessons_by_categories = @user.lessons_by_categories
+    respond_to do |f|
+      f.html
+      f.json { render json: @lessons_by_categories, root: true, status: :ok }
+    end
   end
 
   def show

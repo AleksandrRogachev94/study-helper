@@ -17,6 +17,7 @@ function Lesson(attributes) {
   this.links = attributes.lesson.links
   this.created_at = Comment.format_date(new Date(attributes.lesson.created_at))
   this.category = attributes.lesson.category
+  this.category_id = attributes.lesson.category_id // For index action
   this.author = attributes.lesson.author
   this.can_update = attributes.lesson.can_update
   this.can_destroy = attributes.lesson.can_destroy
@@ -139,7 +140,6 @@ function slideLessons() {
 
 Lesson.loadUserLessons = function(ev) {
   ev.preventDefault()
-  debugger
   // $(".loader").show()
   $.ajax({
     url: $(this).attr("href"),
@@ -153,6 +153,10 @@ Lesson.loadUserLessons = function(ev) {
 
 Lesson.successLoadUserLessons = function(json) {
   debugger
+  // lessons_by_categories
+  // const lessons_by_categories = json.map(function(category) {
+  //   return { category.: }
+  // })
 }
 
 Lesson.failLoadUserLessons = function(xhr) {

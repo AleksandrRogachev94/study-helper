@@ -4,7 +4,7 @@
   <ul class="categories">
     <% @lessons_by_categories.each do |category, lessons| %>
       <li class="category-li">
-        <a href="#" onclick="return false;" class="category-title"><%= category.title %></a>
+        <a href="#" onclick="return false;" class="category-title"><%= category %></a>
         <ul class="category-lessons">
           <% lessons.each do |lesson| %>
             <li class="category-lesson"><%= link_to lesson.title, user_lesson_path(@user, lesson), class: "lesson-link" %></li>
