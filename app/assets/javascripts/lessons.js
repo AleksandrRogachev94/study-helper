@@ -2,8 +2,6 @@
 
 'use strict'
 
-$.ajaxSetup({cache: false}) // Without it "back" renders json instead of html
-
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Show Lesson
@@ -80,12 +78,14 @@ Lesson.failLoad = function(xhr) {
   switch(xhr.readyState) {
     case 0:
       error = "Network Error"
+      break
     case 4:
       if(Math.floor((xhr.status/100)) === 5) { // Status Code 5**
         error = "Server Error"
       } else {
         error = xhr.responseText
       }
+      break
     default:
       error = "Error occured"
   }

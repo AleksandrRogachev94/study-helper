@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, mininum-scale=1.0, maximum-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= stylesheet_link_tag params[:controller] %>
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_include_tag params[:controller] %>
   </head>
 
   <body>
@@ -23,5 +21,8 @@
     <% end %>
 
     <%= render 'layouts/footer' %>
+
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag params[:controller] %>
   </body>
 </html>

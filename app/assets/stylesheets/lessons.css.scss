@@ -1,3 +1,7 @@
+/*
+*= comments
+*/
+
 .lesson-container, .info-container {
   padding-left: 10px;
   padding-right: 10px;
@@ -52,114 +56,9 @@ h1, h2, h3 {
   text-align: right;
 }
 
-// --------------------Comments---------------------------------
 
-#comments-section {
-  margin-top: 40px;
-}
-
-#comments-section .btn {
-  width: 75px;
-}
-
-#new_comment .comment-action-button.btn {
-  width: 150px;
-  margin-bottom: 20px;
-}
-
-// -------------------------------COMMENT LINKS-----------------------------
-
-.delete-comment { // Form
-  display: inline;
-  margin-left: 2em;
-}
-
-.delete-comment-button {
-  background:none!important;
-  color:inherit;
-  border:none;
-  padding:0!important;
-  font: inherit;
-  cursor: pointer;
-  transition: color .4s;
-  color: #265C83;
-  text-decoration: none;
-}
-
-.delete-comment-button:link, .delete-comment-button:visited {
- color: #265C83;
-}
-
-.delete-comment-button:hover {
- color: #63A1B9;
- text-decoration: none;
-}
-
-.delete-comment-button:active  {
- transition: color .3s;
- color: #79C5E3;
-}
-
-//------------------------------------------------------------------------
-// Each comment.
-
-ul#comments {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-.comment {
-  border-bottom: 1px solid black;
-  margin-bottom: 15px;
-  font-size: 0.8em;
-}
-
-#comments .content {
-  font-size: 1.3em;
-}
-
-#create-comment-error, .comment-error, .lesson-error {
-  color: red;
-}
-
-.comment-error {
-  text-align: right;
-}
-
-.form-update-comment {
-  margin-bottom: 10px;
-}
-
-//-----------------------------------------------------------------------------
-// Flex Box
-
-.flex-container, .flex-container-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.flex-container {
-  margin-bottom: 20px;
-}
-
-.info {
-  margin: 0 auto;
-  padding-left: 1em;
-  display: inline-block;
-  text-align: center;
-}
-
-.avatar-comment {
-  display: inline-block;
-  margin: 0 auto;
-  height: 4em;
-  width: 4em;
-  border-radius: 2.25em;
-  background-color: black;
-}
+//--------------------------------------------------------------
+// Media
 
 // Small
 @media only screen and (min-width: 576px) {

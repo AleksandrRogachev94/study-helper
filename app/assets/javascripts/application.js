@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require handlebars.min
+
+$.ajaxSetup({cache: false}) // Without it "back" renders json instead of html

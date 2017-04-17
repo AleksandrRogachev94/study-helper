@@ -9,4 +9,8 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += ["lessons.css", "lessons.js"]
+
+# Controller specific files.
+%w( categories comments lessons profiles requests static studyships users ).each do |controller|
+  Rails.application.config.assets.precompile += ["#{controller}.js.coffee", "#{controller}.css"]
+end
