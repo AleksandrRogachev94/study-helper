@@ -1,7 +1,7 @@
 module UsersHelper
   def link_for_user_lessons(lesson)
     if policy(lesson).index?
-      link_to "Lessons", user_lessons_path(lesson.author), class: "btn btn-primary"
+      link_to "Lessons", user_lessons_path(lesson.author), class: "btn btn-primary", id: "user-lessons"
     elsif Request.find_by(student: current_user, teacher: lesson.author)
       content_tag 'div', "Request sent", class: "request_sent"
     else

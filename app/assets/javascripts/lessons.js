@@ -129,14 +129,37 @@ $(document).ready(function() {
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Index Ation
 
-function attachListeners() {
-  $(".category-li").on("click", slideLessons)
-}
+// function attachListeners() {
+//   $(document).on("click", ".category-li", slideLessons)
+// }
 
 function slideLessons() {
   $(this).find(".category-lessons").slideToggle()
 }
 
-$(document).ready(function() {
-  attachListeners()
-})
+Lesson.loadUserLessons = function(ev) {
+  ev.preventDefault()
+  debugger
+  // $(".loader").show()
+  $.ajax({
+    url: $(this).attr("href"),
+    type: "GET",
+    dataType: "json"
+  })
+  .done(Lesson.successLoadUserLessons)
+  .fail(Lesson.failLoadUserLessons)
+  // .always(() => { $(".loader").hide() })
+}
+
+Lesson.successLoadUserLessons = function(json) {
+  debugger
+}
+
+Lesson.failLoadUserLessons = function(xhr) {
+
+}
+
+// $(document).ready(function() {
+
+  // attachListeners()
+// })
