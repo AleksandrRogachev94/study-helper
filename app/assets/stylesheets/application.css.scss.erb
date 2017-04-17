@@ -93,7 +93,7 @@ h1, h2 {
 }
 
 .my-container {
- width: 50%;
+ width: 100%;
  margin: 0 auto;
  text-align: center;
 }
@@ -180,12 +180,13 @@ footer {
  color: rgb(139, 123, 118);
 }
 
-// Medium
-@media only screen and (min-width: 768px) {
+// Small
+@media only screen and (min-width: 576px) {
   body { font-size: 1.4em; }
 }
 
-// Small
-@media only screen and (min-width: 576px) {
+// Medium
+@media only screen and (min-width: 768px) {
   body { font-size: 1.7em; }
+  .my-container { width: 50%; }
 }

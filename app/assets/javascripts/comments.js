@@ -40,6 +40,8 @@ Comment.ready = function() {
   Comment.commentsToUpdate = [] // Array for all comments opened to update.
   Comment.fixDates() // Fix dates from the server.
 
+  if($("#comment-template").length <= 0 || $("#update-comment-template").length <= 0) return;
+
   let source = $("#comment-template").html()
   Comment.template = Handlebars.compile(source)
 
