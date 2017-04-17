@@ -10,17 +10,17 @@
 // Lesson Class
 
 function Lesson(attributes) {
-  this.id = attributes.id
-  this.description = attributes.description
-  this.content = attributes.content
-  this.links = attributes.links
-  this.created_at = Comment.format_date(new Date(attributes.created_at))
-  this.category = attributes.category
-  this.author = attributes.author
-  this.can_update = attributes.can_update
-  this.can_destroy = attributes.can_destroy
+  this.id = attributes.lesson.id
+  this.description = attributes.lesson.description
+  this.content = attributes.lesson.content
+  this.links = attributes.lesson.links
+  this.created_at = Comment.format_date(new Date(attributes.lesson.created_at))
+  this.category = attributes.lesson.category
+  this.author = attributes.lesson.author
+  this.can_update = attributes.lesson.can_update
+  this.can_destroy = attributes.lesson.can_destroy
 
-  this.comments = attributes.comments.map((comment) => new Comment(comment))
+  this.comments = attributes.lesson.comments.map((comment) => new Comment(comment))
 }
 
 // Instance methods
@@ -42,6 +42,7 @@ Lesson.ready = function() {
 }
 
 Lesson.loadLesson = function() {
+  $(".loading").show()
   $.ajax({
     url: window.location.href,
     type: "GET",
@@ -53,8 +54,8 @@ Lesson.loadLesson = function() {
 
 Lesson.successLoad = function(json) {
   const lesson = new Lesson(json)
-  debugger
 
+  $(".loading").hide()
   lesson.appendToPage()
   // Comment.appendToPage(lesson.comments)
 }
@@ -73,8 +74,8 @@ Lesson.failLoad = function(xhr) {
     default:
       error = "Error occured"
   }
-  //xxx
-  console.log(error)
+
+  $("#lesson-error").text(error)
 }
 
 

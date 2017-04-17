@@ -22,5 +22,4 @@ class LessonSerializer < ActiveModel::Serializer
   def can_destroy
     Pundit.policy(current_user, object).destroy?
   end
-
 end
