@@ -8,6 +8,8 @@ function Comment(attributes) {
   this.content = attributes.content
   this.created_at = Comment.format_date(new Date(attributes.created_at))
   this.author = attributes.author
+  this.can_update = attributes.can_update
+  this.can_destroy = attributes.can_destroy
 }
 
 // Instance methods
@@ -206,7 +208,7 @@ Comment.removeFromCommentsToUpdate = function(id) {
 // Index Action
 
 Comment.appendToPage = function(comments) {
-  
+
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

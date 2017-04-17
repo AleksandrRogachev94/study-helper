@@ -1,47 +1,41 @@
 <div class="lesson-container">
+
+</div>
+
+
+
+
+<script id="lesson-template" type="text/x-handlebars-template">
   <article>
     <h1 id="title"><strong><%= @lesson.title %></strong></h1>
 
-    <h3 id="author"><%= link_to user_path(@lesson.author), class: "my-link" do %>
+    <h3 id="author">
+      <a href="/users/{{author.id}}" class="my-link">
         <div class="avatar-title"></div>
-        <%= @lesson.author.appearance %>
-      <% end %>
+        {{author.appearance}}
+      </a>
     </h3>
 
-    <h3 id="category"><%= link_to @lesson.category.title, category_path(@lesson.category), class: "my-link" %></h1>
+    <h3 id="category"><a href="/categories/{{category.id}}" class="my-link">{{category.title}}</a></h3>
 
     <div class="lesson">
-      <p id="description"><em><%= @lesson.description %></em></p>
-      <p id="content"><%= @lesson.content %></p>
+      <p id="description"><em>{{description}}</em></p>
+      <p id="content">{{content}}</p>
       <h3 id="resources">Resources</h3>
       <h3 id="links">Links</h3>
-      <p><%= @lesson.links %></p>
+      <p>{{links}}</p>
 
       <div class="lesson-links">
-        <% if policy(@lesson).update? %>
-          <%= link_to 'Edit', edit_user_lesson_path(@lesson.author, @lesson), class: "btn btn-primary" %>
-        <% end %>
-        <% if policy(@lesson).destroy? %>
-          <%= link_to 'Delete', user_lesson_path(@lesson.author, @lesson), method: 'delete', class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-        <% end %>
+        {{#if can_update}}
+          <a href="/users/{{author.id}}/lessons/{{id}}/edit" class="btn btn-primary">Edit</a>
+        {{/if}}
+        {{#if can_destroy}}
+          <a href="/users/{{author.id}}/lessons/{{id}}" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete">Delete</a>
+        {{/if}}
       </div>
     </div>
   </article>
-
-
-  <section id="comments-section">
-    <h2>Comments</h2>
-    <div class="comment-form">
-      <%= render 'comments/form', comment: @comment, lesson_id: @lesson.id %>
-    </div>
-
-    <div id="create-comment-error"></div>
-
-    <ul id="comments">
-      <%= render partial: 'comments/comment', collection: @comments %>
-    </ul>
-  </section>
-</div>
+</script>
 
 <script id="comment-template" type="text/x-handlebars-template">
   <li id="comment_{{id}}" class="comment">
