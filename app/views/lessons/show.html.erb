@@ -1,11 +1,22 @@
-<div class="lesson-container">
-  <p class="loading">Loading...</p>
+<div class="info-container">
+  <div class="loader"></div>
   <p class="lesson-error"></p>
+</div>
+
+<div class="lesson-container">
 </div>
 
 <script id="lesson-template" type="text/x-handlebars-template">
   <article>
-    <h1 id="title"><strong><%= @lesson.title %></strong></h1>
+    <div class="flex-container">
+      <div>
+        <a href="#" class="prev-lesson my-link"><< Previous Lesson</a>
+      </div>
+      <div>
+        <a href="#" class="next-lesson my-link">Next Lesson >></a>
+      </div>
+    </div>
+    <h1 id="title"><strong>{{title}}</strong></h1>
 
     <h3 id="author">
       <a href="/users/{{author.id}}" class="my-link">

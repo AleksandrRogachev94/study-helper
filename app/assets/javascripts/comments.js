@@ -218,8 +218,7 @@ Comment.removeFromCommentsToUpdate = function(id) {
 
 Comment.appendToPage = function(lesson) {
   const html = Comment.commentsTemplate(lesson)
-  const rendered = $(html).appendTo(".lesson-container")//.hide()
-  //rendered.slideDown()
+  const rendered = $(html).appendTo(".lesson-container")
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
