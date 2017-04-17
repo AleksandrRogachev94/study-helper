@@ -4,12 +4,13 @@
 // Comment Class
 
 function Comment(attributes) {
-  this.id = attributes.id
-  this.content = attributes.content
-  this.created_at = Comment.format_date(new Date(attributes.created_at))
-  this.author = attributes.author
-  this.can_update = attributes.can_update
-  this.can_destroy = attributes.can_destroy
+  // debugger
+  this.id = attributes.comment.id
+  this.content = attributes.comment.content
+  this.created_at = Comment.format_date(new Date(attributes.comment.created_at))
+  this.author = attributes.comment.author
+  this.can_update = attributes.comment.can_update
+  this.can_destroy = attributes.comment.can_destroy
 }
 
 // Instance methods
@@ -40,17 +41,23 @@ Comment.prototype.destroy = function() {
 
 Comment.ready = function() {
   Comment.commentsToUpdate = [] // Array for all comments opened to update.
-  // Comment.fixDates() // Fix dates from the server.
 
-  if($("#comment-template").length <= 0 || $("#update-comment-template").length <= 0) return;
+  if($("#comment-partial").length <= 0 || $("#update-comment-template").length <= 0 || $("#comments-template").length <= 0) return;
+  Comment.prepareHandlebars()
 
-  let source = $("#comment-template").html()
+  Comment.attachListeners()
+}
+
+Comment.prepareHandlebars = function() {
+  let source = $("#comments-template").html()
+  Comment.commentsTemplate = Handlebars.compile(source)
+
+  source = $("#comment-partial").html()
   Comment.template = Handlebars.compile(source)
+  Handlebars.registerPartial('commentPartial',  document.getElementById("comment-partial").innerHTML)
 
   source = $("#update-comment-template").html()
   Comment.updateTemplate = Handlebars.compile(source)
-
-  Comment.attachListeners()
 }
 
 Comment.attachListeners = function() {
@@ -146,11 +153,13 @@ Comment.from_li = function(id) {
   if($li.length <= 0) return new Comment({});
 
   const json = {
-    id: id,
-    content: $li.find(".content").text(),
-    created_at: $li.find(".created_at").text(),
-    author: {
-      appearance: $li.find(".appearance").text()
+    comment: {
+      id: id,
+      content: $li.find(".content").text(),
+      created_at: $li.find(".created_at").text(),
+      author: {
+        appearance: $li.find(".appearance").text()
+      }
     }
   }
 
@@ -207,8 +216,10 @@ Comment.removeFromCommentsToUpdate = function(id) {
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Index Action
 
-Comment.appendToPage = function(comments) {
-
+Comment.appendToPage = function(lesson) {
+  const html = Comment.commentsTemplate(lesson)
+  const rendered = $(html).appendTo(".lesson-container")//.hide()
+  //rendered.slideDown()
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

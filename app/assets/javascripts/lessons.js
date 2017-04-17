@@ -20,7 +20,7 @@ function Lesson(attributes) {
   this.can_update = attributes.lesson.can_update
   this.can_destroy = attributes.lesson.can_destroy
 
-  this.comments = attributes.lesson.comments.map((comment) => new Comment(comment))
+  this.comments = attributes.lesson.comments.reverse().map((comment) => new Comment({ comment: comment }))
 }
 
 // Instance methods
@@ -57,7 +57,7 @@ Lesson.successLoad = function(json) {
 
   $(".loading").hide()
   lesson.appendToPage()
-  // Comment.appendToPage(lesson.comments)
+  Comment.appendToPage(lesson)
 }
 
 Lesson.failLoad = function(xhr) {

@@ -3,9 +3,6 @@
   <p class="lesson-error"></p>
 </div>
 
-
-
-
 <script id="lesson-template" type="text/x-handlebars-template">
   <article>
     <h1 id="title"><strong><%= @lesson.title %></strong></h1>
@@ -38,7 +35,37 @@
   </article>
 </script>
 
-<script id="comment-template" type="text/x-handlebars-template">
+<script id="comments-template" type="text/x-handlebars-template">
+  <section id="comments-section">
+      <h2>Comments</h2>
+      <div class="comment-form">
+        <form class="new_comment" id="new_comment" action="/comments" accept-charset="UTF-8" method="post">
+          <input name="utf8" type="hidden" value="✓">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+          <div class="form-group">
+            <%= label_tag "comment_content", "Create New Comment" %>
+            <%= text_area_tag "comment[content]", nil, rows: 6, class: "form-control" %>
+            <!-- <label for="comment_content">Create New Comment</label> -->
+            <!-- <textarea rows="6" class="form-control" name="comment[content]" id="comment_content"></textarea> -->
+          </div>
+
+          <input value="{{id}}" type="hidden" name="comment[lesson_id]" id="comment_lesson_id">
+          <%= submit_tag "Create Comment", data: { disable_with: "Creating..." }, class: "btn btn-primary comment-action-button" %>
+        </form>
+      </div>
+
+      <div id="create-comment-error"></div>
+
+      <ul id="comments">
+        {{#each comments}}
+          {{> commentPartial this}}
+        {{/each}}
+      </ul>
+  </section>
+</script>
+
+<script id="comment-partial" type="text/x-handlebars-template">
   <li id="comment_{{id}}" class="comment">
     <div class="flex-container">
       <div class="flex-block flex-container-info">
