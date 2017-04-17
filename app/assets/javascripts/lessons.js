@@ -53,6 +53,7 @@ Lesson.loadLesson = function() {
 
 Lesson.successLoad = function(json) {
   const lesson = new Lesson(json)
+  debugger
 
   lesson.appendToPage()
   // Comment.appendToPage(lesson.comments)

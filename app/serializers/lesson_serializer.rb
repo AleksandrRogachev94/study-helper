@@ -16,12 +16,11 @@ class LessonSerializer < ActiveModel::Serializer
   end
 
   def can_update
-    true
-    # policy(object).update?
+    Pundit.policy(current_user, object).update?
   end
 
   def can_destroy
-    true
-    # policy(object).destroy?
+    Pundit.policy(current_user, object).destroy?
   end
+
 end
