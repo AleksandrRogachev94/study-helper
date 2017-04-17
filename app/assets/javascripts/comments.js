@@ -203,6 +203,13 @@ Comment.removeFromCommentsToUpdate = function(id) {
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Index Action
+
+Comment.appendToPage = function(comments) {
+  
+}
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Shared methods.
 
 Comment.processError = function(xhr) {

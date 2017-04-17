@@ -15,8 +15,15 @@ class LessonsController < ApplicationController
 
   def show
     authorize @lesson
+
+    # Break em both!
     @comments = @lesson.comments.reverse
     @comment = Comment.new
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @lesson, status: :ok }
+    end
   end
 
   def new

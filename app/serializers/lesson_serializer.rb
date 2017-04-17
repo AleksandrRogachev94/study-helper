@@ -1,5 +1,6 @@
-class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :content, :created_at, :author
+class LessonSerializer < ActiveModel::Serializer
+  attributes :id, :description, :content, :links, :created_at, :author
+  has_many :comments
 
   def author
     {

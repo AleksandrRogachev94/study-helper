@@ -15,7 +15,18 @@ function Lesson(attributes) {
   this.content = attributes.content
   this.links = attributes.links
   this.created_at = Comment.format_date(new Date(attributes.created_at))
+  this.author = attributes.author
+
+  this.comments = attributes.comments.map((comment) => new Comment(comment))
 }
+
+// Instance methods
+
+Lesson.prototype.appendToPage = function() {
+
+}
+
+// Class methods
 
 Lesson.ready = function() {
   Lesson.loadLesson()
@@ -32,7 +43,10 @@ Lesson.loadLesson = function() {
 }
 
 Lesson.successLoad = function(json) {
-  debugger
+  const lesson = new Lesson(json)
+
+  lesson.appendToPage
+  Comment.appendToPage(lesson.comments)
 }
 
 Lesson.failLoad = function(xhr) {
@@ -61,7 +75,7 @@ $(document).ready(function() {
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// Index
+// Index Ation
 
 function attachListeners() {
   $(".category-li").on("click", slideLessons)
