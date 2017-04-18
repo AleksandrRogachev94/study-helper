@@ -4,7 +4,6 @@
 // Comment Class
 
 function Comment(attributes) {
-  // debugger
   this.id = attributes.comment.id
   this.content = attributes.comment.content
   this.created_at = Comment.format_date(new Date(attributes.comment.created_at))
@@ -21,14 +20,14 @@ Comment.prototype.render = function() {
   rendered.slideDown()
 }
 
-Comment.prototype.replaceCommentWithForm = function($li) {
+Comment.prototype.replaceContentWithForm = function($content) {
   const form = Comment.updateTemplate(this)
-  $li.replaceWith(form)
+  $content.replaceWith(form)
 }
 
-Comment.prototype.replaceFormWithComment = function($form) {
-  const li = Comment.template(this)
-  $form.replaceWith(li)
+Comment.prototype.replaceFormWithContent = function($form) {
+  const content = '<p class="content">' + this.content + '</p>'
+  $form.replaceWith(content)
 }
 
 Comment.prototype.destroy = function() {
@@ -144,7 +143,7 @@ Comment.addUpdateForm = function(ev) {
 
   const comment = Comment.from_li(id)
   Comment.commentsToUpdate.push(comment) // Add to array of comments opened to update.
-  comment.replaceCommentWithForm($(this).parent().parent().parent().next())
+  comment.replaceContentWithForm($(this).parent().parent().parent().next())
   $("#comment_" + id + " .form-update-comment textarea").focus()
 }
 
@@ -158,7 +157,8 @@ Comment.from_li = function(id) {
       content: $li.find(".content").text(),
       created_at: $li.find(".created_at").text(),
       author: {
-        appearance: $li.find(".appearance").text()
+        appearance: $li.find(".appearance").text(),
+        avatar_url: $li.find(".avatar-comment").css("background-image")
       }
     }
   }
@@ -178,7 +178,7 @@ Comment.successUpdate = function(json) {
 
   // 'this' binded to form
   Comment.removeFromCommentsToUpdate(comment.id)
-  comment.replaceFormWithComment(this.parent().parent())
+  comment.replaceFormWithContent(this)
 }
 
 Comment.failUpdate = function(xhr) {
@@ -188,17 +188,16 @@ Comment.failUpdate = function(xhr) {
   // 'this' binded to form
   const id = this.parent().data("id")
   const comment = Comment.removeFromCommentsToUpdate(id) // Remove from array of opened comments
-  comment.replaceFormWithComment(this.parent().parent())
+  comment.replaceFormWithContent(this)
   $("#comment_" + id + " .comment-error").text(error) // Place Errors.
 }
 
 Comment.cancelUpdate = function(ev) {
   ev.preventDefault()
-  console.log("Hijacked")
   // 'this' binded to form
   const id = $(this).parent().parent().data("id")
   const comment = Comment.removeFromCommentsToUpdate(id) // Remove from array of opened comments
-  comment.replaceFormWithComment($(this).parent().parent().parent())
+  comment.replaceFormWithContent($(this).parent())
 }
 
 Comment.removeFromCommentsToUpdate = function(id) {
@@ -240,7 +239,6 @@ Comment.processError = function(xhr) {
 }
 
 Comment.SubmitFormAJAX = function($form, success, fail) {
-  console.log(($form.find("input[name='_method']").val() || $form.attr("method")))
   $.ajax({
     url: $form.attr("action"),
     type: ($form.find("input[name='_method']").val() || $form.attr("method")),
