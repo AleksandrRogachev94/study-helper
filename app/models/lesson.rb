@@ -2,8 +2,11 @@ class Lesson < ApplicationRecord
   belongs_to :category
   belongs_to :author, class_name: "User", foreign_key: "user_id"
 
-  has_attached_file :doc1
-  has_attached_file :doc2
+  has_attached_file :doc1,
+                    storage: :s3, s3_credentials: aws_s3_credentials
+  has_attached_file :doc2,
+                    storage: :s3, s3_credentials: aws_s3_credentials
+
   validates_attachment_content_type :doc1, :doc2, :content_type => ["application/pdf","application/vnd.ms-excel",
              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
              "application/msword",
