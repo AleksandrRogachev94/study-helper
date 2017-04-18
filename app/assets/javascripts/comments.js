@@ -4,12 +4,10 @@
 // Comment Class
 
 function Comment(attributes) {
-  this.id = attributes.comment.id
-  this.content = attributes.comment.content
-  this.created_at = Comment.format_date(new Date(attributes.comment.created_at))
-  this.author = attributes.comment.author
-  this.can_update = attributes.comment.can_update
-  this.can_destroy = attributes.comment.can_destroy
+  let prop
+  for(prop in attributes.comment) {
+    this[prop] = attributes.comment[prop]
+  }
 }
 
 // Instance methods

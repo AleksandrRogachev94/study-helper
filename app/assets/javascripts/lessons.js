@@ -10,27 +10,16 @@
 // Lesson Class
 
 function Lesson(attributes) {
-  // debugger
-  this.id = attributes.lesson.id
-  this.title = attributes.lesson.title
-  this.description = attributes.lesson.description
-  this.content = attributes.lesson.content
-  this.links = attributes.lesson.links
-  this.created_at = Comment.format_date(new Date(attributes.lesson.created_at))
-  this.category = attributes.lesson.category
-  this.category_id = attributes.lesson.category_id // For index action
-  this.author = attributes.lesson.author
-  this.author_id = attributes.lesson.user_id // For index action
-  this.can_update = attributes.lesson.can_update
-  this.can_destroy = attributes.lesson.can_destroy
-  this.next_id = attributes.lesson.next_id
-  this.prev_id = attributes.lesson.prev_id
-
-  this.doc1 = attributes.lesson.doc1
-  this.doc2 = attributes.lesson.doc2
-
-  if(attributes.lesson.comments) {
-    this.comments = attributes.lesson.comments.reverse().map((comment) => new Comment({ comment: comment }))
+  let prop
+  for(prop in attributes.lesson) {
+    if(prop === "user_id") {
+      this["author_id"] = attributes.lesson[prop]
+    } else {
+      this[prop] = attributes.lesson[prop]
+    }
+  }
+  if(this.comments) {
+    this.comments = this.comments.reverse().map((comment) => new Comment({ comment: comment }))
   }
 }
 
