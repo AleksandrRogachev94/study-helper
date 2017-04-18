@@ -7,6 +7,6 @@ $(document).ready(function() {
   let source = $("#lessons-by-categories-template").html()
   Lesson.lessonByCategoriesTemplate = Handlebars.compile(source)
 
-  $("#user-lessons").on("click", Lesson.loadUserLessons)
+  $("#user-lessons-link").on("click", Lesson.loadUserLessons)
   $("lessons-by-categories").on("click", ".category-li", slideLessons)
 })

@@ -46,9 +46,35 @@ a.lesson-link {
 
 //---------------------------------------
 
-#user-lessons {
+ .yellow-button {
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: 5px;
+  background-color: #ccff00;
+  border: 2px solid #8cff00;
+  opacity: 0.7;
+  color: black;
+  text-decoration: none;
+  transition: opacity 0.5s;
+}
+
+.yellow-button:hover {
+  opacity: 0.9;
+  color: black;
+  text-decoration: none;
+}
+
+#user-lessons-link, .new-lesson-link {
   font-size: 140%;
   width: 100%;
+}
+
+.new-lesson-link {
+  font-size: 120%;
+}
+
+.lessons-by-categories {
+  margin-bottom: 2em;
 }
 
 .lesson-by-categories-error {

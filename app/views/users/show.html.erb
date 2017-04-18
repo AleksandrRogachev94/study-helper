@@ -16,6 +16,9 @@
   <div class="loader"></div>
   <div class="lesson-by-categories-error"></div>
   <div class="lessons-by-categories"></div>
+  <% if current_user == @user %>
+    <%= link_to "Create New Lesson", new_user_lesson_path(@user), class: "new-lesson-link yellow-button" %>
+  <% end %>
 </div>
 
 <script id="lessons-by-categories-template" type="text/x-handlebars-template">
