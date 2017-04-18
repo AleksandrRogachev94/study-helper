@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :categories, through: :lessons
-  has_many :lessons
+  has_many :lessons, dependent: :destroy
 
   # As a student
   has_many :student_teacher_relationships, class_name: "Studyship", foreign_key: 'student_id'

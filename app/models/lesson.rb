@@ -11,7 +11,7 @@ class Lesson < ApplicationRecord
              "text/plain"]
   validates_with AttachmentSizeValidator, attributes: [:doc1, :doc2], less_than: 2.megabytes
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   before_save :make_capitalized
 
