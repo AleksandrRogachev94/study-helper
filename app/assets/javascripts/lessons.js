@@ -24,7 +24,9 @@ function Lesson(attributes) {
   this.next_id = attributes.lesson.next_id
   this.prev_id = attributes.lesson.prev_id
 
-  this.comments = attributes.lesson.comments.reverse().map((comment) => new Comment({ comment: comment }))
+  if(attributes.lesson.comments) {
+    this.comments = attributes.lesson.comments.reverse().map((comment) => new Comment({ comment: comment }))
+  }
 }
 
 // Instance methods
@@ -152,11 +154,11 @@ Lesson.loadUserLessons = function(ev) {
 }
 
 Lesson.successLoadUserLessons = function(json) {
-  debugger
-  // lessons_by_categories
-  // const lessons_by_categories = json.map(function(category) {
-  //   return { category.: }
-  // })
+  let lessons_by_categories = {}, category
+
+  for(category in json) {
+    lessons_by_categories[category] = json[category].map((lesson) => new Lesson(lesson))
+  }
 }
 
 Lesson.failLoadUserLessons = function(xhr) {
