@@ -3,5 +3,5 @@
 <%= form_for [lesson.author, lesson], html: { multipart: true } do |f| %>
   <%= render 'lesson_fields', f: f %>
   <%= render 'category_fields', f: f, category: lesson.category %>
-  <%= f.submit class: "btn btn-success" %>
+  <%= f.submit class: "gray-button" %>
 <% end %>

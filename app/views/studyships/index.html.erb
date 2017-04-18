@@ -4,12 +4,12 @@
   <div class="list-group">
     <% @studyships.each do |studyship| %>
         <%= link_to studyship.send("#{@rel_type}").appearance, user_path(studyship.send("#{@rel_type}")), class: "list-group-item list-group-item-action studyships" %>
-        <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', data: { confirm: "Are you sure?" }, class: "red-button" %>
         <br>
     <% end %>
   </div>
 
   <% if @rel_type == "student" %>
-    <%= link_to "New Requests from Students", requests_path, class: "btn btn-primary" %>
+    <%= link_to "New Requests from Students", requests_path, class: "gray-button" %>
   <% end %>
 </div>
