@@ -1,5 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
+  has_attached_file :avatar
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
 
   before_save :capitalize_name
 
