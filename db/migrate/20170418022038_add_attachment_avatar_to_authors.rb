@@ -1,11 +1,11 @@
 class AddAttachmentAvatarToAuthors < ActiveRecord::Migration
   def self.up
-    change_table :users do |t|
+    change_table :profiles do |t|
       t.attachment :avatar
     end
   end
 
   def self.down
-    remove_attachment :users, :avatar
+    remove_attachment :profiles, :avatar
   end
 end

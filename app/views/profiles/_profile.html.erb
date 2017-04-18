@@ -1,4 +1,4 @@
-<%= image_tag profile.image, id: "avatar" if profile.image %>
+<%= image_tag profile.avatar.url(:original), id: "avatar" %>
 <h1><%= profile.user.appearance %></h1>
 
 <table class="table">

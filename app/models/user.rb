@@ -40,7 +40,7 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      profile = user.build_profile(full_name: auth.info.name, image: auth.info.image)
+      profile = user.build_profile(full_name: auth.info.name, avatar_from_url: auth.info.image)
       profile.save(:validate => false)
     end
   end

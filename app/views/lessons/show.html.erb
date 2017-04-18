@@ -20,7 +20,7 @@
 
     <h3 id="author">
       <a href="/users/{{author.id}}" class="my-link">
-        <div class="avatar-title"></div>
+        <div class="avatar-title" style="background-image: url({{author.avatar_url}});"></div>
         {{author.appearance}}
       </a>
     </h3>
@@ -78,8 +78,7 @@
   <li id="comment_{{id}}" class="comment">
     <div class="flex-container">
       <div class="flex-block flex-container-info">
-        <div class="flex-block avatar-comment">
-        </div>
+        <div class="flex-block avatar-comment" style="background-image: url({{author.avatar_url}});"></div>
         <div class="flex-block info">
           <p class="appearance">{{author.appearance}}</p>
           <p class="created_at">{{created_at}}</p>

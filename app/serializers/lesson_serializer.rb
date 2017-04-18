@@ -7,7 +7,8 @@ class LessonSerializer < ActiveModel::Serializer
     {
       id: object.author.id,
       email: object.author.email,
-      appearance: object.author.appearance
+      appearance: object.author.appearance,
+      avatar_url: ActionController::Base.helpers.asset_path(object.author.profile.avatar.url(:thumb))
     }
   end
 

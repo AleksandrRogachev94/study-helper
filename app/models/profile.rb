@@ -1,6 +1,6 @@
 class Profile < ApplicationRecord
   belongs_to :user
-  has_attached_file :avatar
+  has_attached_file :avatar, default_url: ':style/default_avatar.png', styles: { thumb: "100x100>" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
 
@@ -20,5 +20,9 @@ class Profile < ApplicationRecord
   def capitalize_name
     self.first_name.capitalize!
     self.last_name.capitalize!
+  end
+
+  def avatar_from_url=(url)
+    self.avatar = URI.parse(url)
   end
 end

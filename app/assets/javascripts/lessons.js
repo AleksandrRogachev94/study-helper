@@ -19,6 +19,7 @@ function Lesson(attributes) {
   this.category = attributes.lesson.category
   this.category_id = attributes.lesson.category_id // For index action
   this.author = attributes.lesson.author
+  // this.author.avatar_url = location.protocol + '//' + location.host + "/" + this.author.avatar_url
   this.author_id = attributes.lesson.user_id // For index action
   this.can_update = attributes.lesson.can_update
   this.can_destroy = attributes.lesson.can_destroy
