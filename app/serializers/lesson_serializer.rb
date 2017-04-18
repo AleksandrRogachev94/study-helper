@@ -1,5 +1,7 @@
 class LessonSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :content, :links, :created_at, :author, :can_update, :can_destroy, :next_id, :prev_id
+  attributes :id, :title, :description, :content, :links, :created_at, :author,
+             :can_update, :can_destroy, :next_id, :prev_id, :doc1, :doc2
+
   has_many :comments
   belongs_to :category
 
@@ -36,5 +38,21 @@ class LessonSerializer < ActiveModel::Serializer
 
     index = lessons.find_index { |lesson| lesson == object } - 1
     index >= 0 ? lessons[index].id : nil
+  end
+
+  def doc1
+    {
+      name: object.doc1.original_filename,
+      url: ActionController::Base.helpers.asset_path(object.doc1.url(:original, false)),
+      exists: object.doc1?
+    }
+  end
+
+  def doc2
+    {
+      name: object.doc2.original_filename,
+      url: ActionController::Base.helpers.asset_path(object.doc2.url(:original, false)),
+      exists: object.doc2?
+    }
   end
 end

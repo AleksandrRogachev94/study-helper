@@ -10,6 +10,7 @@
 // Lesson Class
 
 function Lesson(attributes) {
+  // debugger
   this.id = attributes.lesson.id
   this.title = attributes.lesson.title
   this.description = attributes.lesson.description
@@ -19,12 +20,14 @@ function Lesson(attributes) {
   this.category = attributes.lesson.category
   this.category_id = attributes.lesson.category_id // For index action
   this.author = attributes.lesson.author
-  // this.author.avatar_url = location.protocol + '//' + location.host + "/" + this.author.avatar_url
   this.author_id = attributes.lesson.user_id // For index action
   this.can_update = attributes.lesson.can_update
   this.can_destroy = attributes.lesson.can_destroy
   this.next_id = attributes.lesson.next_id
   this.prev_id = attributes.lesson.prev_id
+
+  this.doc1 = attributes.lesson.doc1
+  this.doc2 = attributes.lesson.doc2
 
   if(attributes.lesson.comments) {
     this.comments = attributes.lesson.comments.reverse().map((comment) => new Comment({ comment: comment }))

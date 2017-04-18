@@ -27,6 +27,15 @@
 
     <h3 id="category"><a href="/categories/{{category.id}}" class="my-link">{{category.title}}</a></h3>
 
+    <div class="attachments">
+      {{#if doc1.exists}}
+        <a class="doc" href="{{doc1.url}}">{{doc1.name}}</a>
+      {{/if}}
+      {{#if doc2.exists}}
+        <a class="doc" href="{{doc2.url}}">{{doc2.name}}</a>
+      {{/if}}
+    </div>
+
     <div class="lesson">
       <p id="description"><em>{{description}}</em></p>
       <p id="content">{{content}}</p>
@@ -36,10 +45,10 @@
 
       <div class="lesson-links">
         {{#if can_update}}
-          <a href="/users/{{author.id}}/lessons/{{id}}/edit" class="btn btn-primary">Edit</a>
+          <a href="/users/{{author.id}}/lessons/{{id}}/edit" class="gray-button">Edit</a>
         {{/if}}
         {{#if can_destroy}}
-          <a href="/users/{{author.id}}/lessons/{{id}}" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete">Delete</a>
+          <a href="/users/{{author.id}}/lessons/{{id}}" class="red-button" data-confirm="Are you sure?" data-method="delete">Delete</a>
         {{/if}}
       </div>
     </div>
@@ -60,7 +69,7 @@
           </div>
 
           <input value="{{id}}" type="hidden" name="comment[lesson_id]" id="comment_lesson_id">
-          <%= submit_tag "Create Comment", data: { disable_with: "Creating..." }, class: "btn btn-primary comment-action-button" %>
+          <%= submit_tag "Create Comment", data: { disable_with: "Creating..." }, class: "gray-button comment-action-button" %>
         </form>
       </div>
 
@@ -118,8 +127,8 @@
       <div class="form-group">
         <textarea name="comment[content]" id="comment_content", rows="6", class="form-control">{{content}}</textarea>
       </div>
-      <%= submit_tag "Update", class: "btn btn-primary", data: { disable_with: "Updating..." } %>
-      <a href="#" class="btn btn-danger" id="cancel-update-comment">Cancel</a>
+      <%= submit_tag "Update", class: "gray-button", data: { disable_with: "Updating..." } %>
+      <a href="#" class="red-button" id="cancel-update-comment">Cancel</a>
     </form>
   </div>
 </script>

@@ -44,25 +44,7 @@ a.lesson-link {
   height: 100%;
 }
 
-//---------------------------------------
-
- .yellow-button {
-  display: inline-block;
-  padding: 0.5em;
-  border-radius: 5px;
-  background-color: #ccff00;
-  border: 2px solid #8cff00;
-  opacity: 0.7;
-  color: black;
-  text-decoration: none;
-  transition: opacity 0.5s;
-}
-
-.yellow-button:hover {
-  opacity: 0.9;
-  color: black;
-  text-decoration: none;
-}
+//------------------------------------------------------
 
 #user-lessons-link, .new-lesson-link {
   font-size: 140%;
@@ -82,5 +64,12 @@ a.lesson-link {
 }
 
 img#avatar {
- width: 50%;
+  margin: 1.5em auto;
+  width: 25vw;
+  height: 25vw;
+  border-radius: 50%;
+}
+
+.btn-search {
+  padding: 0.3em;
 }

@@ -2,6 +2,15 @@ class Lesson < ApplicationRecord
   belongs_to :category
   belongs_to :author, class_name: "User", foreign_key: "user_id"
 
+  has_attached_file :doc1
+  has_attached_file :doc2
+  validates_attachment_content_type :doc1, :doc2, :content_type => ["application/pdf","application/vnd.ms-excel",
+             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+             "application/msword",
+             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+             "text/plain"]
+  validates_with AttachmentSizeValidator, attributes: [:doc1, :doc2], less_than: 2.megabytes
+
   has_many :comments
 
   before_save :make_capitalized

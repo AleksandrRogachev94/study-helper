@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418022038) do
+ActiveRecord::Schema.define(version: 20170418151349) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
@@ -35,8 +35,16 @@ ActiveRecord::Schema.define(version: 20170418022038) do
     t.text     "links"
     t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "doc1_file_name"
+    t.string   "doc1_content_type"
+    t.integer  "doc1_file_size"
+    t.datetime "doc1_updated_at"
+    t.string   "doc2_file_name"
+    t.string   "doc2_content_type"
+    t.integer  "doc2_file_size"
+    t.datetime "doc2_updated_at"
     t.index ["category_id"], name: "lesson_category_id_ix"
     t.index ["user_id"], name: "lesson_user_id_ix"
   end

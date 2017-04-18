@@ -153,6 +153,47 @@ footer {
  color: rgb(139, 123, 118);
 }
 
+//------------------------------------------------------
+// My Gray and Red Buttons
+
+ .gray-button, .gray-button:link {
+  text-align: center;
+  display: inline-block;
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  background-color: #181818;
+  opacity: 0.8;
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.5s;
+}
+
+.gray-button:hover, .gray-button:visited {
+  color: white;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.red-button, .red-button:link {
+  text-align: center;
+  display: inline-block;
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  background-color: #d81c00;
+  opacity: 0.8;
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.5s;
+}
+
+.red-button:hover, .red-button:visited {
+  color: white;
+  opacity: 1;
+  text-decoration: none;
+}
+
 /*------------------------------ Loader --------------------------------*/
 
 .loader {
@@ -181,4 +222,15 @@ footer {
 @media only screen and (min-width: 768px) {
   body { font-size: 1.7em; }
   .my-container { width: 50%; }
+}
+
+.btn-search {
+  padding: 0.3em;
+}
+
+// Override bs styles.
+
+.form-control:focus {
+  box-shadow: 0 0 10px #505050;
+  border: none;
 }
