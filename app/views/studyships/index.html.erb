@@ -10,6 +10,12 @@
   </div>
 
   <% if @rel_type == "student" %>
-    <%= link_to "New Requests from Students", requests_path, class: "gray-button" %>
+    <%= link_to "New Requests from Students", requests_path, class: "load-requests gray-button" %>
   <% end %>
+
+  <div id="new-requests"></div>
 </div>
+
+<script id="request-template" type="text/x-handlebars-template">
+
+</script>
