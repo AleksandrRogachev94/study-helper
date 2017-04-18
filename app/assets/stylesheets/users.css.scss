@@ -1,0 +1,44 @@
+ul.categories {
+  list-style-type: none;
+  padding: 0;
+  font-size: 130%;
+}
+
+.category-li {
+  background-color: #E6FD8A;
+  width: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border: 1px solid black;
+  // border-radius: 0.5em;
+}
+
+a.category-title {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+ul.category-lessons {
+  list-style-type: none;
+  padding: 0;
+  font-size: 90%;
+  background-color: red;
+  display: none;
+}
+
+a.lesson-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#user-lessons {
+  font-size: 140%;
+  width: 100%;
+}
+
+.lesson-by-categories-error {
+  color: red;
+}

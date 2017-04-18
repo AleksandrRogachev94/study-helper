@@ -19,6 +19,7 @@ function Lesson(attributes) {
   this.category = attributes.lesson.category
   this.category_id = attributes.lesson.category_id // For index action
   this.author = attributes.lesson.author
+  this.author_id = attributes.lesson.user_id // For index action
   this.can_update = attributes.lesson.can_update
   this.can_destroy = attributes.lesson.can_destroy
   this.next_id = attributes.lesson.next_id
@@ -159,10 +160,31 @@ Lesson.successLoadUserLessons = function(json) {
   for(category in json) {
     lessons_by_categories[category] = json[category].map((lesson) => new Lesson(lesson))
   }
+
+  const html = Lesson.lessonByCategoriesTemplate(lessons_by_categories)
+  $(".lessons-by-categories").empty()
+  $(".lesson-by-categories-error").text("")
+  $(html).appendTo($(".lessons-by-categories"))
 }
 
 Lesson.failLoadUserLessons = function(xhr) {
+  let error
+  switch(xhr.readyState) {
+    case 0:
+      error = "Network Error"
+      break
+    case 4:
+      if(Math.floor((xhr.status/100)) === 5) { // Status Code 5**
+        error = "Server Error"
+      } else {
+        error = xhr.responseText
+      }
+      break
+    default:
+      error = "Error occured"
+  }
 
+  $(".lesson-by-categories-error").text(error)
 }
 
 // $(document).ready(function() {

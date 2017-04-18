@@ -13,4 +13,21 @@
   <% end %>
 
   <p><%= link_for_user_lessons(@stub_lesson) %><p>
+  <div class="lesson-by-categories-error"></div>
+  <div class="lessons-by-categories"></div>
 </div>
+
+<script id="lessons-by-categories-template" type="text/x-handlebars-template">
+  <ul class="categories">
+    {{#each this}}
+      <li class="category-li">
+        <a href="#" onclick="return false;" class="category-title">{{@key}}</a>
+        <ul class="category-lessons">
+          {{#each this}}
+            <li class="category-lesson"><a class="lesson-link" href="/users/{{this.user_id}}/lessons/{{this.id}}">{{title}}</a></li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+</script>
