@@ -13,6 +13,7 @@
   <% end %>
 
   <p><%= link_for_user_lessons(@stub_lesson) %><p>
+  <div class="loader"></div>
   <div class="lesson-by-categories-error"></div>
   <div class="lessons-by-categories"></div>
 </div>
@@ -24,7 +25,7 @@
         <a href="#" onclick="return false;" class="category-title">{{@key}}</a>
         <ul class="category-lessons">
           {{#each this}}
-            <li class="category-lesson"><a class="lesson-link" href="/users/{{this.user_id}}/lessons/{{this.id}}">{{title}}</a></li>
+            <li class="category-lesson"><a class="lesson-link" href="/users/{{this.author_id}}/lessons/{{this.id}}">{{title}}</a></li>
           {{/each}}
         </ul>
       </li>

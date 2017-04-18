@@ -38,7 +38,7 @@ Lesson.prototype.appendToPage = function() {
 
   if($wrapper.is(':visible')) $wrapper.hide()
   $(html).appendTo($wrapper)
-  $wrapper.slideDown(700)
+  $wrapper.slideDown(1000)
 }
 
 // Class methods
@@ -70,7 +70,7 @@ Lesson.loadLesson = function(url =  window.location.href) {
 Lesson.successLoad = function(json) {
   Lesson.currentLesson = new Lesson(json)
 
-  $(".lesson-container").slideUp(700, function() {
+  $(".lesson-container").slideUp(1000, function() {
     $("article, #comments-section").remove()
     Lesson.currentLesson.appendToPage()
     Comment.appendToPage(Lesson.currentLesson)
@@ -133,9 +133,9 @@ $(document).ready(function() {
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Index Ation
 
-// function attachListeners() {
-//   $(document).on("click", ".category-li", slideLessons)
-// }
+Lesson.attachListenersIndex = function() {
+  $(document).on("click", ".category-li", slideLessons)
+}
 
 function slideLessons() {
   $(this).find(".category-lessons").slideToggle()
@@ -143,7 +143,7 @@ function slideLessons() {
 
 Lesson.loadUserLessons = function(ev) {
   ev.preventDefault()
-  // $(".loader").show()
+  $(".loader").show()
   $.ajax({
     url: $(this).attr("href"),
     type: "GET",
@@ -151,7 +151,7 @@ Lesson.loadUserLessons = function(ev) {
   })
   .done(Lesson.successLoadUserLessons)
   .fail(Lesson.failLoadUserLessons)
-  // .always(() => { $(".loader").hide() })
+  .always(() => { $(".loader").hide() })
 }
 
 Lesson.successLoadUserLessons = function(json) {
@@ -187,7 +187,6 @@ Lesson.failLoadUserLessons = function(xhr) {
   $(".lesson-by-categories-error").text(error)
 }
 
-// $(document).ready(function() {
-
-  // attachListeners()
-// })
+$(document).ready(function() {
+  Lesson.attachListenersIndex()
+})
