@@ -2,6 +2,7 @@
 
 $(document).ready(function() {
   if($("#request-partial").length <= 0 || $("#requests-template").length <= 0) return;
+  $(".loader").hide()
 
   let source = $("#requests-template").html()
   Request.indexTemplate = Handlebars.compile(source)

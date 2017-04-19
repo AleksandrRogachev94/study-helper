@@ -7,6 +7,7 @@ function Request(attributes) {
 
 Request.loadRequests = function(ev) {
   ev.preventDefault()
+  $(".loader").show()
   $.ajax({
     url: $(this).attr("href"),
     type: "GET",
@@ -14,9 +15,14 @@ Request.loadRequests = function(ev) {
   })
   .done(Request.successLoad)
   .fail(Request.failLoad)
+  .always(() => { $(".loader").hide() })
 }
 
 Request.successLoad = function(json) {
+  if(json.notice) {
+    $(".no-requests").text(json.notice)
+    return;
+  }
   const requests = json.requests.reverse().map((request) => new Request({ request: request }))
   console.log(requests)
   Request.appendToPage(requests)
@@ -32,14 +38,11 @@ Request.failLoad = function(xhr) {
       if(Math.floor((xhr.status/100)) === 5) { // Status Code 5**
         error = "Server Error"
         break
-      } else {
-        error = $.parseJSON(xhr.responseText).errors.join(", ")
-        break
       }
     default:
       error = "Error occured"
   }
-  $(".requests-error").text(error)// Place Error
+  $(".requests-error").text(error) // Place Error
 }
 
 Request.appendToPage = function(requests) {

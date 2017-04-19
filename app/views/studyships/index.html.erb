@@ -13,7 +13,8 @@
     <%= link_to "New Requests from Students", requests_path, class: "load-requests gray-button" %>
   <% end %>
 
-  <div id="new-requests"><div class="requests-error"></div></div>
+  <div id="new-requests"><div class="requests-error"></div><div class="no-requests"></div></div>
+  <div class="loader"></div>
 </div>
 
 <script id="requests-template" type="text/x-handlebars-template">
