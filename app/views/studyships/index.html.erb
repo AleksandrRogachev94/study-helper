@@ -19,6 +19,10 @@
   <div class="no-requests"></div>
 </div>
 
+<script id="student-template" type="text/x-handlebars-template">
+
+</script>
+
 <script id="requests-template" type="text/x-handlebars-template">
   <ul>
     {{#each this}}
@@ -28,7 +32,7 @@
 </script>
 
 <script id="request-partial" type="text/x-handlebars-template">
-  <li>
+  <li id="request_{{id}}">
     <a href="/users/{{student.id}}" class="my-link">{{student.appearance}}</a>
 
     <form class="accept button_to" method="post" action="/users/{{student.id}}/teachers">
@@ -46,5 +50,7 @@
     {{#if description}}
       <h3>Description</h3><p>{{description}}</p>
     {{/if}}
+
+    <div class="request-error"></div>
   </li>
 </script>

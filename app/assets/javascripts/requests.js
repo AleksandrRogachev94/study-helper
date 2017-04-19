@@ -5,6 +5,19 @@ function Request(attributes) {
   }
 }
 
+Request.prototype.destroy = function(accepted = false) {
+  if(accepted) {
+    const html = Request.template(this)
+    $(html).hide().appendTo($())
+    $wrapper.slideDown(800)
+  }
+
+  $("li#request_" + this.id).fadeOut("normal", function() {
+    $(this).remove();
+  });
+}
+
+
 //---------------------------------------------------------------
 // Index Action
 
@@ -26,6 +39,7 @@ Request.successLoad = function(json) {
     $(".no-requests").text(json.notice)
     return;
   }
+
   const requests = json.requests.reverse().map((request) => new Request({ request: request }))
   Request.appendToPage(requests)
 }
@@ -64,22 +78,37 @@ Request.appendToPage = function(requests) {
 
 Request.acceptRequest = function(ev) {
   ev.preventDefault()
-  Request.submitFormAJAX($(this), Request.successCloseRequest, Request.failCloseRequest)
-  console.log("Hijacked")
+  Request.SubmitFormAJAX($(this), Request.successCloseRequest.bind($(this)), Request.failCloseRequest.bind($(this)))
 }
 
 Request.declineRequest = function(ev) {
   ev.preventDefault()
-  Request.submitFormAJAX($(this), Request.successCloseRequest, Request.failCloseRequest)
-  console.log("Hijacked")
+  Request.SubmitFormAJAX($(this), Request.successCloseRequest.bind($(this)), Request.failCloseRequest.bind($(this)))
 }
 
-Request.successCloseRequest = function() {
-
+Request.successCloseRequest = function(json) {
+  const request = new Request(json)
+  request.destroy($(this).hasClass("accept"))
 }
 
-Request.failCloseRequest = function() {
-
+Request.failCloseRequest = function(xhr) {
+  let error
+  switch(xhr.readyState) {
+    case 0:
+      error = "Network Error"
+      break
+    case 4:
+      if(Math.floor((xhr.status/100)) === 5) { // Status Code 5**
+        error = "Server Error"
+        break
+      } else {
+        error = $.parseJSON(xhr.responseText).errors.join(", ")
+        break
+      }
+    default:
+      error = "Error occured"
+  }
+  this.parent().children().last().text(error) // Place Error
 }
 
 Request.SubmitFormAJAX = function($form, success, fail) {

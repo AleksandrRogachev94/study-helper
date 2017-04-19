@@ -31,7 +31,6 @@ Lesson.prototype.appendToPage = function() {
 
   if($wrapper.is(':visible')) $wrapper.hide()
   $(html).appendTo($wrapper)
-  $wrapper.slideDown(1000)
 }
 
 // Class methods

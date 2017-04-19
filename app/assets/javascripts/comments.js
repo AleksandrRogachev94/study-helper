@@ -214,8 +214,12 @@ Comment.removeFromCommentsToUpdate = function(id) {
 // Index Action
 
 Comment.appendToPage = function(lesson) {
+  const $wrapper = $(".lesson-container")
+
   const html = Comment.commentsTemplate(lesson)
-  const rendered = $(html).appendTo(".lesson-container")
+  const rendered = $(html).appendTo($wrapper)
+
+  $wrapper.slideDown(1000)
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
