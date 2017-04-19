@@ -5,8 +5,10 @@
     <% @studyships.each do |studyship| %>
       <div class="student">
         <%= link_to studyship.send("#{@rel_type}").appearance, user_path(studyship.send("#{@rel_type}")), class: "list-group-item list-group-item-action studyships" %>
-        <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', data: { confirm: "Are you sure?" }, class: "red-button" %>
-        <br>
+        <%= form_tag user_studyship_path(@user, @rel_type.pluralize, studyship), method: "DELETE", class: "remove-student"  do %>
+          <%= submit_tag "Remove", class: "red-button", data: { disable_with: "Removing..." } %>
+        <% end %>
+        <div class="student-error"></div>
       </div>
     <% end %>
   </div>
@@ -22,9 +24,15 @@
 </div>
 
 <script id="student-template" type="text/x-handlebars-template">
+
   <div class="student">
-    <a class="list-group-item list-group-item-action studyships" href="/users/{{student.id}}">{{student.appearance}}</a>
-    <a data-confirm="Are you sure?" class="red-button" rel="nofollow" data-method="delete" href="/users/{{teacher.id}}/students/{{studyship_id}}">Remove</a>
+    <a class="list-group-item list-group-item-action studyships" href="/users/1">Stan Smith</a>
+    <form class="remove-student" action="/users/{{teacher.id}}/students/{{studyship_id}}" accept-charset="UTF-8" method="post">
+      <input name="utf8" type="hidden" value="✓">
+      <input type="hidden" name="_method" value="delete">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= submit_tag "Remove", class: "red-button", data: { disable_with: "Removing..." } %>
+    </form>
   </div>
 </script>
 

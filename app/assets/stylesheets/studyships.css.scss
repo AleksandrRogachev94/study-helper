@@ -1,8 +1,21 @@
+.studyships {
+ width: 70%;
+ display: inline-block;
+}
+
+.remove-student {
+  display: inline-block;
+}
+
+.button_to {
+ display: inline-block;
+}
+
 #new-requests {
   margin-top: 1.5em;
 }
 
-.requests-error, .request-error {
+.requests-error, .request-error, .student-error {
   color: red;
 }
 

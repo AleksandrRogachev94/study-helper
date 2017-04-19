@@ -48,7 +48,10 @@ class StudyshipsController < ApplicationController
       studyship = Studyship.find_by(id: params[:id])
       authorize studyship
       studyship.delete
-      redirect_to user_studyships_path(current_user, params[:rel_type]), notice: "Successfully deleted #{params[:rel_type].singularize}"
+      respond_to do |f|
+        f.html { redirect_to user_studyships_path(current_user, params[:rel_type]), notice: "Successfully deleted #{params[:rel_type].singularize}" }
+        f.json { render json: studyship, status: :ok }
+      end
     end
   end
 
