@@ -9,4 +9,5 @@ $(document).ready(function() {
 
   Handlebars.registerPartial('requestPartial',  document.getElementById("request-partial").innerHTML)
   $(".load-requests").on("click", Request.loadRequests)
+  // $(".load-requests").on("click", Request.loadRequests)
 })

@@ -23,7 +23,23 @@ Request.successLoad = function(json) {
 }
 
 Request.failLoad = function(xhr) {
-  console.log(xhr)
+  let error
+  switch(xhr.readyState) {
+    case 0:
+      error = "Network Error"
+      break
+    case 4:
+      if(Math.floor((xhr.status/100)) === 5) { // Status Code 5**
+        error = "Server Error"
+        break
+      } else {
+        error = $.parseJSON(xhr.responseText).errors.join(", ")
+        break
+      }
+    default:
+      error = "Error occured"
+  }
+  $(".requests-error").text(error)// Place Error
 }
 
 Request.appendToPage = function(requests) {
