@@ -6,9 +6,12 @@ $(document).ready(function() {
 
   let source = $("#requests-template").html()
   Request.indexTemplate = Handlebars.compile(source)
-  // $(".loader").hide()
+
+  source = $("#request-partial").html()
+  Request.template = Handlebars.compile(source)
 
   Handlebars.registerPartial('requestPartial',  document.getElementById("request-partial").innerHTML)
   $(".load-requests").on("click", Request.loadRequests)
-  // $(".load-requests").on("click", Request.loadRequests)
+  $(document).on("submit", ".accept", Request.acceptRequest)
+  $(document).on("submit", ".decline", Request.declineRequest)
 })

@@ -5,6 +5,9 @@ function Request(attributes) {
   }
 }
 
+//---------------------------------------------------------------
+// Index Action
+
 Request.loadRequests = function(ev) {
   ev.preventDefault()
   $(".loader").show()
@@ -24,7 +27,6 @@ Request.successLoad = function(json) {
     return;
   }
   const requests = json.requests.reverse().map((request) => new Request({ request: request }))
-  console.log(requests)
   Request.appendToPage(requests)
 }
 
@@ -48,10 +50,45 @@ Request.failLoad = function(xhr) {
 Request.appendToPage = function(requests) {
   const html = Request.indexTemplate(requests)
   const $wrapper = $("#new-requests")
+  $(".requests-error, .no-request").text("")
   $wrapper.slideUp(800, function() {
     $wrapper.empty()
     if($wrapper.is(':visible')) $wrapper.hide()
     $(html).appendTo($wrapper)
     $wrapper.slideDown(800)
   })
+}
+
+//-------------------------------------------------------
+// Accept/Decline
+
+Request.acceptRequest = function(ev) {
+  ev.preventDefault()
+  Request.submitFormAJAX($(this), Request.successCloseRequest, Request.failCloseRequest)
+  console.log("Hijacked")
+}
+
+Request.declineRequest = function(ev) {
+  ev.preventDefault()
+  Request.submitFormAJAX($(this), Request.successCloseRequest, Request.failCloseRequest)
+  console.log("Hijacked")
+}
+
+Request.successCloseRequest = function() {
+
+}
+
+Request.failCloseRequest = function() {
+
+}
+
+Request.SubmitFormAJAX = function($form, success, fail) {
+  $.ajax({
+    url: $form.attr("action"),
+    type: ($form.find("input[name='_method']").val() || $form.attr("method")),
+    data: $form.serialize(),
+    dataType: "json"
+  })
+  .done(success)
+  .fail(fail)
 }

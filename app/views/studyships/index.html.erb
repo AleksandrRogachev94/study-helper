@@ -13,8 +13,10 @@
     <%= link_to "New Requests from Students", requests_path, class: "load-requests gray-button" %>
   <% end %>
 
-  <div id="new-requests"><div class="requests-error"></div><div class="no-requests"></div></div>
   <div class="loader"></div>
+  <div id="new-requests"></div>
+  <div class="requests-error"></div>
+  <div class="no-requests"></div>
 </div>
 
 <script id="requests-template" type="text/x-handlebars-template">
@@ -29,13 +31,13 @@
   <li>
     <a href="/users/{{student.id}}" class="my-link">{{student.appearance}}</a>
 
-    <form class="button_to" method="post" action="/users/{{student.id}}/teachers">
+    <form class="accept button_to" method="post" action="/users/{{student.id}}/teachers">
       <%= submit_tag "Accept", data: { disable_with: "Accepting..." }, class: "btn btn-success" %>
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <input type="hidden" name="request_id" value="{{id}}">
     </form>
 
-    <form class="button_to" method="post" action="/requests/{{id}}">
+    <form class="decline button_to" method="post" action="/requests/{{id}}">
       <input type="hidden" name="_method" value="delete">
       <%= submit_tag "Decline", data: { disable_with: "Declining..." }, class: "btn btn-danger" %>
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
