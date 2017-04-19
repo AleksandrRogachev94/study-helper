@@ -2,12 +2,13 @@
   <legend>Choose category from the list or create new one</legend>
 
   <div class="form-group">
-    <%= f.collection_select :category_id, Category.all.sort_by(&:title), :id, :title, {}, class: "form-control" %>
+    <%= f.collection_select :category_id, Category.all.sort_by(&:title), :id, :title, {}, class: "form-control choose-category" %>
   </div>
+  <a href="#" class="new-category-link gray-button">New Category</a>
 
   <%= f.fields_for :category, category do |category_form| %>
-    <div class="form-group">
-      <%= category_form.label :title, "or New" %>
+    <div class="form-group new-category">
+      <%= category_form.label :title, "New Category" %>
       <%= category_form.text_field :title, value: "", class: "form-control" %>
     </div>
   <% end %>

@@ -179,6 +179,22 @@ Lesson.failLoadUserLessons = function(xhr) {
   $(".lesson-by-categories-error").text(error)
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Create Action
+
+Lesson.attachListenersCreate = function() {
+  $(".new-category").hide()
+  $(document).on("click", ".new-category-link", function(ev) {
+    ev.preventDefault()
+    $(this).hide()
+    $(".new-category").show()
+  })
+}
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Document Ready
+
 $(document).ready(function() {
   Lesson.attachListenersIndex()
+  Lesson.attachListenersCreate()
 })

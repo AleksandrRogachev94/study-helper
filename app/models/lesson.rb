@@ -19,7 +19,7 @@ class Lesson < ApplicationRecord
   before_save :make_capitalized
 
   validates :title, presence: true
-  validates :content, presence: true, length: { minimum: 5 }
+  validates :content, presence: true, length: { minimum: 20 }
 
   def category_attributes=(attrs)
     if attrs[:title].present?
