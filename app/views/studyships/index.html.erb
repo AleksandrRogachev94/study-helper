@@ -16,6 +16,32 @@
   <div id="new-requests"></div>
 </div>
 
-<script id="request-template" type="text/x-handlebars-template">
+<script id="requests-template" type="text/x-handlebars-template">
+  <ul>
+    {{#each this}}
+      {{> requestPartial this}}
+    {{/each}}
+  </ul>
+</script>
 
+<script id="request-partial" type="text/x-handlebars-template">
+  <li>
+    <a href="/users/{{student.id}}" class="my-link">{{student.appearance}}</a>
+
+    <form class="button_to" method="post" action="/users/{{student.id}}/teachers">
+      <%= submit_tag "Accept", data: { disable_with: "Accepting..." }, class: "btn btn-success" %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" name="request_id" value="{{id}}">
+    </form>
+
+    <form class="button_to" method="post" action="/requests/{{id}}">
+      <input type="hidden" name="_method" value="delete">
+      <%= submit_tag "Decline", data: { disable_with: "Declining..." }, class: "btn btn-danger" %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    </form>
+
+    {{#if description}}
+      <h3>Description</h3><p>{{description}}</p>
+    {{/if}}
+  </li>
 </script>

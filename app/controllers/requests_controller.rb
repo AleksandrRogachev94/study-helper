@@ -7,7 +7,16 @@ class RequestsController < ApplicationController
 
   def index
     @requests = policy_scope(Request)
-    redirect_to user_studyships_path(current_user, "students"), notice: "You don't have any requests" if @requests.empty?
+
+    respond_to do |f|
+      if @requests.empty?
+        f.html { redirect_to user_studyships_path(current_user, "students"), notice: "You don't have any requests" }
+        f.json { render json: { errors: "You don't have any requests" }, status: :ok }
+      else
+        f.html
+        f.json { render json: @requests, each_serializer: RequestSerializer, status: :ok }
+      end
+    end
   end
 
   def create

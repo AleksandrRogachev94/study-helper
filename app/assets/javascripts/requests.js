@@ -5,13 +5,32 @@ function Request(attributes) {
   }
 }
 
-Request.ready = function() {
-  if($("#request-template").length <= 0) return;
-
-  let source = $("#request-template").html()
-  Request.template = Handlebars.compile(source)
+Request.loadRequests = function(ev) {
+  ev.preventDefault()
+  $.ajax({
+    url: $(this).attr("href"),
+    type: "GET",
+    dataType: "json"
+  })
+  .done(Request.successLoad)
+  .fail(Request.failLoad)
 }
 
-$(document).ready(function() {
-  Request.ready()
-})
+Request.successLoad = function(json) {
+  const requests = json.requests.reverse().map((request) => new Request({ request: request }))
+  console.log(requests)
+  Request.appendToPage(requests)
+}
+
+Request.failLoad = function(xhr) {
+  console.log(xhr)
+}
+
+Request.appendToPage = function(requests) {
+  const html = Request.indexTemplate(requests)
+  // const $wrapper = $(".lesson-container")
+
+  // if($wrapper.is(':visible')) $wrapper.hide()
+  $(html).appendTo($("#new-requests"))
+  // $wrapper.slideDown(1000)
+}
