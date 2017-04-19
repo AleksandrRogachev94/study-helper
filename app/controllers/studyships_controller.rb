@@ -28,11 +28,21 @@ class StudyshipsController < ApplicationController
     request = Request.find_by(id: params[:request_id])
     return redirect_to requests_path, notice: "You are not an owner of this request" if !request || (request.teacher != current_user)
     # If someone wants to hack by url, the only thing he can do is to grant acces to other users to his data.
-    if request && Studyship.establish_mutual_relationships(teacher: @current_user, student: @user)
-      request.delete
-      redirect_to requests_path, notice: "Request confirmed"
-    else
-      redirect_to (:back), alert: "Can't establish relationship"
+
+    respond_to do |f|
+      if request && studyship = Studyship.establish_mutual_relationships(teacher: @current_user, student: @user)
+        request.delete
+        f.html { redirect_to requests_path, notice: "Request confirmed" }
+        f.json { render json: studyship, status: :ok }
+      else
+        f.html { redirect_to (:back), alert: "Can't establish relationship" }
+        f.json { render json: { errors: ["Can't establish relationship"] }, status: :unprocessable_entity  }
+      end
+    end
+
+    respond_to do |f|
+      f.html { redirect_to user_lesson_path(lesson.author, lesson), notice: "Successfully deleted comment" }
+      f.json { render json: @comment, status: :ok }
     end
   end
 

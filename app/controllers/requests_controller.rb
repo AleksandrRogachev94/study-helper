@@ -36,7 +36,11 @@ class RequestsController < ApplicationController
     authorize request
 
     request.delete
-    redirect_to requests_path, notice: "Request declined"
+
+    respond_to do |f|
+      f.html { redirect_to requests_path, notice: "Request declined" }
+      f.json { render json: request, status: :ok }
+    end
   end
 
   private
