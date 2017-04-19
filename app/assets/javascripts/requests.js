@@ -3,13 +3,16 @@ function Request(attributes) {
   for(prop in attributes.request) {
     this[prop] = attributes.request[prop]
   }
+
+
+  if(attributes.meta) this.studyship_id = attributes.meta.studyship_id // When user accepts requests.
 }
 
 Request.prototype.destroy = function(accepted = false) {
   if(accepted) {
-    const html = Request.template(this)
-    $(html).hide().appendTo($())
-    $wrapper.slideDown(800)
+    const html = Request.studentTemplate(this)
+    // debugger
+    $(html).appendTo($(".list-group")).hide().slideDown(500)
   }
 
   $("li#request_" + this.id).fadeOut("normal", function() {
@@ -40,6 +43,7 @@ Request.successLoad = function(json) {
     return;
   }
 
+  $(".requests-error").text("")
   const requests = json.requests.reverse().map((request) => new Request({ request: request }))
   Request.appendToPage(requests)
 }
@@ -65,11 +69,11 @@ Request.appendToPage = function(requests) {
   const html = Request.indexTemplate(requests)
   const $wrapper = $("#new-requests")
   $(".requests-error, .no-request").text("")
-  $wrapper.slideUp(800, function() {
+  $wrapper.slideUp(500, function() {
     $wrapper.empty()
     if($wrapper.is(':visible')) $wrapper.hide()
     $(html).appendTo($wrapper)
-    $wrapper.slideDown(800)
+    $wrapper.slideDown(500)
   })
 }
 
@@ -88,6 +92,7 @@ Request.declineRequest = function(ev) {
 
 Request.successCloseRequest = function(json) {
   const request = new Request(json)
+  this.parent().children().last().text("") // Clear Error
   request.destroy($(this).hasClass("accept"))
 }
 

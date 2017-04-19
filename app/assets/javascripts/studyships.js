@@ -10,6 +10,9 @@ $(document).ready(function() {
   source = $("#request-partial").html()
   Request.template = Handlebars.compile(source)
 
+  source = $("#student-template").html()
+  Request.studentTemplate = Handlebars.compile(source)
+
   Handlebars.registerPartial('requestPartial',  document.getElementById("request-partial").innerHTML)
   $(".load-requests").on("click", Request.loadRequests)
   $(document).on("submit", ".accept", Request.acceptRequest)

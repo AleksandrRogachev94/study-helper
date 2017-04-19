@@ -3,9 +3,11 @@
 <div class="my-container">
   <div class="list-group">
     <% @studyships.each do |studyship| %>
+      <div class="student">
         <%= link_to studyship.send("#{@rel_type}").appearance, user_path(studyship.send("#{@rel_type}")), class: "list-group-item list-group-item-action studyships" %>
         <%= link_to "Remove", user_studyship_path(@user, @rel_type.pluralize, studyship), method: 'delete', data: { confirm: "Are you sure?" }, class: "red-button" %>
         <br>
+      </div>
     <% end %>
   </div>
 
@@ -20,7 +22,10 @@
 </div>
 
 <script id="student-template" type="text/x-handlebars-template">
-
+  <div class="student">
+    <a class="list-group-item list-group-item-action studyships" href="/users/{{student.id}}">{{student.appearance}}</a>
+    <a data-confirm="Are you sure?" class="red-button" rel="nofollow" data-method="delete" href="/users/{{teacher.id}}/students/{{studyship_id}}">Remove</a>
+  </div>
 </script>
 
 <script id="requests-template" type="text/x-handlebars-template">
@@ -32,7 +37,7 @@
 </script>
 
 <script id="request-partial" type="text/x-handlebars-template">
-  <li id="request_{{id}}">
+  <li id="request_{{id}}" class="request">
     <a href="/users/{{student.id}}" class="my-link">{{student.appearance}}</a>
 
     <form class="accept button_to" method="post" action="/users/{{student.id}}/teachers">
