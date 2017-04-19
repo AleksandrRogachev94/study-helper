@@ -14,7 +14,7 @@
   </div>
 
   <% if @rel_type == "student" %>
-    <%= link_to "New Requests from Students", requests_path, class: "load-requests gray-button" %>
+    <%= link_to "New Requests from Students" + requests_notification, requests_path, class: "load-requests gray-button" %>
   <% end %>
 
   <div class="loader"></div>

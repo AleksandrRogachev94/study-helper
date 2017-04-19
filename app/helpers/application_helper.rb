@@ -19,4 +19,12 @@ module ApplicationHelper
       ""
     end
   end
+
+  def requests_notification
+    if policy_scope(Request).any?
+      "*"
+    else
+      ""
+    end
+  end
 end

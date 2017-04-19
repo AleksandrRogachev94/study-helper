@@ -1,14 +1,14 @@
-profile = Profile.create(first_name: "Stan", last_name: "Smith", interests: "Phys and Math")
+profile = Profile.create(first_name: "Stan", last_name: "Smith (Example)", interests: "Physics and Math")
 stan = User.create(email: "stan@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Roger", last_name: "Federer", interests: "History")
+profile = Profile.create(first_name: "Roger", last_name: "Federer (Example)", interests: "History")
 roger = User.create(email: "roger@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Nick", last_name: "Johnson", interests: "Biology")
+profile = Profile.create(first_name: "Nick", last_name: "Johnson (Example)", interests: "Biology")
 nick = User.create(email: "nick@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Helen", last_name: "Williams", interests: "French")
+profile = Profile.create(first_name: "Helen", last_name: "Williams (Example)", interests: "French")
 helen = User.create(email: "helen@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Linda", last_name: "Jones")
+profile = Profile.create(first_name: "Linda", last_name: "Jones (Example)")
 linda = User.create(email: "linda@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Pablo", last_name: "Garcia", interests: "Spanish")
+profile = Profile.create(first_name: "Pablo", last_name: "Garcia (Example)", interests: "Spanish")
 pablo = User.create(email: "pablo@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
 
 math = Category.create(title: "Math")
@@ -34,10 +34,10 @@ Boolean algebra has been fundamental in the development of digital electronics, 
                     links: "https://en.wikipedia.org/wiki/Boolean_algebra"
                     )
 stan.lessons.create(title: "Logarithms", category: math,
-                    content: "ln(0) = 1"
+                    content: "ln(0) = 1................"
                     )
 stan.lessons.create(title: "Trigonometry", category: math,
-                    content:"(sin^2(x) + cos^2(x) = 1)"
+                    content:"(sin^2(x) + cos^2(x) = 1)............."
                     )
 stan.lessons.create(title: "Kinematics", category: phys,
                     description: "Review of basic concepts of Kinematics",
@@ -53,23 +53,23 @@ Kinematic analysis is the process of measuring the kinematic quantities used to 
                     links: "https://en.wikipedia.org/wiki/Kinematics"
                     )
 stan.lessons.create(title: "Electricity", category: phys,
-                    content: "I = U/R"
+                    content: "I = U/R..............."
                     )
 stan.lessons.create(title: "Optics", category: phys,
-                    content: "div B = 0"
+                    content: "div B = 0............."
                     )
 
 roger.lessons.create(title: "1-st half of 19-th century", category: his,
-                    content: "History stuff"
+                    content: "History stuff..............."
                     )
 roger.lessons.create(title: "2-nd half of 19-th century", category: his,
-                    content: "History stuff"
+                    content: "History stuff..............."
                     )
 roger.lessons.create(title: "Present Simple", category: eng,
-                    content: "he, she, it => 's' ending"
+                    content: "he, she, it => 's' ending............."
                     )
 roger.lessons.create(title: "Future Simple", category: eng,
-                    content: "I WILL make it"
+                    content: "I WILL make it............."
                     )
 
 nick.lessons.create(title: "Mushrooms", category: biol,

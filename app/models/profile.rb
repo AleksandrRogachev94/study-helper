@@ -27,4 +27,9 @@ class Profile < ApplicationRecord
   def avatar_from_url=(url)
     self.avatar = URI.parse(url)
   end
+
+  # after_save do |profile|
+  #   binding.pry
+  #   Studyship.establish_mutual_relationships(teacher: User.first, student: profile.user)
+  # end
 end

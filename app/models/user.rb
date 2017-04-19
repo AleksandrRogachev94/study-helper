@@ -9,11 +9,11 @@ class User < ApplicationRecord
   has_many :lessons, dependent: :destroy
 
   # As a student
-  has_many :student_teacher_relationships, class_name: "Studyship", foreign_key: 'student_id'
+  has_many :student_teacher_relationships, class_name: "Studyship", foreign_key: 'student_id', dependent: :destroy
   has_many :teachers, through: :student_teacher_relationships
 
   # As a teacher
-  has_many :teacher_student_relationships, class_name: "Studyship", foreign_key: 'teacher_id'
+  has_many :teacher_student_relationships, class_name: "Studyship", foreign_key: 'teacher_id', dependent: :destroy
   has_many :students, through: :teacher_student_relationships
 
   has_one :profile, dependent: :destroy
