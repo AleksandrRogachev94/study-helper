@@ -28,9 +28,11 @@ Request.failLoad = function(xhr) {
 
 Request.appendToPage = function(requests) {
   const html = Request.indexTemplate(requests)
-  // const $wrapper = $(".lesson-container")
-
-  // if($wrapper.is(':visible')) $wrapper.hide()
-  $(html).appendTo($("#new-requests"))
-  // $wrapper.slideDown(1000)
+  const $wrapper = $("#new-requests")
+  $wrapper.slideUp(800, function() {
+    $wrapper.empty()
+    if($wrapper.is(':visible')) $wrapper.hide()
+    $(html).appendTo($wrapper)
+    $wrapper.slideDown(800)
+  })
 }
