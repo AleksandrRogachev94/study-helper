@@ -22,7 +22,7 @@ module ApplicationHelper
 
   def requests_notification
     if policy_scope(Request).any?
-      "*"
+      " (#{policy_scope(Request).size})"
     else
       ""
     end
