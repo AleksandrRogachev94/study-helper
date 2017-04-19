@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def self.search(search)
-    return self.all if search.blank?
+    return self.all.sort_by(&:appearance) if search.blank?
 
     # Search in profiles first.
     result = Profile.where("last_name LIKE ?", "%#{search}%").map(&:user)
@@ -57,8 +57,7 @@ class User < ApplicationRecord
       #Search in credentials.
       result = self.where("email LIKE ?", "%#{search}%")
     end
-
-    result
+    result.sort_by(&:appearance)
   end
 
   def self.most_popular_teachers(limit)
