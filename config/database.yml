@@ -21,8 +21,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: study_helper_development
+  database: study_helper_test
 
 production:
   <<: *default
-  database: study_helper_development
+  database: study_helper_production

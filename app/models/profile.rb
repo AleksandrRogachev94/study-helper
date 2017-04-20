@@ -1,10 +1,12 @@
 class Profile < ApplicationRecord
   belongs_to :user
-  has_attached_file :avatar, default_url: ':style/default_avatar.jpg', styles: { thumb: "100x100>" }
-                    # storage: :s3, s3_credentials: aws_s3_credentials
+  has_attached_file :avatar, default_url: ':style/default_avatar.jpg', styles: { thumb: "100x100>" },
+                    storage: :s3, s3_credentials: aws_s3_credentials
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-  validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
+  validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 21.megabytes
+
+  process_in_background :avatar
 
   before_save :capitalize_name
 
@@ -27,9 +29,4 @@ class Profile < ApplicationRecord
   def avatar_from_url=(url)
     self.avatar = URI.parse(url)
   end
-
-  # after_save do |profile|
-  #   binding.pry
-  #   Studyship.establish_mutual_relationships(teacher: User.first, student: profile.user)
-  # end
 end

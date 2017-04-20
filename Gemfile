@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.0.2'
-gem 'pg'
+gem 'pg', '~> 0.20.0'
 gem 'puma', '~> 3.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'devise', '~> 4.2'
@@ -14,6 +14,7 @@ gem 'pundit', '~> 1.1'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth', '~> 1.6'
 gem 'active_model_serializers'
+gem 'sidekiq', '~> 4.1', '>= 4.1.2'
 gem 'figaro'
 
 gem 'jbuilder', '~> 2.5'
@@ -21,7 +22,8 @@ gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-gem 'paperclip', '~> 5.1'
+gem 'delayed_paperclip', '~> 3.0', '>= 3.0.1'
+gem 'paperclip'
 gem 'aws-sdk', '~> 2.9', '>= 2.9.7'
 
 group :development, :test do

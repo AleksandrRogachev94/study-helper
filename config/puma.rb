@@ -3,17 +3,25 @@
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum, this matches the default thread size of Active Record.
-#
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
+
+workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+threads_count = Integer(ENV['MAX_THREADS'] || 1)
 threads threads_count, threads_count
 
-# Specifies the `port` that Puma will listen on to receive requests, default is 3000.
-#
-port        ENV.fetch("PORT") { 3000 }
+preload_app!
 
-# Specifies the `environment` that Puma will run in.
-#
+rackup      DefaultRackup
+port        ENV.fetch("PORT") { 3000 }
 environment ENV.fetch("RAILS_ENV") { "development" }
+
+before_fork do
+  puts "Puma master process about to fork. Closing existing Active record connections."
+  ActiveRecord::Base.connection.disconnect! if defined?(ActiveRecord)
+end
+
+on_worker_boot do
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+end
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together

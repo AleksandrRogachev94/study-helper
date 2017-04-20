@@ -1,15 +1,15 @@
 profile = Profile.create(first_name: "Stan", last_name: "Smith (Example)", interests: "Physics and Math")
 stan = User.create(email: "stan@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Roger", last_name: "Federer (Example)", interests: "History")
-roger = User.create(email: "roger@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Nick", last_name: "Johnson (Example)", interests: "Biology")
-nick = User.create(email: "nick@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Helen", last_name: "Williams (Example)", interests: "French")
-helen = User.create(email: "helen@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Linda", last_name: "Jones (Example)")
-linda = User.create(email: "linda@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
-profile = Profile.create(first_name: "Pablo", last_name: "Garcia (Example)", interests: "Spanish")
-pablo = User.create(email: "pablo@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
+# profile = Profile.create(first_name: "Roger", last_name: "Federer (Example)", interests: "History")
+# roger = User.create(email: "roger@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
+# profile = Profile.create(first_name: "Nick", last_name: "Johnson (Example)", interests: "Biology")
+# nick = User.create(email: "nick@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
+# profile = Profile.create(first_name: "Helen", last_name: "Williams (Example)", interests: "French")
+# helen = User.create(email: "helen@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
+# profile = Profile.create(first_name: "Linda", last_name: "Jones (Example)")
+# linda = User.create(email: "linda@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
+# profile = Profile.create(first_name: "Pablo", last_name: "Garcia (Example)", interests: "Spanish")
+# pablo = User.create(email: "pablo@gmail.com", password: "12345678", password_confirmation: "12345678", profile: profile)
 
 math = Category.create(title: "Math")
 phys = Category.create(title: "Physics")
@@ -59,52 +59,52 @@ stan.lessons.create(title: "Optics", category: phys,
                     content: "div B = 0............."
                     )
 
-roger.lessons.create(title: "1-st half of 19-th century", category: his,
-                    content: "History stuff..............."
-                    )
-roger.lessons.create(title: "2-nd half of 19-th century", category: his,
-                    content: "History stuff..............."
-                    )
-roger.lessons.create(title: "Present Simple", category: eng,
-                    content: "he, she, it => 's' ending............."
-                    )
-roger.lessons.create(title: "Future Simple", category: eng,
-                    content: "I WILL make it............."
-                    )
-
-nick.lessons.create(title: "Mushrooms", category: biol,
-                    description: "This article is about fungi. For use in food, see Edible mushroom. For other uses, see Mushroom (disambiguation).",
-                    content: <<-HEREDOC,
-A mushroom (or toadstool) is the fleshy, spore-bearing fruiting body of a fungus, typically produced above ground on soil or on its food source.
-
-The standard for the name "mushroom" is the cultivated white button mushroom, Agaricus bisporus; hence the word "mushroom" is most often applied to those fungi (Basidiomycota, Agaricomycetes) that have a stem (stipe), a cap (pileus), and gills (lamellae, sing. lamella) on the underside of the cap. These gills produce microscopic spores that help the fungus spread across the ground or its occupant surface.
-
-"Mushroom" describes a variety of gilled fungi, with or without stems, and the term is used even more generally, to describe both the fleshy fruiting bodies of some Ascomycota and the woody or leathery fruiting bodies of some Basidiomycota, depending upon the context of the word.
-
-Forms deviating from the standard morphology usually have more specific names, such as "bolete", "puffball", "stinkhorn", and "morel", and gilled mushrooms themselves are often called "agarics" in reference to their similarity to Agaricus or their order Agaricales. By extension, the term "mushroom" can also designate the entire fungus when in culture; the thallus (called a mycelium) of species forming the fruiting bodies called mushrooms; or the species itself.
-                    HEREDOC
-                    links: "https://en.wikipedia.org/wiki/Mushroom"
-                    )
-nick.lessons.create(title: "Mosses", category: biol,
-                    content: "Mosses are small flowerless plants that typically grow in dense green clumps or mats, often in damp or shady locations."
-                    )
-
-helen.lessons.create(title: "Les Articles", category: fren,
-                    content: "Il y a trois types des articles en Français: défini, indéfini et partitif"
-                    )
-helen.lessons.create(title: "Les Articles Défini", category: fren,
-                    content: "Ils sont le, la et les."
-                    )
-
-pablo.lessons.create(title: "España", category: span,
-                    content: "El país está situado al Suroeste de Europa."
-                    )
-pablo.lessons.create(title: "Mi familia", category: span,
-                    content: "Mi nombre es Natalia, Natasha en corto. Tengo una gran familia."
-                    )
-
-Studyship.create(teacher: stan, student: pablo)
-Studyship.create(teacher: stan, student: nick)
-Studyship.create(teacher: nick, student: roger)
-Studyship.create(teacher: nick, student: linda)
-Studyship.create(teacher: helen, student: stan)
+# roger.lessons.create(title: "1-st half of 19-th century", category: his,
+#                     content: "History stuff..............."
+#                     )
+# roger.lessons.create(title: "2-nd half of 19-th century", category: his,
+#                     content: "History stuff..............."
+#                     )
+# roger.lessons.create(title: "Present Simple", category: eng,
+#                     content: "he, she, it => 's' ending............."
+#                     )
+# roger.lessons.create(title: "Future Simple", category: eng,
+#                     content: "I WILL make it............."
+#                     )
+#
+# nick.lessons.create(title: "Mushrooms", category: biol,
+#                     description: "This article is about fungi. For use in food, see Edible mushroom. For other uses, see Mushroom (disambiguation).",
+#                     content: <<-HEREDOC,
+# A mushroom (or toadstool) is the fleshy, spore-bearing fruiting body of a fungus, typically produced above ground on soil or on its food source.
+#
+# The standard for the name "mushroom" is the cultivated white button mushroom, Agaricus bisporus; hence the word "mushroom" is most often applied to those fungi (Basidiomycota, Agaricomycetes) that have a stem (stipe), a cap (pileus), and gills (lamellae, sing. lamella) on the underside of the cap. These gills produce microscopic spores that help the fungus spread across the ground or its occupant surface.
+#
+# "Mushroom" describes a variety of gilled fungi, with or without stems, and the term is used even more generally, to describe both the fleshy fruiting bodies of some Ascomycota and the woody or leathery fruiting bodies of some Basidiomycota, depending upon the context of the word.
+#
+# Forms deviating from the standard morphology usually have more specific names, such as "bolete", "puffball", "stinkhorn", and "morel", and gilled mushrooms themselves are often called "agarics" in reference to their similarity to Agaricus or their order Agaricales. By extension, the term "mushroom" can also designate the entire fungus when in culture; the thallus (called a mycelium) of species forming the fruiting bodies called mushrooms; or the species itself.
+#                     HEREDOC
+#                     links: "https://en.wikipedia.org/wiki/Mushroom"
+#                     )
+# nick.lessons.create(title: "Mosses", category: biol,
+#                     content: "Mosses are small flowerless plants that typically grow in dense green clumps or mats, often in damp or shady locations."
+#                     )
+#
+# helen.lessons.create(title: "Les Articles", category: fren,
+#                     content: "Il y a trois types des articles en Français: défini, indéfini et partitif"
+#                     )
+# helen.lessons.create(title: "Les Articles Défini", category: fren,
+#                     content: "Ils sont le, la et les."
+#                     )
+#
+# pablo.lessons.create(title: "España", category: span,
+#                     content: "El país está situado al Suroeste de Europa."
+#                     )
+# pablo.lessons.create(title: "Mi familia", category: span,
+#                     content: "Mi nombre es Natalia, Natasha en corto. Tengo una gran familia."
+#                     )
+#
+# Studyship.create(teacher: stan, student: pablo)
+# Studyship.create(teacher: stan, student: nick)
+# Studyship.create(teacher: nick, student: roger)
+# Studyship.create(teacher: nick, student: linda)
+# Studyship.create(teacher: helen, student: stan)
