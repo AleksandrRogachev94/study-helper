@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170418151349) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 20170418151349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "lesson_id"
-    t.index ["lesson_id"], name: "comment_lesson_id_ix"
-    t.index ["user_id"], name: "comment_user_id_ix"
+    t.index ["lesson_id"], name: "comment_lesson_id_ix", using: :btree
+    t.index ["user_id"], name: "comment_user_id_ix", using: :btree
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -45,8 +48,8 @@ ActiveRecord::Schema.define(version: 20170418151349) do
     t.string   "doc2_content_type"
     t.integer  "doc2_file_size"
     t.datetime "doc2_updated_at"
-    t.index ["category_id"], name: "lesson_category_id_ix"
-    t.index ["user_id"], name: "lesson_user_id_ix"
+    t.index ["category_id"], name: "lesson_category_id_ix", using: :btree
+    t.index ["user_id"], name: "lesson_user_id_ix", using: :btree
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170418151349) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.index ["user_id"], name: "profile_user_id_ix"
+    t.index ["user_id"], name: "profile_user_id_ix", using: :btree
   end
 
   create_table "requests", force: :cascade do |t|
@@ -73,8 +76,8 @@ ActiveRecord::Schema.define(version: 20170418151349) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["student_id"], name: "request_student_id_ix"
-    t.index ["teacher_id"], name: "request_teacher_id_ix"
+    t.index ["student_id"], name: "request_student_id_ix", using: :btree
+    t.index ["teacher_id"], name: "request_teacher_id_ix", using: :btree
   end
 
   create_table "studyships", force: :cascade do |t|
@@ -82,8 +85,8 @@ ActiveRecord::Schema.define(version: 20170418151349) do
     t.integer  "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "student_id_ix"
-    t.index ["teacher_id"], name: "teacher_id_ix"
+    t.index ["student_id"], name: "student_id_ix", using: :btree
+    t.index ["teacher_id"], name: "teacher_id_ix", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,7 +102,7 @@ ActiveRecord::Schema.define(version: 20170418151349) do
     t.datetime "updated_at",                       null: false
     t.string   "provider"
     t.string   "uid"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
 end

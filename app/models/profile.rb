@@ -1,6 +1,6 @@
 class Profile < ApplicationRecord
   belongs_to :user
-  has_attached_file :avatar, default_url: ':style/default_avatar.png', styles: { thumb: "100x100>" }
+  has_attached_file :avatar, default_url: ':style/default_avatar.jpg', styles: { thumb: "100x100>" }
                     # storage: :s3, s3_credentials: aws_s3_credentials
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
