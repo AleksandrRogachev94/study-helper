@@ -8,6 +8,7 @@ function Comment(attributes) {
   for(prop in attributes.comment) {
     this[prop] = attributes.comment[prop]
   }
+  // if(this.created_at) this.created_at = Comment.formatDate(this.created_at)
 }
 
 // Instance methods
@@ -199,13 +200,11 @@ Comment.cancelUpdate = function(ev) {
 }
 
 Comment.removeFromCommentsToUpdate = function(id) {
-  let array = Comment.commentsToUpdate
-  let i, l = array.length
+  let i, l = Comment.commentsToUpdate.length
   for(i = 0; i < l; i++) {
 
-    if(array[i].id === id) {
-      Comment.commentsToUpdate = [...array.slice(0, i), ...array.slice(i + 1)]
-      return array[i]
+    if(Comment.commentsToUpdate[i].id === id) {
+      return Comment.commentsToUpdate.splice(i, 1)[0]
     }
   }
 }
@@ -251,21 +250,21 @@ Comment.SubmitFormAJAX = function($form, success, fail) {
   .fail(fail)
 }
 
-Comment.fixDates = function() {
-  let js_date
-  const dates = $(".created_at")
+// Comment.fixDates = function() {
+//   let js_date
+//   const dates = $(".created_at")
+//
+//   dates.each(function() {
+//     js_date = new Date($(this).text())
+//     $(this).text(Comment.formatDate(js_date))
+//   })
+// }
 
-  dates.each(function() {
-    js_date = new Date($(this).text())
-    $(this).text(Comment.format_date(js_date))
-  })
-}
-
-var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-Comment.format_date = function(date) {
-  return `${month[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-}
+// Comment.formatDate = function(date) {
+//   const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+//   const formatted = new Date(date)
+//   return `${month[formatted.getMonth()]} ${formatted.getDate()}, ${formatted.getFullYear()}`
+// }
 
 //------------------------------------------------------------------------
 // Documents Ready

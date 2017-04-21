@@ -15,7 +15,7 @@ class LessonSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    object.created_at.to_s
+    object.created_at.strftime("%b %d, %Y")
   end
 
   def can_update
