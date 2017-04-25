@@ -27,14 +27,14 @@ class LessonSerializer < ActiveModel::Serializer
   end
 
   def next_id
-    lessons = object.author.lessons
+    lessons = object.author.lessons.sort_by(&:title)
 
     index = lessons.find_index { |lesson| lesson == object } + 1
     index < lessons.size ? lessons[index].id : nil
   end
 
   def prev_id
-    lessons = object.author.lessons
+    lessons = object.author.lessons.sort_by(&:title)
 
     index = lessons.find_index { |lesson| lesson == object } - 1
     index >= 0 ? lessons[index].id : nil

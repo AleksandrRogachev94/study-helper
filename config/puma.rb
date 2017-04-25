@@ -5,7 +5,7 @@
 # and maximum, this matches the default thread size of Active Record.
 
 workers Integer(ENV['WEB_CONCURRENCY'] || 2)
-threads_count = Integer(ENV['MAX_THREADS'] || 1)
+threads_count = Integer(ENV['MAX_THREADS'] || 5)
 threads threads_count, threads_count
 
 preload_app!
@@ -16,11 +16,11 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 before_fork do
   puts "Puma master process about to fork. Closing existing Active record connections."
-  ActiveRecord::Base.connection.disconnect! if defined?(ActiveRecord)
+  ActiveRecord::Base.connection.disconnect!
 end
 
 on_worker_boot do
-  ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+  ActiveRecord::Base.establish_connection
 end
 
 # Specifies the number of `workers` to boot in clustered mode.

@@ -34,10 +34,20 @@ Boolean algebra has been fundamental in the development of digital electronics, 
                     links: "https://en.wikipedia.org/wiki/Boolean_algebra"
                     )
 stan.lessons.create(title: "Logarithms", category: math,
-                    content: "ln(0) = 1................"
+                    description: "Logarithms were introduced by John Napier in the early 17th century as a means to simplify calculations. They were rapidly adopted by navigators, scientists, engineers, and others to perform computations more easily, using slide rules and logarithm tables.",
+                    content: <<-HEREDOC,
+                    In mathematics, the logarithm is the inverse operation to exponentiation. That means the logarithm of a number is the exponent to which another fixed number, the base, must be raised to produce that number. In simple cases the logarithm counts factors in multiplication. For example, the base 10 logarithm of 1000 is 3, as 10 to the power 3 is 1000 (1000 = 10 × 10 × 10 = 103); 10 is used as a factor three times. More generally, exponentiation allows any positive real number to be raised to any real power, always producing a positive result, so the logarithm can be calculated for any two positive real numbers b and x where b is not equal to 1. The logarithm of x to base b, denoted logb(x), is the unique real number y such that by = x. For example, log2(64) = 6, as 64 = 26.
+The logarithm to base 10 (that is b = 10) is called the common logarithm and has many applications in science and engineering. The natural logarithm has the number e (≈ 2.718) as its base; its use is widespread in mathematics and physics, because of its simpler derivative. The binary logarithm uses base 2 (that is b = 2) and is commonly used in computer science.
+                    HEREDOC
+                    links: "https://en.wikipedia.org/wiki/Logarithm"
                     )
 stan.lessons.create(title: "Trigonometry", category: math,
-                    content:"(sin^2(x) + cos^2(x) = 1)............."
+                    description: "Sumerian astronomers studied angle measure, using a division of circles into 360 degrees.[4] They, and later the Babylonians, studied the ratios of the sides of similar triangles and discovered some properties of these ratios but did not turn that into a systematic method for finding sides and angles of triangles. The ancient Nubians used a similar method",
+                    content: <<-HEREDOC,
+                    Trigonometry (from Greek trigōnon, "triangle" and metron, "measure"[1]) is a branch of mathematics that studies relationships involving lengths and angles of triangles. The field emerged in the Hellenistic world during the 3rd century BC from applications of geometry to astronomical studies.[2]
+The 3rd-century astronomers first noted that the lengths of the sides of a right-angle triangle and the angles between those sides have fixed relationships: that is, if at least the length of one side and the value of one angle is known, then all other angles and lengths can be determined algorithmically. These calculations soon came to be defined as the trigonometric functions and today are pervasive in both pure and applied mathematics: fundamental methods of analysis such as the Fourier transform, for example, or the wave equation, use trigonometric functions to understand cyclical phenomena across many applications in fields as diverse as physics, mechanical and electrical engineering, music and acoustics, astronomy, ecology, and biology. Trigonometry is also the foundation of surveying.
+                    HEREDOC
+                    links: "https://en.wikipedia.org/wiki/Trigonometry"
                     )
 stan.lessons.create(title: "Kinematics", category: phys,
                     description: "Review of basic concepts of Kinematics",
@@ -56,7 +66,12 @@ stan.lessons.create(title: "Electricity", category: phys,
                     content: "I = U/R..............."
                     )
 stan.lessons.create(title: "Optics", category: phys,
-                    content: "div B = 0............."
+                    description: "Optics is the branch of physics which involves the behaviour and properties of light, including its interactions with matter and the construction of instruments that use or detect it",
+                    content: <<-HEREDOC,
+                    Most optical phenomena can be accounted for using the classical electromagnetic description of light. Complete electromagnetic descriptions of light are, however, often difficult to apply in practice. Practical optics is usually done using simplified models. The most common of these, geometric optics, treats light as a collection of rays that travel in straight lines and bend when they pass through or reflect from surfaces. Physical optics is a more comprehensive model of light, which includes wave effects such as diffraction and interference that cannot be accounted for in geometric optics. Historically, the ray-based model of light was developed first, followed by the wave model of light. Progress in electromagnetic theory in the 19th century led to the discovery that light waves were in fact electromagnetic radiation.
+Some phenomena depend on the fact that light has both wave-like and particle-like properties. Explanation of these effects requires quantum mechanics. When considering light's particle-like properties, the light is modelled as a collection of particles called "photons". Quantum optics deals with the application of quantum mechanics to optical systems.
+                    HEREDOC
+                    links: "https://en.wikipedia.org/wiki/Optics"
                     )
 
 # roger.lessons.create(title: "1-st half of 19-th century", category: his,
