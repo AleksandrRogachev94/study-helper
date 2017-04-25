@@ -3,7 +3,7 @@
 This web app was made to simplify studing for both students and teachers. Teachers can store there materials privately and open access only to students they want. Students can add users as teachers and access their material.
 
 
-![Schema](/schema.png)
+![Schema](/erd.png)
 
 
 ## Installation

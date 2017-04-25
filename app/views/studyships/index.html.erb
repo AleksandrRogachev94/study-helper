@@ -26,7 +26,7 @@
 <script id="student-template" type="text/x-handlebars-template">
 
   <div class="student">
-    <a class="list-group-item list-group-item-action studyships" href="/users/1">Stan Smith</a>
+    <a class="list-group-item list-group-item-action studyships" href="/users/1">{{student.appearance}}</a>
     <form class="remove-student" action="/users/{{teacher.id}}/students/{{studyship_id}}" accept-charset="UTF-8" method="post">
       <input name="utf8" type="hidden" value="✓">
       <input type="hidden" name="_method" value="delete">
