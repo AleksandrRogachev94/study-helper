@@ -11,7 +11,7 @@ class CommentSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    object.created_at.strftime("%b %d, %Y")
+    object.created_at.to_f * 1000 # convert to milliseconds since 1970-01-01 00:00:00 UTC.
   end
 
   def can_update
