@@ -27,7 +27,7 @@ class User < ApplicationRecord
 
   def lessons_by_categories
     result = self.lessons.group_by {|lesson| lesson.category}
-    result.transform_keys { |category| category.title }.sort.to_h
+    result.transform_keys { |category| category.title }.sort.to_h.transform_values { |lessons| lessons.sort }
   end
 
   def profile_attributes=(attrs)
