@@ -1,6 +1,6 @@
 class LessonSerializer < ActiveModel::Serializer
   attributes :id, :title, :description, :content, :links, :created_at, :author,
-             :can_update, :can_destroy, :next_id, :prev_id, :doc1, :doc2
+             :can_update, :can_destroy, :next_id, :prev_id, :doc1, :doc2, :doc3
 
   has_many :comments
   belongs_to :category
@@ -40,19 +40,13 @@ class LessonSerializer < ActiveModel::Serializer
     index >= 0 ? lessons[index].id : nil
   end
 
-  def doc1
-    {
-      name: object.doc1.original_filename,
-      url: ActionController::Base.helpers.asset_path(object.doc1.url(:original, false)),
-      exists: object.doc1?
-    }
-  end
-
-  def doc2
-    {
-      name: object.doc2.original_filename,
-      url: ActionController::Base.helpers.asset_path(object.doc2.url(:original, false)),
-      exists: object.doc2?
-    }
+  (1..3).each do |number|
+    define_method("doc#{number}") do
+      {
+        name: object.send("doc#{number}").original_filename,
+        url: ActionController::Base.helpers.asset_path(object.send("doc#{number}").url(:original, false)),
+        exists: object.send("doc#{number}?")
+      }
+    end
   end
 end

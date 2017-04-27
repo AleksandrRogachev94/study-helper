@@ -2,20 +2,21 @@ class Lesson < ApplicationRecord
   belongs_to :category
   belongs_to :author, class_name: "User", foreign_key: "user_id"
 
-  has_attached_file :doc1,
-                    storage: :s3, s3_credentials: aws_s3_credentials
-  has_attached_file :doc2,
-                    storage: :s3, s3_credentials: aws_s3_credentials
+  has_attached_file :doc1
+  has_attached_file :doc2
+  has_attached_file :doc3
 
-  validates_attachment_content_type :doc1, :doc2, :content_type => ["application/pdf","application/vnd.ms-excel",
+  validates_attachment_content_type :doc1, :doc2, :doc3, :content_type => ["application/pdf","application/vnd.ms-excel",
              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+             "application/vnd.openxmlformats-officedocument.presentationml.presentation",
              "application/msword",
              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
              "text/plain"]
-  validates_with AttachmentSizeValidator, attributes: [:doc1, :doc2], less_than: 2.megabytes
+  validates_with AttachmentSizeValidator, attributes: [:doc1, :doc2, :doc3], less_than: 2.megabytes
 
   process_in_background :doc1
   process_in_background :doc2
+  process_in_background :doc3
 
   has_many :comments, dependent: :destroy
 

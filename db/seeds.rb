@@ -62,9 +62,6 @@ Kinematic analysis is the process of measuring the kinematic quantities used to 
                     HEREDOC
                     links: "https://en.wikipedia.org/wiki/Kinematics"
                     )
-stan.lessons.create(title: "Electricity", category: phys,
-                    content: "I = U/R..............."
-                    )
 stan.lessons.create(title: "Optics", category: phys,
                     description: "Optics is the branch of physics which involves the behaviour and properties of light, including its interactions with matter and the construction of instruments that use or detect it",
                     content: <<-HEREDOC,

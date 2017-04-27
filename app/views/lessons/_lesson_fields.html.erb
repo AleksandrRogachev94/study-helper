@@ -3,15 +3,22 @@
   <%= f.text_field :title, class: "form-control" %>
 </div>
 
-<div class="form-group">
-  <%= f.label :doc1, "First Attachment ( < 2 MB)" %>
-  <%= f.file_field :doc1 %>
-</div>
+<section>
+  <fieldset>
+    <legend>Attachments. Size < 2 MB, permitted formats: pdf, excel files, pptx, doc, docx</legend>
+  </fieldset>
+  <div class="form-group">
+    <%= f.file_field :doc1 %>
+  </div>
 
-<div class="form-group">
-  <%= f.label :doc2, "Second Attachment ( < 2 MB)" %>
-  <%= f.file_field :doc2 %>
-</div>
+  <div class="form-group">
+    <%= f.file_field :doc2 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.file_field :doc3 %>
+  </div>
+</section>
 
 <div class="form-group">
   <%= f.label :description %>
