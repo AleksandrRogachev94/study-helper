@@ -219,7 +219,7 @@ Comment.appendToPage = function(lesson) {
   const html = Comment.commentsTemplate(lesson)
   const rendered = $(html).appendTo($wrapper)
 
-  $wrapper.slideDown(1000)
+  $wrapper.slideDown(850)
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

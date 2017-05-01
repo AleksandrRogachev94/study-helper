@@ -4,7 +4,6 @@ function Request(attributes) {
     this[prop] = attributes.request[prop]
   }
 
-
   if(attributes.meta) this.studyship_id = attributes.meta.studyship_id // When user accepts requests.
 }
 

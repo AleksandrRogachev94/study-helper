@@ -62,7 +62,7 @@ Lesson.loadLesson = function(url =  window.location.href) {
 Lesson.successLoad = function(json) {
   Lesson.currentLesson = new Lesson(json)
 
-  $(".lesson-container").slideUp(1000, function() {
+  $(".lesson-container").slideUp(850, function() {
     $("article, #comments-section").remove()
     Lesson.currentLesson.appendToPage()
     Comment.appendToPage(Lesson.currentLesson)
@@ -130,7 +130,6 @@ Lesson.attachListenersIndex = function() {
 }
 
 function slideLessons() {
-  console.log(this)
   $(this).find(".category-lessons").slideToggle()
 }
 
