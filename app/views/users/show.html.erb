@@ -1,11 +1,27 @@
+<!-- Modal -->
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Update Profile</h4>
+      </div>
+      <div id="profile-form"></div>
+      <div id="profile-load-error"></div>
+    </div>
+  </div>
+</div>
+
 <div class="my-container">
 
-  <%= render 'profiles/profile', profile: @user.profile %>
+  <div class="profile">
+    <%= render 'profiles/profile', profile: @user.profile %>
+  </div>
 
   <p>E-mail: <%= @user.email %></p>
 
   <% if policy(@user.profile).update? %>
-    <%= link_to 'Edit Profile', edit_profile_path, class: "my-link" %>
+    <%= link_to 'Edit Profile', edit_profile_path, class: "my-link edit-profile" %>
   <% end %><br>
 
   <% if @user == current_user %>
@@ -34,4 +50,77 @@
       </li>
     {{/each}}
   </ul>
+</script>
+
+<script id="profile-template" type="text/x-handlebars-template">
+  <img id="avatar" src="{{avatar_url}}" alt="Avatar">
+  <h1>{{first_name}} {{last_name}}</h1>
+
+  <table class="table">
+    <tbody>
+      {{#each properties}}
+        <tr>
+          <td>{{humanize @key}}</td>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script id="profile-form-template" type="text/x-handlebars-template">
+  <div class="modal-body">
+    <form class="edit_profile" id="edit_profile" enctype="multipart/form-data" action="/profile" accept-charset="UTF-8" method="post">
+      <input name="utf8" type="hidden" value="✓">
+      <input type="hidden" name="_method" value="PATCH">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <div class="form-group">
+        <label for="profile_first_name">First name (REQUIRED)</label>
+        <input class="form-control" type="text" value="{{first_name}}" name="profile[first_name]" id="profile_first_name">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_last_name">Last name (REQUIRED)</label>
+        <input class="form-control" type="text" value="{{last_name}}" name="profile[last_name]" id="profile_last_name">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_avatar">Avatar</label>
+        <input type="file" name="profile[avatar]" id="profile_avatar">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_phone_number">Phone number</label>
+        <input class="form-control" type="tel" name="profile[phone_number]" value="{{properties.phone_number}}" id="profile_phone_number">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_age">Age</label>
+        <input class="form-control" type="number" name="profile[age]" value="{{properties.age}}" id="profile_age">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_study_place">Study place</label>
+        <input class="form-control" type="text" name="profile[study_place]" value="{{properties.study_place}}" id="profile_study_place">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_degree">Degree</label>
+        <input class="form-control" type="text" name="profile[degree]" value="{{properties.degree}}" id="profile_degree">
+      </div>
+
+      <div class="form-group">
+        <label for="profile_interests">Interests</label>
+        <textarea class="form-control" name="profile[interests]" id="profile_interests">{{properties.interests}}</textarea>
+      </div>
+
+      <div id="profile-update-error"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="red-button" data-dismiss="modal">Close</button>
+        <%= submit_tag "Update Profile", class: "gray-button", data: { disable_with: "Updating..." } %>
+      </div>
+    </form>
+  </div>
 </script>

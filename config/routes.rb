@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     delete ':rel_type/:id' => 'studyships#destroy', as: "studyship"
   end
 
-  resource :profile, only: [:edit, :update]
+  resource :profile, only: [:edit, :update, :show]
 
   resources :categories
   resources :requests, only: [:create, :destroy, :index]

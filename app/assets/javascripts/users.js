@@ -1,4 +1,5 @@
 //= require lessons
+//= require profiles
 
 $(document).ready(function() {
   if($("#lessons-by-categories-template").length <= 0) return;
@@ -8,5 +9,5 @@ $(document).ready(function() {
   Lesson.lessonByCategoriesTemplate = Handlebars.compile(source)
 
   $("#user-lessons-link").on("click", Lesson.loadUserLessons)
-  $("lessons-by-categories").on("click", ".category-li", slideLessons)
+  $(".edit-profile").on("click", Profile.prepareAndRenderForm)
 })

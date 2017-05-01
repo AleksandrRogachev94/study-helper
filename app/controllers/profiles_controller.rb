@@ -1,8 +1,13 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: [:edit, :update]
+  before_action :set_profile, only: [:edit, :update, :show]
 
   after_action :verify_authorized
+
+  def show
+    authorize @profile
+    render json: @profile, status: :ok
+  end
 
   def edit
     authorize @profile
@@ -10,10 +15,15 @@ class ProfilesController < ApplicationController
 
   def update
     authorize @profile
-    if @profile.update(profile_params)
-      redirect_to user_path(current_user), notice: "Successfully updated profile"
-    else
-      render 'edit'
+
+    respond_to do |f|
+      if @profile.update(profile_params)
+        f.html { redirect_to user_path(current_user), notice: "Successfully updated profile" }
+        f.json { render json: @profile, status: :ok }
+      else
+        f.html { render 'edit' }
+        f.json { render json: { errors: @profile.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 

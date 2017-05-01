@@ -130,6 +130,7 @@ Lesson.attachListenersIndex = function() {
 }
 
 function slideLessons() {
+  console.log(this)
   $(this).find(".category-lessons").slideToggle()
 }
 
