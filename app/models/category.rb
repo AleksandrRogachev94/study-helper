@@ -12,7 +12,7 @@ class Category < ApplicationRecord
 
   def self.search(search)
     if search
-      self.where("title LIKE ?", "%#{search}%").sort_by(&:title)
+      self.where("title ILIKE ?", "%#{search}%").sort_by(&:title)
     else
       self.all.sort_by(&:title)
     end

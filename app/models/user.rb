@@ -49,13 +49,13 @@ class User < ApplicationRecord
     return self.all.sort_by(&:appearance) if search.blank?
 
     # Search in profiles first.
-    result = Profile.where("last_name LIKE ?", "%#{search}%").map(&:user)
+    result = Profile.where("last_name ILIKE ?", "%#{search}%").map(&:user)
     if result.empty?
-     Profile.where("first_name LIKE ?", "%#{search}%").map(&:user)
+     Profile.where("first_name ILIKE ?", "%#{search}%").map(&:user)
     end
     if result.empty?
       #Search in credentials.
-      result = self.where("email LIKE ?", "%#{search}%")
+      result = self.where("email ILIKE ?", "%#{search}%")
     end
     result.sort_by(&:appearance)
   end
